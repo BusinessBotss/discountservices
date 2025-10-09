@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Business Bots — Special Service List (ES/EN)</title>
+    <meta name="description" content="Página minimalista bilingüe (ES/EN) con lista especial de servicios de Business Bots. Fondo negro, tipografía blanca, sin comisiones por venta." />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
+    <meta property="og:title" content="Business Bots — Special Service List" />
+    <meta property="og:description" content="Lista especial de servicios (ES/EN). Minimal, alto contraste, sin comisión por venta." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" />
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        :root { 
+            --bg: #000; 
+            --fg: #fff; 
+            --muted: rgba(255,255,255,.75); 
+            --panel: #0a0a0a; 
+            --stroke: #1a1a1a; 
+            --accent: #4ade80;
+            --radius: 16px; 
+            --radius-sm: 12px; 
+            --gap: 28px; 
+        }
+        
+        html, body { height: 100%; }
+        
+        body { 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--fg); 
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif; 
+            line-height: 1.5; 
+            text-rendering: optimizeLegibility; 
+            -webkit-font-smoothing: antialiased; 
+        }
+        
+        .wrap { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: clamp(20px, 4vw, 32px); 
+        }
+        
+        header[role="banner"] { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--gap);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .brand-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--stroke);
+            background: var(--panel);
+        }
+        
+        .brand-text h1 { 
+            font-size: clamp(28px, 4vw, 42px); 
+            margin: 0; 
+            font-weight: 700; 
+            letter-spacing: -0.02em;
+        }
+        
+        .brand-text p { 
+            margin: 8px 0 0; 
+            color: var(--muted); 
+            font-size: clamp(14px, 2vw, 16px); 
+        }
+        
+        nav[aria-label="Selector de idioma"] {
+            display: flex;
+            gap: 4px;
+            background: var(--panel);
+            border: 1px solid var(--stroke);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 44px;
+        }
+        
+        .lang-btn[aria-pressed="true"] {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        .lang-btn:hover:not([aria-pressed="true"]) {
+            background: var(--stroke);
+            color: var(--fg);
+        }
+        
+        figure.hero { 
+            margin: 0 0 var(--gap); 
+            border-radius: var(--radius); 
+            overflow: hidden; 
+            background: var(--panel); 
+        }
+        
+        figure.hero img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            max-height: 300px; 
+            object-fit: cover; 
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .services-grid { 
+            display: grid; 
+            gap: var(--gap); 
+            grid-template-columns: 1fr; 
+        }
+        
+        @media (min-width: 768px) {
+            .services-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .services-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            }
+        }
+        
+        .service-card { 
+            background: var(--panel); 
+            border: 1px solid var(--stroke); 
+            border-radius: var(--radius); 
+            padding: 24px; 
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .service-card:hover {
+            border-color: var(--accent);
+        }
+        
+        .service-card .name { 
+            font-size: clamp(16px, 2.5vw, 18px); 
+            margin: 0; 
+            font-weight: 700; 
+            color: var(--accent);
+            line-height: 1.3;
+        }
+        
+        .service-card .desc { 
+            margin: 0; 
+            color: var(--fg); 
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .service-card .scope { 
+            margin: 0; 
+            font-size: 13px;
+            color: var(--muted);
+            border-left: 3px solid var(--stroke);
+            padding-left: 12px;
+            font-style: italic;
+        }
+        
+        .price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            padding: 12px 0;
+            border-top: 1px solid var(--stroke);
+        }
+        
+        .price-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .price.special {
+            color: var(--accent);
+        }
+        
+        .price.standard {
+            color: var(--muted);
+            text-decoration: line-through;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .price-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--stroke);
+            color: var(--fg);
+            text-decoration: none;
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            margin-top: auto;
+            text-align: center;
+        }
+        
+        .cta::before {
+            content: "💬";
+            font-size: 16px;
+        }
+        
+        .cta:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+        }
+        
+        footer[role="contentinfo"] { 
+            margin-top: calc(var(--gap) * 2); 
+            padding-top: var(--gap); 
+            border-top: 1px solid var(--stroke); 
+            text-align: center; 
+            color: var(--muted); 
+            font-size: 14px; 
+        }
+        
+        /* Accessibility */
+        *:focus-visible { 
+            outline: 2px solid var(--accent); 
+            outline-offset: 2px; 
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * { 
+                animation-duration: 0.01ms !important; 
+                animation-iteration-count: 1 !important; 
+                transition-duration: 0.01ms !important; 
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            header[role="banner"] {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .brand {
+                gap: 12px;
+            }
+            
+            .brand-logo {
+                width: 50px;
+                height: 50px;
+            }
+            
+            nav[aria-label="Selector de idioma"] {
+                align-self: stretch;
+                justify-content: center;
+            }
+            
+            .service-card { 
+                padding: 20px; 
+            }
+            
+            .price-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header role="banner">
+            <div class="brand">
+                <img class="brand-logo" 
+                     src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" 
+                     alt="Business Bots Logo" 
+                     width="60" 
+                     height="60" />
+                <div class="brand-text">
+                    <h1>Business Bots</h1>
+                    <p>Special Service List — Lista Especial de Servicios</p>
+                </div>
+            </div>
+            <nav aria-label="Selector de idioma">
+                <button class="lang-btn" aria-pressed="true" onclick="switchLanguage('es')">ES</button>
+                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('en')">EN</button>
+            </nav>
+        </header>
+
+        <main role="main">
+            <section id="es" class="services-section" lang="es">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <strong class="name">Fase 0 — Diagnóstico Estratégico</strong>
+                        <p class="desc">Análisis completo de tu negocio para identificar oportunidades de automatización y optimización de procesos críticos.</p>
+                        <p class="scope">Análisis de negocio, detección de flujos críticos, informe base en 72h. Incluye roadmap personalizado y consultoría estratégica.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€150</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€250</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Fase%200%20-%20Diagn%C3%B3stico%20Estrat%C3%A9gico.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener" aria-describedby="fase0-desc">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Automatización Multicanal</strong>
+                        <p class="desc">Conecta todos tus sistemas y canales de comunicación para crear un flujo de trabajo completamente automatizado y sin interrupciones.</p>
+                        <p class="scope">Integraciones Make/Zapier con WhatsApp, CRM y Web. Configuración completa en 7 días laborables con testing incluido.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€800</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€1,500</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Automatizaci%C3%B3n%20Multicanal.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Chatbots Inteligentes</strong>
+                        <p class="desc">Asistentes virtuales con IA avanzada que entienden contexto y responden de forma natural, disponibles 24/7 para tus clientes.</p>
+                        <p class="scope">NLP + conexión CRM. Entrega funcional en 10 días. Incluye entrenamiento personalizado y optimización continua.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€1,200</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€2,200</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Chatbots%20Inteligentes.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Paneles de Control y Reportes</strong>
+                        <p class="desc">Visualiza todos tus datos empresariales en tiempo real con paneles interactivos y reportes automatizados personalizados.</p>
+                        <p class="scope">Paneles Power BI o Data Studio en tiempo real. Conexión con múltiples fuentes de datos y alertas automáticas.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€600</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€1,100</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Paneles%20de%20Control%20y%20Reportes.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Experiencia de Usuario y Diseño Digital</strong>
+                        <p class="desc">Diseños modernos, funcionales y optimizados para conversión que transforman visitantes en clientes satisfechos.</p>
+                        <p class="scope">Optimización visual y conversión 2025. Diseño responsive, testing A/B y análisis de usabilidad incluido.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€400</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€750</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Experiencia%20de%20Usuario%20y%20Dise%C3%B1o%20Digital.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">NFC/QR Implementation</strong>
+                        <p class="desc">Tecnología contactless de última generación para crear experiencias de usuario innovadoras y completamente sin fricciones.</p>
+                        <p class="scope">Hardware inteligente NFC programado. Configuración completa con app móvil personalizada y analytics integrados.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€300</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€550</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20NFC/QR%20Implementation.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Soporte Técnico</strong>
+                        <p class="desc">Soporte técnico especializado y proactivo para mantener todos tus sistemas funcionando de manera óptima y sin interrupciones.</p>
+                        <p class="scope">SLA < 24h, mantenimiento trimestral. Monitoreo proactivo, actualizaciones de seguridad y backup automático incluidos.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€200/mes</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€400/mes</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Soporte%20T%C3%A9cnico.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Formación y Puesta en Marcha</strong>
+                        <p class="desc">Formación integral y certificada para que tu equipo domine completamente las nuevas herramientas desde el primer día.</p>
+                        <p class="scope">Sesión formativa virtual certificada. Material didáctico exclusivo, seguimiento post-formación y soporte continuo incluido.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Precio Especial</span>
+                                <span class="price special">€350</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Precio Estándar</span>
+                                <span class="price standard">€650</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Formaci%C3%B3n%20y%20Puesta%20en%20Marcha.%20%C2%BFPodr%C3%ADan%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener">Contáctanos por WhatsApp</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="en" class="services-section hidden" lang="en">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <strong class="name">Phase 0 — Strategic Diagnosis</strong>
+                        <p class="desc">Complete business analysis to identify automation opportunities and optimize critical processes for maximum efficiency.</p>
+                        <p class="scope">Business analysis, critical flow detection, base report in 72h. Includes personalized roadmap and strategic consulting.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€150</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€250</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Phase%200%20-%20Strategic%20Diagnosis%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Multichannel Automation</strong>
+                        <p class="desc">Connect all your systems and communication channels to create a completely automated and seamless workflow experience.</p>
+                        <p class="scope">Make/Zapier integrations with WhatsApp, CRM and Web. Complete setup in 7 business days with testing included.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€800</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€1,500</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Multichannel%20Automation%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Intelligent Chatbots</strong>
+                        <p class="desc">Advanced AI virtual assistants that understand context and respond naturally, available 24/7 for your customers.</p>
+                        <p class="scope">NLP + CRM connection. Functional delivery in 10 days. Includes personalized training and continuous optimization.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€1,200</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€2,200</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Intelligent%20Chatbots%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Dashboards & Reporting</strong>
+                        <p class="desc">Visualize all your business data in real-time with interactive panels and personalized automated reports.</p>
+                        <p class="scope">Real-time Power BI or Data Studio panels. Connection with multiple data sources and automatic alerts.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€600</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€1,100</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Dashboards%20%26%20Reporting%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">UX/UI & Digital Interface</strong>
+                        <p class="desc">Modern, functional and conversion-optimized designs that transform visitors into satisfied customers.</p>
+                        <p class="scope">2025 visual and conversion optimization. Responsive design, A/B testing and usability analysis included.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€400</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€750</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20UX/UI%20%26%20Digital%20Interface%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">NFC/QR Implementation</strong>
+                        <p class="desc">Latest generation contactless technology to create innovative and completely frictionless user experiences.</p>
+                        <p class="scope">Programmed intelligent NFC hardware. Complete setup with personalized mobile app and integrated analytics.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€300</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€550</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20NFC/QR%20Implementation%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Technical Support</strong>
+                        <p class="desc">Specialized and proactive technical support to keep all your systems running optimally and without interruptions.</p>
+                        <p class="scope">SLA < 24h, quarterly maintenance. Proactive monitoring, security updates and automatic backup included.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€200/month</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€400/month</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Technical%20Support%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+
+                    <div class="service-card">
+                        <strong class="name">Training & Onboarding</strong>
+                        <p class="desc">Comprehensive and certified training so your team completely masters the new tools from day one.</p>
+                        <p class="scope">Certified virtual training session. Exclusive educational material, post-training follow-up and continuous support included.</p>
+                        <div class="price-section">
+                            <div class="price-group">
+                                <span class="price-label">Special Price</span>
+                                <span class="price special">€350</span>
+                            </div>
+                            <div class="price-group">
+                                <span class="price-label">Standard Price</span>
+                                <span class="price standard">€650</span>
+                            </div>
+                        </div>
+                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Training%20%26%20Onboarding%20service.%20Could%20you%20please%20share%20more%20info?" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer role="contentinfo">
+            <p>Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).setAttribute('aria-pressed', 'true');
+            document.querySelectorAll('.services-section').forEach(section => section.classList.add('hidden'));
+            document.getElementById(lang).classList.remove('hidden');
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        const savedLang = localStorage.getItem('preferredLanguage') || (navigator.language.startsWith('en') ? 'en' : 'es');
+        switchLanguage(savedLang);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c07f3332690269',t:'MTc2MDA0MDM2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
