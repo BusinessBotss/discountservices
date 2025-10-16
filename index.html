@@ -531,15 +531,15 @@
                      loading="eager" />
                 <div class="brand-text">
                     <h1>Business Bots</h1>
-                    <p id="brand-subtitle">Lista Especial de Servicios 2025</p>
+                    <p id="brand-subtitle" data-i18n-key="homeSubtitle">Lista Especial de Servicios 2025</p>
                 </div>
             </div>
             <nav aria-label="Selector de idioma">
-                <button class="lang-btn" aria-pressed="true" onclick="switchLanguage('es')" type="button">ES</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('en')" type="button">EN</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('de')" type="button">DE</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('fr')" type="button">FR</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('it')" type="button">IT</button>
+                <button class="lang-btn" aria-pressed="true" data-lang="es" type="button">ES</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="de" type="button">DE</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
             </nav>
         </header>
 
@@ -1021,90 +1021,10 @@
         </main>
 
         <footer role="contentinfo">
-            <p id="footer-text">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+            <p id="footer-text" data-i18n-key="footer">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
         </footer>
     </div>
 
-    <script>
-        const siteTexts = {
-            subtitles: {
-                es: 'Lista Especial de Servicios 2025',
-                en: 'Special Service List 2025',
-                de: 'Sonderdienstliste 2025',
-                fr: 'Liste spéciale de services 2025',
-                it: 'Elenco speciale dei servizi 2025'
-            },
-            footer: {
-                es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
-                en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
-                de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
-                fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
-                it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
-            }
-        };
-
-        function switchLanguage(lang) {
-            const validLangs = Object.keys(siteTexts.subtitles);
-            if (!validLangs.includes(lang)) {
-                return;
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
-            const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
-            if (activeBtn) {
-                activeBtn.setAttribute('aria-pressed', 'true');
-            }
-
-            document.querySelectorAll('.services-section').forEach(section => section.classList.add('hidden'));
-            const targetSection = document.getElementById(lang);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
-
-            const subtitleEl = document.getElementById('brand-subtitle');
-            if (subtitleEl && siteTexts.subtitles[lang]) {
-                subtitleEl.textContent = siteTexts.subtitles[lang];
-            }
-
-            const footerEl = document.getElementById('footer-text');
-            if (footerEl && siteTexts.footer[lang]) {
-                footerEl.textContent = siteTexts.footer[lang];
-            }
-
-            document.documentElement.setAttribute('lang', lang);
-            document.documentElement.setAttribute('xml:lang', lang);
-
-            try {
-                localStorage.setItem('preferredLanguage', lang);
-            } catch (error) {
-                console.warn('Could not store language preference', error);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            let initialLang = 'es';
-
-            try {
-                const saved = localStorage.getItem('preferredLanguage');
-                if (saved) {
-                    initialLang = saved;
-                } else if (navigator.language) {
-                    const browserLang = navigator.language.toLowerCase();
-                    if (browserLang.startsWith('en')) initialLang = 'en';
-                    else if (browserLang.startsWith('de')) initialLang = 'de';
-                    else if (browserLang.startsWith('fr')) initialLang = 'fr';
-                    else if (browserLang.startsWith('it')) initialLang = 'it';
-                }
-            } catch (error) {
-                console.warn('Language preference unavailable', error);
-            }
-
-            if (!Object.prototype.hasOwnProperty.call(siteTexts.subtitles, initialLang)) {
-                initialLang = 'es';
-            }
-
-            switchLanguage(initialLang);
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c1b1c3c265cc69',t:'MTc2MDA1MjkyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="./lang-switcher.js"></script>
+</body>
 </html>
