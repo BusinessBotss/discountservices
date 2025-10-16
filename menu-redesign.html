@@ -127,6 +127,20 @@
     }
 
     .lang-btn:hover:not([aria-pressed="true"]) {
+      background: var(--stroke);
+      color: var(--fg);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
       padding: 6px 10px;
       box-shadow: var(--shadow);
     }
