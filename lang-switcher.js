@@ -786,6 +786,13 @@ const translations = {
   },
 
 };
+const supportedLanguages = [
+  { code: "es", label: "ES", ariaLabel: "Cambiar idioma a español" },
+  { code: "en", label: "EN", ariaLabel: "Switch language to English" },
+  { code: "de", label: "DE", ariaLabel: "Sprache auf Deutsch umstellen" },
+  { code: "fr", label: "FR", ariaLabel: "Basculer la langue en français" },
+  { code: "it", label: "IT", ariaLabel: "Passa la lingua in italiano" },
+];
 const languageAnnouncements = {
   es: "Idioma cambiado a español.",
   en: "Language switched to English.",
@@ -826,52 +833,134 @@ function applyLanguage(lang) {
   localStorage.setItem("preferredLanguage", lang);
 }
 
+function changeLanguage(lang) {
+  const service = currentService || document.body?.dataset?.service || "";
+  if (!translations[service] || !translations[service][lang]) {
+    return;
+  }
+  applyLanguage(lang);
+}
+
+function onLanguageButtonClick(event) {
+  const button = event.currentTarget;
+  if (!button || !button.dataset) {
+    return;
+  }
+  const { lang } = button.dataset;
+  if (lang) {
+    changeLanguage(lang);
+  }
+}
+
+function ensureLanguageSwitcher() {
+  let switcher = document.querySelector(".language-switcher");
+  if (!switcher) {
+    const header = document.querySelector(".page-header");
+    if (!header) {
+      return null;
+    }
+    switcher = document.createElement("div");
+    switcher.className = "language-switcher";
+    header.insertBefore(switcher, header.firstElementChild || null);
+  }
+
+  let nav = switcher.querySelector("[data-lang-nav]");
+  if (!nav) {
+    nav = document.createElement("nav");
+    nav.setAttribute("aria-label", "Language selector");
+    nav.dataset.langNav = "";
+    if (switcher.firstElementChild) {
+      switcher.insertBefore(nav, switcher.firstElementChild);
+    } else {
+      switcher.appendChild(nav);
+    }
+  }
+
+  const allowedCodes = new Set(supportedLanguages.map(({ code }) => code));
+
+  supportedLanguages.forEach(({ code, label, ariaLabel }) => {
+    let button = nav.querySelector(`.lang-btn[data-lang="${code}"]`);
+    if (!button) {
+      button = document.createElement("button");
+      nav.appendChild(button);
+    }
+    button.type = "button";
+    button.classList.add("lang-btn");
+    button.dataset.lang = code;
+    button.textContent = label;
+    button.setAttribute("aria-label", ariaLabel);
+    if (!button.hasAttribute("aria-pressed")) {
+      button.setAttribute("aria-pressed", "false");
+    }
+    button.onclick = null;
+    button.removeAttribute("onclick");
+    button.addEventListener("click", onLanguageButtonClick);
+  });
+
+  Array.from(nav.querySelectorAll(".lang-btn")).forEach((button) => {
+    if (!allowedCodes.has(button.dataset.lang)) {
+      button.remove();
+    }
+  });
+
+  announcer = switcher.querySelector("[data-lang-announcer]");
+  if (!announcer) {
+    announcer = document.createElement("span");
+    announcer.className = "sr-only";
+    announcer.setAttribute("aria-live", "polite");
+    announcer.dataset.langAnnouncer = "";
+    switcher.appendChild(announcer);
+  }
+
+  return nav;
+}
+
 function initLanguageSwitcher() {
   currentService = document.body?.dataset?.service || "";
   if (!translations[currentService]) {
     return;
   }
 
-  langButtons = Array.from(document.querySelectorAll(".lang-btn"));
-  announcer = document.querySelector("[data-lang-announcer]");
-  const nav = document.querySelector("[data-lang-nav]");
-
-  if (nav) {
-    nav.addEventListener("keydown", (event) => {
-      const keys = ["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"];
-      if (!keys.includes(event.key)) {
-        return;
-      }
-      const focusedIndex = langButtons.indexOf(document.activeElement);
-      if (focusedIndex === -1) {
-        return;
-      }
-      event.preventDefault();
-      let targetIndex = focusedIndex;
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        targetIndex = (focusedIndex + 1) % langButtons.length;
-      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        targetIndex = (focusedIndex - 1 + langButtons.length) % langButtons.length;
-      } else if (event.key === "Home") {
-        targetIndex = 0;
-      } else if (event.key === "End") {
-        targetIndex = langButtons.length - 1;
-      }
-      langButtons[targetIndex].focus();
-    });
+  const nav = ensureLanguageSwitcher();
+  if (!nav) {
+    return;
   }
+
+  langButtons = Array.from(nav.querySelectorAll(".lang-btn"));
+  announcer = document.querySelector("[data-lang-announcer]");
+
+  nav.addEventListener("keydown", (event) => {
+    const keys = ["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"];
+    if (!keys.includes(event.key)) {
+      return;
+    }
+    const focusedIndex = langButtons.indexOf(document.activeElement);
+    if (focusedIndex === -1) {
+      return;
+    }
+    event.preventDefault();
+    let targetIndex = focusedIndex;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      targetIndex = (focusedIndex + 1) % langButtons.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      targetIndex = (focusedIndex - 1 + langButtons.length) % langButtons.length;
+    } else if (event.key === "Home") {
+      targetIndex = 0;
+    } else if (event.key === "End") {
+      targetIndex = langButtons.length - 1;
+    }
+    langButtons[targetIndex].focus();
+  });
 
   const savedLang = localStorage.getItem("preferredLanguage");
   const initialLang = savedLang && translations[currentService][savedLang] ? savedLang : defaultLanguage;
   applyLanguage(initialLang);
 }
 
-window.switchLanguage = function (lang) {
-  const service = currentService || document.body?.dataset?.service || "";
-  if (!translations[service] || !translations[service][lang]) {
-    return;
-  }
-  applyLanguage(lang);
-};
+window.switchLanguage = changeLanguage;
 
-document.addEventListener("DOMContentLoaded", initLanguageSwitcher);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initLanguageSwitcher);
+} else {
+  initLanguageSwitcher();
+}
