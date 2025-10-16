@@ -52,70 +52,7 @@
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .language-switcher {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .language-switcher nav {
-      display: inline-flex;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--stroke);
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(6px);
-    }
-
-    .lang-btn {
-      border: 1px solid var(--stroke);
-      background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 6px 12px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .lang-btn[aria-pressed="true"] {
-      background: var(--accent);
-      color: var(--bg);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
-    }
-
-    .lang-btn:hover {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
-    }
-
-    .lang-btn[aria-pressed="true"]:hover {
-      color: var(--bg);
-    }
-
-    .lang-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+      gap: 12px;
     }
 
     .eyebrow {
@@ -136,7 +73,6 @@
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
-      max-width: 720px;
     }
 
     .content-grid {
@@ -371,74 +307,64 @@
 <body data-service="branding">
   <div class="wrap">
     <header class="page-header">
-      <div class="language-switcher">
-        <nav aria-label="Language selector" data-lang-nav>
-          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish">ES</button>
-          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English">EN</button>
-          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen">DE</button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français">FR</button>
-          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano">IT</button>
-        </nav>
-        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
-      </div>
       <span class="eyebrow">Business Bots Solutions</span>
-      <h1 data-i18n="title">Branding Completo</h1>
-      <p class="lead" data-i18n="lead">Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.</p>
+      <h1>Branding Completo</h1>
+      <p class="lead">Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.</p>
     </header>
 
     <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Branding Completo" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
 
     <main class="content-grid" role="main">
       <section class="panel">
-        <h2 data-i18n="section1Title">Kit completo de identidad</h2>
-        <p data-i18n="section1Paragraph">Creamos un sistema visual consistente para reforzar tu presencia en canales impresos y digitales con piezas listas para usar.</p>
+        <h2>Kit completo de identidad</h2>
+        <p>Creamos un sistema visual consistente para reforzar tu presencia en canales impresos y digitales con piezas listas para usar.</p>
         <ul class="feature-list">
-          <li data-i18n="section1Feature1">Logo vectorial con versiones horizontales, verticales y monocromas</li>
-          <li data-i18n="section1Feature2">Guía de estilo completa con tipografía, color y componentes UI</li>
-          <li data-i18n="section1Feature3">Plantillas editables para redes sociales, presentaciones y flyers</li>
-          <li data-i18n="section1Feature4">Manual de tono de voz y bibliotecas para Canva o Figma</li>
+          <li>Logo vectorial con versiones horizontales, verticales y monocromas</li>
+          <li>Guía de estilo completa con tipografía, color y componentes UI</li>
+          <li>Plantillas editables para redes sociales, presentaciones y flyers</li>
+          <li>Manual de tono de voz y bibliotecas para Canva o Figma</li>
         </ul>
       </section>
 
       <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
+        <h2>Detalles técnicos</h2>
         <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">2–5 semanas dependiendo de rondas de validación y activos previos.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">Canva, Illustrator, Figma y repositorios colaborativos en Drive.</dd>
-          <dt data-i18n="section2Item3Term">Integración</dt>
-          <dd data-i18n="section2Item3Desc">Materiales adaptables para web, redes sociales, señalética y NFC.</dd>
-          <dt data-i18n="section2Item4Term">Soporte</dt>
-          <dd data-i18n="section2Item4Desc">Incluye acompañamiento en lanzamiento y asesoría de impresión.</dd>
+          <dt>Entrega</dt>
+          <dd>2–5 semanas dependiendo de rondas de validación y activos previos.</dd>
+          <dt>Herramientas</dt>
+          <dd>Canva, Illustrator, Figma y repositorios colaborativos en Drive.</dd>
+          <dt>Integración</dt>
+          <dd>Materiales adaptables para web, redes sociales, señalética y NFC.</dd>
+          <dt>Soporte</dt>
+          <dd>Incluye acompañamiento en lanzamiento y asesoría de impresión.</dd>
         </dl>
       </section>
 
       <section class="panel full">
-        <h2 data-i18n="section3Title">Proceso creativo</h2>
-        <p data-i18n="section3Paragraph1">Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.</p>
+        <h2>Proceso creativo</h2>
+        <p>Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.</p>
+        <p class="muted">Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.</p>
       </section>
 
       <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
+        <h2>Inversión preferente</h2>
         <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€999</span>
-          <span class="discount" data-i18n="section4Discount">€799</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €200</span>
+          <span class="regular">€999</span>
+          <span class="discount">€799</span>
+          <span class="saving">Ahorra €200</span>
         </div>
-        <p class="muted" data-i18n="section4Note">Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.</p>
+        <p class="muted">Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.</p>
       </section>
 
       <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones y entregables</h2>
-        <p data-i18n="section5Paragraph">Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
+        <h2>Condiciones y entregables</h2>
+        <p>Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
       </section>
     </main>
 
     <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
+      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo." target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+      <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
     </div>
 
     <footer>Business Bots Solutions © 2025</footer>
