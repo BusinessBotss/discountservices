@@ -523,15 +523,15 @@
     <div class="wrap">
         <header role="banner">
             <div class="brand">
-                <img class="brand-logo" 
-                     src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" 
-                     alt="Business Bots Logo" 
-                     width="64" 
+                <img class="brand-logo"
+                     src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png"
+                     alt="Business Bots Logo"
+                     width="64"
                      height="64"
                      loading="eager" />
                 <div class="brand-text">
                     <h1>Business Bots</h1>
-                    <p>Lista Especial de Servicios 2025</p>
+                    <p id="brand-subtitle">Lista Especial de Servicios 2025</p>
                 </div>
             </div>
             <nav aria-label="Selector de idioma">
@@ -1035,6 +1035,14 @@
             it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
         };
 
+        const subtitleTexts = {
+            es: 'Lista Especial de Servicios 2025',
+            en: 'Special Services Lineup 2025',
+            de: 'Spezielle Serviceliste 2025',
+            fr: 'Liste spéciale de services 2025',
+            it: 'Lista speciale di servizi 2025'
+        };
+
         // Language switching function
         function switchLanguage(lang) {
             // Validate language parameter
@@ -1069,6 +1077,12 @@
                 const footerElement = document.getElementById('footer-text');
                 if (footerElement) {
                     footerElement.textContent = footerTexts[lang];
+                }
+
+                // Update brand subtitle
+                const brandSubtitle = document.getElementById('brand-subtitle');
+                if (brandSubtitle && subtitleTexts[lang]) {
+                    brandSubtitle.textContent = subtitleTexts[lang];
                 }
 
                 // Update document language

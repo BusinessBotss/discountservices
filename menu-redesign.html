@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rediseño de Menú e Interfaz Digital — Business Bots Solutions</title>
-  <meta name="description" content="Rediseño de Menú e Interfaz Digital — Reestructuración visual y funcional centrada en conversión." />
+  <meta name="description" content="UI/UX centrado en conversión con auditoría, prototipos interactivos y handoff técnico para menús digitales." />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #000000;
@@ -18,6 +19,7 @@
       --radius-sm: 12px;
       --gap: 32px;
       --shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      --shadow-accent: 0 10px 25px rgba(74, 222, 128, 0.35);
     }
 
     * {
@@ -30,8 +32,8 @@
       color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      display: flex;
       min-height: 100vh;
+      display: flex;
     }
 
     a {
@@ -39,7 +41,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: clamp(24px, 6vw, 64px);
@@ -48,74 +50,106 @@
       gap: var(--gap);
     }
 
-    header.page-header {
-      text-align: center;
+    header[role="banner"] {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
-    .language-switcher {
+    .brand {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
       align-items: center;
+      gap: 18px;
+      text-decoration: none;
     }
 
-    .language-switcher nav {
-      display: inline-flex;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav[aria-label="Selector de idioma"] {
+      display: flex;
+      gap: 6px;
+      background: var(--panel);
       border: 1px solid var(--stroke);
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(6px);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      box-shadow: var(--shadow);
     }
 
     .lang-btn {
-      border: 1px solid var(--stroke);
       background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 6px 12px;
-      border-radius: 999px;
+      border: none;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 48px;
+      min-height: 44px;
     }
 
     .lang-btn[aria-pressed="true"] {
       background: var(--accent);
       color: var(--bg);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
-    .lang-btn:hover {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
+    .lang-btn:hover:not([aria-pressed="true"]) {
+      background: var(--stroke);
+      color: var(--fg);
     }
 
-    .lang-btn[aria-pressed="true"]:hover {
-      color: var(--bg);
+    .hidden {
+      display: none !important;
     }
 
-    .lang-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    .services-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
     .eyebrow {
@@ -126,17 +160,26 @@
       font-weight: 600;
     }
 
-    header.page-header h1 {
+    .page-header h2 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(32px, 5vw, 46px);
       letter-spacing: -0.02em;
     }
 
-    header.page-header .lead {
+    .page-header .lead {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
       max-width: 720px;
+    }
+
+    .hero-media {
+      display: block;
+      margin: 0 auto;
+      max-width: min(640px, 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
     }
 
     .content-grid {
@@ -155,7 +198,7 @@
       gap: 16px;
     }
 
-    .panel h2 {
+    .panel h3 {
       margin: 0;
       font-size: clamp(20px, 3vw, 26px);
       color: var(--accent);
@@ -295,7 +338,7 @@
     .cta:hover {
       color: var(--bg);
       border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta:hover::after {
@@ -331,32 +374,42 @@
       transform: translateX(-2px);
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    footer {
+    footer[role="contentinfo"] {
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      padding-top: 8px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
     }
 
     @media (min-width: 900px) {
       .content-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .panel.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header[role="banner"] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav[aria-label="Selector de idioma"] {
+        width: 100%;
+        justify-content: center;
+        max-width: 420px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
 
@@ -368,81 +421,349 @@
     }
   </style>
 </head>
-<body data-service="menu-redesign">
+<body>
   <div class="wrap">
-    <header class="page-header">
-      <div class="language-switcher">
-        <nav aria-label="Language selector" data-lang-nav>
-          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish" onclick="switchLanguage('es')">ES</button>
-          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English" onclick="switchLanguage('en')">EN</button>
-          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen" onclick="switchLanguage('de')">DE</button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français" onclick="switchLanguage('fr')">FR</button>
-          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano" onclick="switchLanguage('it')">IT</button>
-        </nav>
-        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
-      </div>
-      <span class="eyebrow">Business Bots Solutions</span>
-      <h1 data-i18n="title">Rediseño de Menú e Interfaz Digital</h1>
-      <p class="lead" data-i18n="lead">Reestructuración visual y funcional centrada en conversión para maximizar la experiencia del usuario y aumentar las ventas.</p>
+    <header role="banner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" alt="Business Bots Logo" width="60" height="60" loading="lazy" />
+        <div class="brand-text">
+          <h1>Business Bots</h1>
+          <p>Servicios profesionales automatizados</p>
+        </div>
+      </a>
+      <nav aria-label="Selector de idioma">
+        <button class="lang-btn" aria-pressed="true" onclick="switchLanguage('es')" type="button">ES</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('en')" type="button">EN</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('de')" type="button">DE</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('fr')" type="button">FR</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('it')" type="button">IT</button>
+      </nav>
     </header>
 
-    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Rediseño de Menú e Interfaz Digital" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
-
-    <main class="content-grid" role="main">
-      <section class="panel">
-        <h2 data-i18n="section1Title">Qué incluye</h2>
-        <p data-i18n="section1Paragraph">Transformamos tu carta digital en una experiencia fluida, actualizada y enfocada en conversión para clientes presenciales y digitales.</p>
-        <ul class="feature-list">
-          <li data-i18n="section1Feature1">Auditoría UX completa con informes accionables</li>
-          <li data-i18n="section1Feature2">Prototipo interactivo listo para test A/B</li>
-          <li data-i18n="section1Feature3">Guía de estilos y componentes reutilizables</li>
-          <li data-i18n="section1Feature4">Handoff técnico detallado para tu equipo de desarrollo</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
-        <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">2–4 semanas según alcance y activos actuales.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">Figma, Canva, HTML/CSS colaborativo y librerías personalizadas.</dd>
-          <dt data-i18n="section2Item3Term">Compatibilidad</dt>
-          <dd data-i18n="section2Item3Desc">Integración con CMS, kioscos digitales o plataformas de pedidos existentes.</dd>
-          <dt data-i18n="section2Item4Term">Soporte</dt>
-          <dd data-i18n="section2Item4Desc">2 rondas de ajustes + documentación para tu equipo interno.</dd>
-        </dl>
-      </section>
-
-      <section class="panel full">
-        <h2 data-i18n="section3Title">Proceso colaborativo</h2>
-        <p data-i18n="section3Paragraph1">Sigue nuestro flujo comprobado: auditoría → arquitectura de información → prototipo navegable → pruebas con usuarios → entrega final optimizada.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Integramos entregables con handoff técnico listo para desarrolladores y un kit de assets exportables en múltiples formatos.</p>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
-        <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€1.124</span>
-          <span class="discount" data-i18n="section4Discount">€899</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €225</span>
+    <main role="main">
+      <section id="es" class="services-section" lang="es">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Rediseño de Menú e Interfaz Digital</h2>
+          <p class="lead">Reestructuración visual y funcional centrada en conversión para maximizar la experiencia del usuario y aumentar las ventas.</p>
         </div>
-        <p class="muted" data-i18n="section4Note">Incluye diseño responsive, guidelines para actualizaciones futuras y capacitación breve para tu equipo.</p>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Rediseño de menú digital" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Qué incluye</h3>
+            <p>Transformamos tu carta digital en una experiencia fluida, actualizada y enfocada en conversión para clientes presenciales y digitales.</p>
+            <ul class="feature-list">
+              <li>Auditoría UX completa con informes accionables</li>
+              <li>Prototipo interactivo listo para test A/B</li>
+              <li>Guía de estilos y componentes reutilizables</li>
+              <li>Handoff técnico detallado para tu equipo de desarrollo</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Detalles técnicos</h3>
+            <dl class="data">
+              <dt>Entrega</dt>
+              <dd>2–4 semanas según alcance y activos actuales.</dd>
+              <dt>Herramientas</dt>
+              <dd>Figma, Canva, HTML/CSS colaborativo y librerías personalizadas.</dd>
+              <dt>Compatibilidad</dt>
+              <dd>Integración con CMS, kioscos digitales o plataformas de pedidos existentes.</dd>
+              <dt>Soporte</dt>
+              <dd>2 rondas de ajustes + documentación para tu equipo interno.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Proceso colaborativo</h3>
+            <p>Sigue nuestro flujo comprobado: auditoría → arquitectura de información → prototipo navegable → pruebas con usuarios → entrega final optimizada.</p>
+            <p class="muted">Integramos entregables con handoff técnico listo para desarrolladores y un kit de assets exportables en múltiples formatos.</p>
+          </div>
+          <div class="panel">
+            <h3>Inversión preferente</h3>
+            <div class="price-card">
+              <span class="regular">€1.124</span>
+              <span class="discount">€899</span>
+              <span class="saving">Ahorra €225</span>
+            </div>
+            <p class="muted">Incluye diseño responsive, guidelines para actualizaciones futuras y capacitación breve para tu equipo.</p>
+          </div>
+          <div class="panel">
+            <h3>Condiciones y entregables</h3>
+            <p>El proyecto se agenda con un 30% inicial y balance al entregar la versión final aprobada. Entregamos archivos editables, exportables y documentación de implementación para asegurar consistencia en todas tus sedes.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20quiero%20optimizar%20mi%20men%C3%BA%20digital.%20%C2%BFPodemos%20revisar%20alcance%20y%20plazos?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Volver a servicios</a>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones y entregables</h2>
-        <p data-i18n="section5Paragraph">El proyecto se agenda con un 30% inicial y balance al entregar la versión final aprobada. Entregamos archivos editables, exportables y documentación de implementación para asegurar consistencia en todas tus sedes.</p>
+      <section id="en" class="services-section hidden" lang="en">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Menu Redesign & Digital Interface</h2>
+          <p class="lead">UI/UX redesign focused on conversion to maximize user experience and boost sales.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Menu redesign and digital interface" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>What's included</h3>
+            <p>We transform your digital menu into a fluid, up-to-date experience focused on conversion for on-site and online customers.</p>
+            <ul class="feature-list">
+              <li>Full UX audit with actionable reports</li>
+              <li>Interactive prototype ready for A/B testing</li>
+              <li>Reusable style guide and component library</li>
+              <li>Detailed technical handoff for your development team</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technical details</h3>
+            <dl class="data">
+              <dt>Delivery</dt>
+              <dd>2–4 weeks depending on scope and current assets.</dd>
+              <dt>Tools</dt>
+              <dd>Figma, Canva, collaborative HTML/CSS and custom libraries.</dd>
+              <dt>Compatibility</dt>
+              <dd>Integrates with CMS platforms, digital kiosks or existing ordering systems.</dd>
+              <dt>Support</dt>
+              <dd>2 revision rounds plus documentation for your internal team.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Collaborative process</h3>
+            <p>Follow our proven flow: audit → information architecture → navigable prototype → user testing → optimized final handoff.</p>
+            <p class="muted">We bundle developer-ready handoff materials and an exportable asset kit in multiple formats.</p>
+          </div>
+          <div class="panel">
+            <h3>Preferred investment</h3>
+            <div class="price-card">
+              <span class="regular">€1,124</span>
+              <span class="discount">€899</span>
+              <span class="saving">Save €225</span>
+            </div>
+            <p class="muted">Includes responsive design, update guidelines and a short training session for your team.</p>
+          </div>
+          <div class="panel">
+            <h3>Terms & deliverables</h3>
+            <p>Project kicks off with 30% upfront and the balance upon final approval. You receive editable files, exports and implementation docs to keep every location consistent.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'd%20like%20to%20redesign%20our%20digital%20menu.%20Can%20we%20discuss%20scope%20and%20timeline?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+        </div>
+      </section>
+
+      <section id="de" class="services-section hidden" lang="de">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Menü-Redesign & Digitale Schnittstelle</h2>
+          <p class="lead">UI/UX-Redesign mit Fokus auf Konversion, um das Nutzererlebnis zu maximieren und den Umsatz zu steigern.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Menü-Redesign und digitale Schnittstelle" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Leistungsumfang</h3>
+            <p>Wir verwandeln deine digitale Speisekarte in ein nahtloses, aktuelles Erlebnis mit Fokus auf Konversion für Gäste vor Ort und online.</p>
+            <ul class="feature-list">
+              <li>Umfassendes UX-Audit mit umsetzbaren Erkenntnissen</li>
+              <li>Interaktiver Prototyp bereit für A/B-Tests</li>
+              <li>Wiederverwendbarer Styleguide und Komponentenbibliothek</li>
+              <li>Detaillierter technischer Handoff für dein Entwicklerteam</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technische Details</h3>
+            <dl class="data">
+              <dt>Lieferung</dt>
+              <dd>2–4 Wochen je nach Umfang und vorhandenen Assets.</dd>
+              <dt>Tools</dt>
+              <dd>Figma, Canva, kollaboratives HTML/CSS und individuelle Libraries.</dd>
+              <dt>Kompatibilität</dt>
+              <dd>Anbindung an CMS, digitale Kioske oder bestehende Bestellsysteme.</dd>
+              <dt>Support</dt>
+              <dd>2 Überarbeitungsrunden plus Dokumentation für dein internes Team.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Gemeinsamer Prozess</h3>
+            <p>Unser bewährter Ablauf: Audit → Informationsarchitektur → klickbarer Prototyp → Nutzertests → optimiertes Finale.</p>
+            <p class="muted">Wir liefern entwicklerfertige Übergabedokumente sowie ein exportierbares Asset-Kit in mehreren Formaten.</p>
+          </div>
+          <div class="panel">
+            <h3>Bevorzugtes Investment</h3>
+            <div class="price-card">
+              <span class="regular">€1.124</span>
+              <span class="discount">€899</span>
+              <span class="saving">Spare 225 €</span>
+            </div>
+            <p class="muted">Inklusive Responsive-Design, Richtlinien für Updates und kurzem Training für dein Team.</p>
+          </div>
+          <div class="panel">
+            <h3>Rahmenbedingungen & Deliverables</h3>
+            <p>Projektstart mit 30 % Anzahlung, Rest bei finaler Freigabe. Du erhältst editierbare Dateien, Exporte und Implementierungsdokumente für konsistente Standorte.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20m%C3%B6chte%20unser%20digitales%20Men%C3%BC%20neu%20gestalten.%20K%C3%B6nnen%20wir%20Umfang%20und%20Zeitplan%20besprechen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Zurück zu den Services</a>
+        </div>
+      </section>
+
+      <section id="fr" class="services-section hidden" lang="fr">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Refonte de menu & interface numérique</h2>
+          <p class="lead">Refonte UI/UX axée sur la conversion pour maximiser l’expérience utilisateur et augmenter les ventes.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Refonte de menu et interface numérique" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Ce qui est inclus</h3>
+            <p>Nous transformons votre menu digital en une expérience fluide, mise à jour et orientée conversion pour vos clients sur place et en ligne.</p>
+            <ul class="feature-list">
+              <li>Audit UX complet avec insights actionnables</li>
+              <li>Prototype interactif prêt pour des tests A/B</li>
+              <li>Guide de style et bibliothèque de composants réutilisables</li>
+              <li>Handoff technique détaillé pour votre équipe de développement</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Détails techniques</h3>
+            <dl class="data">
+              <dt>Livraison</dt>
+              <dd>2 à 4 semaines selon le périmètre et les assets disponibles.</dd>
+              <dt>Outils</dt>
+              <dd>Figma, Canva, HTML/CSS collaboratif et bibliothèques personnalisées.</dd>
+              <dt>Compatibilité</dt>
+              <dd>Intégration avec CMS, bornes digitales ou systèmes de commande existants.</dd>
+              <dt>Support</dt>
+              <dd>2 cycles de révision et documentation pour votre équipe interne.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Processus collaboratif</h3>
+            <p>Suivez notre parcours éprouvé : audit → architecture de l’information → prototype navigable → tests utilisateurs → livraison finale optimisée.</p>
+            <p class="muted">Nous fournissons une passation prête pour les développeurs ainsi qu’un kit d’assets exportables dans plusieurs formats.</p>
+          </div>
+          <div class="panel">
+            <h3>Investissement privilégié</h3>
+            <div class="price-card">
+              <span class="regular">€1 124</span>
+              <span class="discount">€899</span>
+              <span class="saving">Économisez 225 €</span>
+            </div>
+            <p class="muted">Inclut design responsive, lignes directrices pour les mises à jour futures et courte formation de votre équipe.</p>
+          </div>
+          <div class="panel">
+            <h3>Conditions & livrables</h3>
+            <p>Le projet démarre avec 30 % d’acompte et le solde à la validation finale. Nous livrons fichiers éditables, exports et documentation de mise en œuvre pour assurer la cohérence sur tous vos points de contact.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20nous%20souhaitons%20refondre%20notre%20menu%20digital.%20Pouvons-nous%20parler%20du%20p%C3%A9rim%C3%A8tre%20et%20du%20planning?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Retour aux services</a>
+        </div>
+      </section>
+
+      <section id="it" class="services-section hidden" lang="it">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Redesign Menu & Interfaccia Digitale</h2>
+          <p class="lead">Redesign UI/UX focalizzato sulla conversione per massimizzare l’esperienza utente e aumentare le vendite.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559181/ChatGPT_Image_Oct_15_2025_07_52_37_PM_fojqwa.png" alt="Redesign del menu e dell'interfaccia digitale" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Cosa include</h3>
+            <p>Trasformiamo il tuo menu digitale in un’esperienza fluida, aggiornata e orientata alla conversione per clienti in sede e online.</p>
+            <ul class="feature-list">
+              <li>Audit UX completo con report azionabili</li>
+              <li>Prototipo interattivo pronto per test A/B</li>
+              <li>Guida di stile e libreria di componenti riutilizzabili</li>
+              <li>Handoff tecnico dettagliato per il tuo team di sviluppo</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Dettagli tecnici</h3>
+            <dl class="data">
+              <dt>Consegna</dt>
+              <dd>2–4 settimane in base all’ambito e agli asset esistenti.</dd>
+              <dt>Strumenti</dt>
+              <dd>Figma, Canva, HTML/CSS collaborativo e librerie personalizzate.</dd>
+              <dt>Compatibilità</dt>
+              <dd>Integrazione con CMS, chioschi digitali o sistemi d’ordine esistenti.</dd>
+              <dt>Supporto</dt>
+              <dd>2 round di revisioni più documentazione per il tuo team interno.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Processo collaborativo</h3>
+            <p>Segui il nostro flusso collaudato: audit → architettura informativa → prototipo navigabile → test con utenti → consegna finale ottimizzata.</p>
+            <p class="muted">Forniamo materiali di handoff pronti per gli sviluppatori e un kit di asset esportabili in più formati.</p>
+          </div>
+          <div class="panel">
+            <h3>Investimento preferenziale</h3>
+            <div class="price-card">
+              <span class="regular">€1.124</span>
+              <span class="discount">€899</span>
+              <span class="saving">Risparmi 225 €</span>
+            </div>
+            <p class="muted">Include design responsive, linee guida per futuri aggiornamenti e breve formazione al tuo team.</p>
+          </div>
+          <div class="panel">
+            <h3>Condizioni e deliverable</h3>
+            <p>Il progetto parte con un anticipo del 30% e saldo alla consegna finale approvata. Forniamo file modificabili, esportazioni e documentazione di implementazione per garantire coerenza in tutte le sedi.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20vorremmo%20ridisegnare%20il%20nostro%20menu%20digitale.%20Possiamo%20discutere%20ambito%20e%20tempistiche?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Torna ai servizi</a>
+        </div>
       </section>
     </main>
 
-    <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Redise%C3%B1o%20de%20Men%C3%BA%20e%20Interfaz%20Digital." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
-    </div>
-
-    <footer>Business Bots Solutions © 2025</footer>
+    <footer role="contentinfo">
+      <p id="footer-text">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+    </footer>
   </div>
-  <script src="./lang-switcher.js"></script>
+
+  <script>
+    const footerTexts = {
+      es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
+      en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
+      de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
+      fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
+      it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+    };
+
+    function switchLanguage(lang) {
+      if (!footerTexts.hasOwnProperty(lang)) return;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+      const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
+      if (activeBtn) activeBtn.setAttribute('aria-pressed', 'true');
+
+      document.querySelectorAll('.services-section').forEach(section => section.classList.add('hidden'));
+      const target = document.getElementById(lang);
+      if (target) target.classList.remove('hidden');
+
+      const footer = document.getElementById('footer-text');
+      if (footer) footer.textContent = footerTexts[lang];
+
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('xml:lang', lang);
+
+      try {
+        localStorage.setItem('preferredLanguage', lang);
+      } catch (error) {
+        console.warn('Could not save language preference', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferredLanguage') || 'es';
+      switchLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>

@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chatbot 24/7 Multilingüe — Business Bots Solutions</title>
-  <meta name="description" content="Chatbot 24/7 Multilingüe — Automatización conversacional con IA y soporte humano para captar y fidelizar clientes." />
+  <meta name="description" content="Asistente conversacional inteligente con automatización, reservas y soporte multilingüe en tiempo real." />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #000000;
@@ -18,6 +19,7 @@
       --radius-sm: 12px;
       --gap: 32px;
       --shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      --shadow-accent: 0 10px 25px rgba(74, 222, 128, 0.35);
     }
 
     * {
@@ -30,8 +32,8 @@
       color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      display: flex;
       min-height: 100vh;
+      display: flex;
     }
 
     a {
@@ -39,7 +41,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: clamp(24px, 6vw, 64px);
@@ -48,74 +50,106 @@
       gap: var(--gap);
     }
 
-    header.page-header {
-      text-align: center;
+    header[role="banner"] {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
-    .language-switcher {
+    .brand {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
       align-items: center;
+      gap: 18px;
+      text-decoration: none;
     }
 
-    .language-switcher nav {
-      display: inline-flex;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav[aria-label="Selector de idioma"] {
+      display: flex;
+      gap: 6px;
+      background: var(--panel);
       border: 1px solid var(--stroke);
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(6px);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      box-shadow: var(--shadow);
     }
 
     .lang-btn {
-      border: 1px solid var(--stroke);
       background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 6px 12px;
-      border-radius: 999px;
+      border: none;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 48px;
+      min-height: 44px;
     }
 
     .lang-btn[aria-pressed="true"] {
       background: var(--accent);
       color: var(--bg);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
-    .lang-btn:hover {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
+    .lang-btn:hover:not([aria-pressed="true"]) {
+      background: var(--stroke);
+      color: var(--fg);
     }
 
-    .lang-btn[aria-pressed="true"]:hover {
-      color: var(--bg);
+    .hidden {
+      display: none !important;
     }
 
-    .lang-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    .services-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
     .eyebrow {
@@ -126,17 +160,26 @@
       font-weight: 600;
     }
 
-    header.page-header h1 {
+    .page-header h2 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(32px, 5vw, 46px);
       letter-spacing: -0.02em;
     }
 
-    header.page-header .lead {
+    .page-header .lead {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
       max-width: 720px;
+    }
+
+    .hero-media {
+      display: block;
+      margin: 0 auto;
+      max-width: min(640px, 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
     }
 
     .content-grid {
@@ -155,7 +198,7 @@
       gap: 16px;
     }
 
-    .panel h2 {
+    .panel h3 {
       margin: 0;
       font-size: clamp(20px, 3vw, 26px);
       color: var(--accent);
@@ -295,7 +338,7 @@
     .cta:hover {
       color: var(--bg);
       border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta:hover::after {
@@ -331,32 +374,42 @@
       transform: translateX(-2px);
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    footer {
+    footer[role="contentinfo"] {
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      padding-top: 8px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
     }
 
     @media (min-width: 900px) {
       .content-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .panel.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header[role="banner"] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav[aria-label="Selector de idioma"] {
+        width: 100%;
+        justify-content: center;
+        max-width: 420px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
 
@@ -368,81 +421,349 @@
     }
   </style>
 </head>
-<body data-service="chatbot">
+<body>
   <div class="wrap">
-    <header class="page-header">
-      <div class="language-switcher">
-        <nav aria-label="Language selector" data-lang-nav>
-          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish" onclick="switchLanguage('es')">ES</button>
-          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English" onclick="switchLanguage('en')">EN</button>
-          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen" onclick="switchLanguage('de')">DE</button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français" onclick="switchLanguage('fr')">FR</button>
-          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano" onclick="switchLanguage('it')">IT</button>
-        </nav>
-        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
-      </div>
-      <span class="eyebrow">Business Bots Solutions</span>
-      <h1 data-i18n="title">Chatbot 24/7 Multilingüe</h1>
-      <p class="lead" data-i18n="lead">Asistente conversacional inteligente disponible en varios idiomas con respuestas automáticas, reservas y soporte en tiempo real.</p>
+    <header role="banner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" alt="Business Bots Logo" width="60" height="60" loading="lazy" />
+        <div class="brand-text">
+          <h1>Business Bots</h1>
+          <p>Servicios profesionales automatizados</p>
+        </div>
+      </a>
+      <nav aria-label="Selector de idioma">
+        <button class="lang-btn" aria-pressed="true" onclick="switchLanguage('es')" type="button">ES</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('en')" type="button">EN</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('de')" type="button">DE</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('fr')" type="button">FR</button>
+        <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('it')" type="button">IT</button>
+      </nav>
     </header>
 
-    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Chatbot 24/7 Multilingüe" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
-
-    <main class="content-grid" role="main">
-      <section class="panel">
-        <h2 data-i18n="section1Title">Automatización conversacional</h2>
-        <p data-i18n="section1Paragraph">Diseñamos flujos multilingües con IA y reglas empresariales para capturar leads, reservar citas y resolver FAQs 24/7.</p>
-        <ul class="feature-list">
-          <li data-i18n="section1Feature1">Integración CRM bidireccional con actualización en tiempo real</li>
-          <li data-i18n="section1Feature2">Sincronización de agenda con Google Calendar o Calendly</li>
-          <li data-i18n="section1Feature3">Entrenamiento personalizado en español, inglés y un tercer idioma</li>
-          <li data-i18n="section1Feature4">Rutas de escalamiento a agentes humanos con historial completo</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
-        <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">10–15 días con sesiones de refinamiento y pruebas en vivo.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">WhatsApp Cloud API, Make, Gmail, Telegram, Webhooks personalizados.</dd>
-          <dt data-i18n="section2Item3Term">Integración</dt>
-          <dd data-i18n="section2Item3Desc">CRM (HubSpot, Zoho, Monday), calendarios, pasarelas de pago y sitios web.</dd>
-          <dt data-i18n="section2Item4Term">Seguridad</dt>
-          <dd data-i18n="section2Item4Desc">Políticas de cifrado end-to-end, manejo de consentimientos y logs auditables.</dd>
-        </dl>
-      </section>
-
-      <section class="panel full">
-        <h2 data-i18n="section3Title">Onboarding y entrenamiento</h2>
-        <p data-i18n="section3Paragraph1">Incluimos workshop de descubrimiento, scripting conversacional y entrenamiento con datasets reales de tu negocio.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Recibirás dashboards de métricas, recomendaciones de mejora continua y soporte técnico durante el primer ciclo mensual.</p>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
-        <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€856</span>
-          <span class="discount" data-i18n="section4Discount">€599</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €257</span>
+    <main role="main">
+      <section id="es" class="services-section" lang="es">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Chatbot 24/7 Multilingüe</h2>
+          <p class="lead">Asistente conversacional inteligente disponible en varios idiomas con respuestas automáticas, reservas y soporte en tiempo real.</p>
         </div>
-        <p class="muted" data-i18n="section4Note">Incluye 2 canales simultáneos, 500 interacciones mensuales y formación a tu equipo de atención.</p>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Vista previa del Chatbot 24/7 Multilingüe" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Automatización conversacional</h3>
+            <p>Diseñamos flujos multilingües con IA y reglas empresariales para capturar leads, reservar citas y resolver FAQs 24/7.</p>
+            <ul class="feature-list">
+              <li>Integración CRM bidireccional con actualización en tiempo real</li>
+              <li>Sincronización de agenda con Google Calendar o Calendly</li>
+              <li>Entrenamiento personalizado en español, inglés y un tercer idioma</li>
+              <li>Rutas de escalamiento a agentes humanos con historial completo</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Detalles técnicos</h3>
+            <dl class="data">
+              <dt>Entrega</dt>
+              <dd>10–15 días con sesiones de refinamiento y pruebas en vivo.</dd>
+              <dt>Herramientas</dt>
+              <dd>WhatsApp Cloud API, Make, Gmail, Telegram, Webhooks personalizados.</dd>
+              <dt>Integración</dt>
+              <dd>CRM (HubSpot, Zoho, Monday), calendarios, pasarelas de pago y sitios web.</dd>
+              <dt>Seguridad</dt>
+              <dd>Políticas de cifrado end-to-end, manejo de consentimientos y logs auditables.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Onboarding y entrenamiento</h3>
+            <p>Incluimos workshop de descubrimiento, scripting conversacional y entrenamiento con datasets reales de tu negocio.</p>
+            <p class="muted">Recibirás dashboards de métricas, recomendaciones de mejora continua y soporte técnico durante el primer ciclo mensual.</p>
+          </div>
+          <div class="panel">
+            <h3>Inversión preferente</h3>
+            <div class="price-card">
+              <span class="regular">€856</span>
+              <span class="discount">€599</span>
+              <span class="saving">Ahorra €257</span>
+            </div>
+            <p class="muted">Incluye 2 canales simultáneos, 500 interacciones mensuales y formación a tu equipo de atención.</p>
+          </div>
+          <div class="panel">
+            <h3>Condiciones de implementación</h3>
+            <p>Se requiere acceso a tu CRM o base de datos de contactos y definición de políticas de privacidad. Ofrecemos contratos de mantenimiento opcionales para ampliar funcionalidades o nuevos idiomas.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Chatbot%2024/7%20Multiling%C3%BCe.%20%C2%BFPodemos%20revisar%20alcances%20y%20fechas?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Volver a servicios</a>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones de implementación</h2>
-        <p data-i18n="section5Paragraph">Se requiere acceso a tu CRM o base de datos de contactos y definición de políticas de privacidad. Ofrecemos contratos de mantenimiento opcionales para ampliar funcionalidades o nuevos idiomas.</p>
+      <section id="en" class="services-section hidden" lang="en">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>24/7 Multilingual Chatbot</h2>
+          <p class="lead">Intelligent conversational assistant in multiple languages with automated replies, bookings and real-time support.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Overview of the 24/7 Multilingual Chatbot service" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Conversational automation</h3>
+            <p>We design multilingual flows with AI and business rules to capture leads, schedule appointments and solve FAQs around the clock.</p>
+            <ul class="feature-list">
+              <li>Two-way CRM integration with real-time updates</li>
+              <li>Calendar sync with Google Calendar or Calendly</li>
+              <li>Custom training in Spanish, English and a third language</li>
+              <li>Escalation paths to human agents with full conversation history</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technical details</h3>
+            <dl class="data">
+              <dt>Delivery</dt>
+              <dd>10–15 days including refinement sessions and live testing.</dd>
+              <dt>Tools</dt>
+              <dd>WhatsApp Cloud API, Make, Gmail, Telegram and custom webhooks.</dd>
+              <dt>Integration</dt>
+              <dd>CRM (HubSpot, Zoho, Monday), calendars, payment gateways and websites.</dd>
+              <dt>Security</dt>
+              <dd>End-to-end encryption policies, consent management and auditable logs.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Onboarding & training</h3>
+            <p>We run a discovery workshop, conversational scripting and training with real datasets from your business.</p>
+            <p class="muted">You'll receive metrics dashboards, continuous improvement guidance and technical support during the first monthly cycle.</p>
+          </div>
+          <div class="panel">
+            <h3>Preferred investment</h3>
+            <div class="price-card">
+              <span class="regular">€856</span>
+              <span class="discount">€599</span>
+              <span class="saving">Save €257</span>
+            </div>
+            <p class="muted">Includes two simultaneous channels, 500 monthly interactions and training for your support team.</p>
+          </div>
+          <div class="panel">
+            <h3>Implementation terms</h3>
+            <p>Requires access to your CRM or contacts database and established privacy policies. Optional maintenance contracts are available to expand features or add new languages.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%2024/7%20Multilingual%20Chatbot.%20Could%20we%20discuss%20scope%20and%20timeline?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+        </div>
+      </section>
+
+      <section id="de" class="services-section hidden" lang="de">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>24/7 Mehrsprachiger Chatbot</h2>
+          <p class="lead">Intelligenter Konversationsassistent in mehreren Sprachen mit automatischen Antworten, Buchungen und Support in Echtzeit.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Serviceübersicht 24/7 Mehrsprachiger Chatbot" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Konversationsautomatisierung</h3>
+            <p>Wir entwickeln mehrsprachige Flows mit KI und Business-Regeln, um Leads zu gewinnen, Termine zu buchen und FAQs rund um die Uhr zu lösen.</p>
+            <ul class="feature-list">
+              <li>Bidirektionale CRM-Integration mit Echtzeitaktualisierung</li>
+              <li>Kalendersynchronisierung mit Google Calendar oder Calendly</li>
+              <li>Individuelles Training auf Spanisch, Englisch und einer weiteren Sprache</li>
+              <li>Eskalationspfade zu menschlichen Agents mit vollständiger Verlaufshistorie</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technische Details</h3>
+            <dl class="data">
+              <dt>Lieferung</dt>
+              <dd>10–15 Tage inklusive Verfeinerungssessions und Live-Tests.</dd>
+              <dt>Tools</dt>
+              <dd>WhatsApp Cloud API, Make, Gmail, Telegram und individuelle Webhooks.</dd>
+              <dt>Integration</dt>
+              <dd>CRM (HubSpot, Zoho, Monday), Kalender, Zahlungsanbieter und Websites.</dd>
+              <dt>Sicherheit</dt>
+              <dd>Ende-zu-Ende-Verschlüsselung, Consent-Management und prüfbare Logs.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Onboarding & Training</h3>
+            <p>Wir führen einen Discovery-Workshop, Konversationsskripting und Training mit echten Unternehmensdaten durch.</p>
+            <p class="muted">Du erhältst Metrik-Dashboards, Empfehlungen zur kontinuierlichen Verbesserung und technischen Support im ersten Monatszyklus.</p>
+          </div>
+          <div class="panel">
+            <h3>Bevorzugtes Investment</h3>
+            <div class="price-card">
+              <span class="regular">€856</span>
+              <span class="discount">€599</span>
+              <span class="saving">Spare €257</span>
+            </div>
+            <p class="muted">Beinhaltet zwei parallele Kanäle, 500 Interaktionen pro Monat und Schulung deines Supportteams.</p>
+          </div>
+          <div class="panel">
+            <h3>Implementierungsbedingungen</h3>
+            <p>Erfordert Zugriff auf dein CRM oder deine Kontaktdatenbank sowie definierte Datenschutzrichtlinien. Optionale Wartungsverträge erweitern Funktionen oder zusätzliche Sprachen.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%2024/7%20Mehrsprachigen%20Chatbot.%20K%C3%B6nnen%20wir%20Umfang%20und%20Zeitplan%20besprechen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Zurück zu den Services</a>
+        </div>
+      </section>
+
+      <section id="fr" class="services-section hidden" lang="fr">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Chatbot multilingue 24/7</h2>
+          <p class="lead">Assistant conversationnel intelligent en plusieurs langues avec réponses automatiques, réservations et support en temps réel.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Aperçu du service Chatbot multilingue 24/7" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Automatisation conversationnelle</h3>
+            <p>Nous concevons des parcours multilingues avec IA et règles métier pour capter des leads, planifier des rendez-vous et résoudre les FAQs 24h/24.</p>
+            <ul class="feature-list">
+              <li>Intégration CRM bidirectionnelle avec mise à jour en temps réel</li>
+              <li>Synchronisation d'agenda avec Google Calendar ou Calendly</li>
+              <li>Entraînement personnalisé en espagnol, anglais et une troisième langue</li>
+              <li>Parcours d'escalade vers des agents humains avec historique complet</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Détails techniques</h3>
+            <dl class="data">
+              <dt>Livraison</dt>
+              <dd>10 à 15 jours incluant sessions de raffinement et tests en direct.</dd>
+              <dt>Outils</dt>
+              <dd>WhatsApp Cloud API, Make, Gmail, Telegram et webhooks personnalisés.</dd>
+              <dt>Intégration</dt>
+              <dd>CRM (HubSpot, Zoho, Monday), agendas, passerelles de paiement et sites web.</dd>
+              <dt>Sécurité</dt>
+              <dd>Politiques de chiffrement de bout en bout, gestion des consentements et journaux auditables.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Onboarding & formation</h3>
+            <p>Nous animons un atelier de découverte, l'écriture des scripts et l'entraînement avec vos jeux de données réels.</p>
+            <p class="muted">Vous recevez des tableaux de bord de métriques, des recommandations d'amélioration continue et un support technique durant le premier mois.</p>
+          </div>
+          <div class="panel">
+            <h3>Investissement préférentiel</h3>
+            <div class="price-card">
+              <span class="regular">€856</span>
+              <span class="discount">€599</span>
+              <span class="saving">Économisez 257 €</span>
+            </div>
+            <p class="muted">Inclut deux canaux simultanés, 500 interactions mensuelles et la formation de votre équipe de support.</p>
+          </div>
+          <div class="panel">
+            <h3>Conditions de mise en œuvre</h3>
+            <p>Accès requis à votre CRM ou base de contacts et définition des politiques de confidentialité. Des contrats de maintenance optionnels permettent d'étendre les fonctionnalités ou d'ajouter de nouvelles langues.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20Chatbot%20multilingue%2024/7.%20Pouvons-nous%20parler%20des%20prochaines%20%C3%A9tapes?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Retour aux services</a>
+        </div>
+      </section>
+
+      <section id="it" class="services-section hidden" lang="it">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Chatbot multilingue 24/7</h2>
+          <p class="lead">Assistente conversazionale intelligente in più lingue con risposte automatiche, prenotazioni e supporto in tempo reale.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559180/ChatGPT_Image_Oct_15_2025_10_06_25_PM_wmbej8.png" alt="Panoramica del servizio Chatbot multilingue 24/7" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Automazione conversazionale</h3>
+            <p>Progettiamo flussi multilingue con IA e regole di business per acquisire lead, fissare appuntamenti e risolvere FAQ 24 ore su 24.</p>
+            <ul class="feature-list">
+              <li>Integrazione CRM bidirezionale con aggiornamento in tempo reale</li>
+              <li>Sincronizzazione dell'agenda con Google Calendar o Calendly</li>
+              <li>Training personalizzato in spagnolo, inglese e una terza lingua</li>
+              <li>Percorsi di escalation verso agenti umani con storico completo</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Dettagli tecnici</h3>
+            <dl class="data">
+              <dt>Consegna</dt>
+              <dd>10–15 giorni con sessioni di affinamento e test dal vivo.</dd>
+              <dt>Strumenti</dt>
+              <dd>WhatsApp Cloud API, Make, Gmail, Telegram e webhook personalizzati.</dd>
+              <dt>Integrazione</dt>
+              <dd>CRM (HubSpot, Zoho, Monday), calendari, gateway di pagamento e siti web.</dd>
+              <dt>Sicurezza</dt>
+              <dd>Criteri di crittografia end-to-end, gestione dei consensi e log verificabili.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Onboarding e training</h3>
+            <p>Realizziamo workshop di discovery, scripting conversazionale e formazione con dataset reali della tua azienda.</p>
+            <p class="muted">Riceverai dashboard di metriche, suggerimenti di miglioramento continuo e supporto tecnico durante il primo mese.</p>
+          </div>
+          <div class="panel">
+            <h3>Investimento preferenziale</h3>
+            <div class="price-card">
+              <span class="regular">€856</span>
+              <span class="discount">€599</span>
+              <span class="saving">Risparmia 257 €</span>
+            </div>
+            <p class="muted">Include due canali simultanei, 500 interazioni mensili e formazione per il tuo team di supporto.</p>
+          </div>
+          <div class="panel">
+            <h3>Condizioni di implementazione</h3>
+            <p>È necessario l'accesso al tuo CRM o database contatti e la definizione delle policy sulla privacy. Contratti di manutenzione opzionali permettono di ampliare le funzionalità o aggiungere nuove lingue.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20vorrei%20saperne%20di%20pi%C3%B9%20sul%20Chatbot%20multilingue%2024/7.%20Possiamo%20parlare%20di%20tempistiche%20e%20setup?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Torna ai servizi</a>
+        </div>
       </section>
     </main>
 
-    <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Chatbot%2024/7%20Multiling%C3%BCe." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
-    </div>
-
-    <footer>Business Bots Solutions © 2025</footer>
+    <footer role="contentinfo">
+      <p id="footer-text">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+    </footer>
   </div>
-  <script src="./lang-switcher.js"></script>
+
+  <script>
+    const footerTexts = {
+      es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
+      en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
+      de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
+      fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
+      it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+    };
+
+    function switchLanguage(lang) {
+      if (!footerTexts.hasOwnProperty(lang)) return;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+      const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
+      if (activeBtn) activeBtn.setAttribute('aria-pressed', 'true');
+
+      document.querySelectorAll('.services-section').forEach(section => section.classList.add('hidden'));
+      const target = document.getElementById(lang);
+      if (target) target.classList.remove('hidden');
+
+      const footer = document.getElementById('footer-text');
+      if (footer) footer.textContent = footerTexts[lang];
+
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('xml:lang', lang);
+
+      try {
+        localStorage.setItem('preferredLanguage', lang);
+      } catch (error) {
+        console.warn('Could not save language preference', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferredLanguage') || 'es';
+      switchLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
