@@ -523,23 +523,23 @@
     <div class="wrap">
         <header role="banner">
             <div class="brand">
-                <img class="brand-logo" 
-                     src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" 
-                     alt="Business Bots Logo" 
-                     width="64" 
+                <img class="brand-logo"
+                     src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png"
+                     alt="Business Bots Logo"
+                     width="64"
                      height="64"
                      loading="eager" />
                 <div class="brand-text">
                     <h1>Business Bots</h1>
-                    <p>Lista Especial de Servicios 2025</p>
+                    <p id="brand-subtitle" data-i18n-key="homeSubtitle">Lista Especial de Servicios 2025</p>
                 </div>
             </div>
             <nav aria-label="Selector de idioma">
-                <button class="lang-btn" aria-pressed="true" onclick="switchLanguage('es')" type="button">ES</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('en')" type="button">EN</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('de')" type="button">DE</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('fr')" type="button">FR</button>
-                <button class="lang-btn" aria-pressed="false" onclick="switchLanguage('it')" type="button">IT</button>
+                <button class="lang-btn" aria-pressed="true" data-lang="es" type="button">ES</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="de" type="button">DE</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
+                <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
             </nav>
         </header>
 
@@ -1021,196 +1021,10 @@
         </main>
 
         <footer role="contentinfo">
-            <p id="footer-text">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+            <p id="footer-text" data-i18n-key="footer">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
         </footer>
     </div>
 
-    <script>
-        // Multilingual footer texts
-        const footerTexts = {
-            es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
-            en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
-            de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
-            fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
-            it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
-        };
-
-        // Language switching function
-        function switchLanguage(lang) {
-            // Validate language parameter
-            if (!footerTexts.hasOwnProperty(lang)) {
-                console.error('Invalid language:', lang);
-                return;
-            }
-
-            try {
-                // Update button states
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.setAttribute('aria-pressed', 'false');
-                });
-                
-                const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
-                if (activeBtn) {
-                    activeBtn.setAttribute('aria-pressed', 'true');
-                }
-
-                // Hide all sections
-                document.querySelectorAll('.services-section').forEach(section => {
-                    section.classList.add('hidden');
-                });
-
-                // Show selected section
-                const targetSection = document.getElementById(lang);
-                if (targetSection) {
-                    targetSection.classList.remove('hidden');
-                }
-
-                // Update footer text
-                const footerElement = document.getElementById('footer-text');
-                if (footerElement) {
-                    footerElement.textContent = footerTexts[lang];
-                }
-
-                // Update document language
-                document.documentElement.setAttribute('lang', lang);
-                document.documentElement.setAttribute('xml:lang', lang);
-
-                // Save preference
-                try {
-                    localStorage.setItem('preferredLanguage', lang);
-                } catch (e) {
-                    console.warn('Could not save language preference:', e);
-                }
-
-                // Announce change to screen readers
-                const announcement = document.createElement('div');
-                announcement.setAttribute('aria-live', 'polite');
-                announcement.setAttribute('aria-atomic', 'true');
-                announcement.className = 'sr-only';
-                announcement.style.position = 'absolute';
-                announcement.style.left = '-10000px';
-                announcement.style.width = '1px';
-                announcement.style.height = '1px';
-                announcement.style.overflow = 'hidden';
-                
-                const langNames = {
-                    es: 'Español',
-                    en: 'English', 
-                    de: 'Deutsch',
-                    fr: 'Français',
-                    it: 'Italiano'
-                };
-                
-                announcement.textContent = `Idioma cambiado a ${langNames[lang]}`;
-                document.body.appendChild(announcement);
-                
-                setTimeout(() => {
-                    document.body.removeChild(announcement);
-                }, 1000);
-
-            } catch (error) {
-                console.error('Error switching language:', error);
-            }
-        }
-
-        // Initialize language on page load
-        function initializeLanguage() {
-            try {
-                // Detect browser language
-                const browserLang = navigator.language.toLowerCase();
-                let defaultLang = 'es'; // Default fallback
-                
-                // Map browser languages to supported languages
-                if (browserLang.startsWith('en')) defaultLang = 'en';
-                else if (browserLang.startsWith('de')) defaultLang = 'de';
-                else if (browserLang.startsWith('fr')) defaultLang = 'fr';
-                else if (browserLang.startsWith('it')) defaultLang = 'it';
-                
-                // Get saved preference or use detected language
-                let savedLang;
-                try {
-                    savedLang = localStorage.getItem('preferredLanguage');
-                } catch (e) {
-                    console.warn('Could not access localStorage:', e);
-                }
-                
-                const initialLang = savedLang || defaultLang;
-                
-                // Validate and set initial language
-                if (footerTexts.hasOwnProperty(initialLang)) {
-                    switchLanguage(initialLang);
-                } else {
-                    switchLanguage('es'); // Fallback to Spanish
-                }
-            } catch (error) {
-                console.error('Error initializing language:', error);
-                switchLanguage('es'); // Fallback to Spanish
-            }
-        }
-
-        // Keyboard navigation for language buttons
-        document.addEventListener('keydown', function(e) {
-            if (e.target.classList.contains('lang-btn')) {
-                const buttons = Array.from(document.querySelectorAll('.lang-btn'));
-                const currentIndex = buttons.indexOf(e.target);
-                
-                let nextIndex;
-                
-                switch(e.key) {
-                    case 'ArrowLeft':
-                    case 'ArrowUp':
-                        e.preventDefault();
-                        nextIndex = currentIndex > 0 ? currentIndex - 1 : buttons.length - 1;
-                        buttons[nextIndex].focus();
-                        break;
-                    case 'ArrowRight':
-                    case 'ArrowDown':
-                        e.preventDefault();
-                        nextIndex = currentIndex < buttons.length - 1 ? currentIndex + 1 : 0;
-                        buttons[nextIndex].focus();
-                        break;
-                    case 'Home':
-                        e.preventDefault();
-                        buttons[0].focus();
-                        break;
-                    case 'End':
-                        e.preventDefault();
-                        buttons[buttons.length - 1].focus();
-                        break;
-                }
-            }
-        });
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeLanguage);
-        } else {
-            initializeLanguage();
-        }
-
-        // Handle visibility change to maintain state
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                // Refresh language state when page becomes visible
-                const currentLang = localStorage.getItem('preferredLanguage') || 'es';
-                if (footerTexts.hasOwnProperty(currentLang)) {
-                    switchLanguage(currentLang);
-                }
-            }
-        });
-
-        // Error handling for failed image loads
-        document.querySelector('.brand-logo').addEventListener('error', function() {
-            this.style.display = 'none';
-            console.warn('Logo image failed to load');
-        });
-
-        // Performance optimization: Preload critical resources
-        const preloadLink = document.createElement('link');
-        preloadLink.rel = 'preload';
-        preloadLink.href = 'https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png';
-        preloadLink.as = 'image';
-        document.head.appendChild(preloadLink);
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c1b1c3c265cc69',t:'MTc2MDA1MjkyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="./lang-switcher.js"></script>
+</body>
 </html>

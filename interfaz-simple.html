@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interfaz Simple con Links + Google Drive — Business Bots Solutions</title>
-  <meta name="description" content="Interfaz Simple con Links + Google Drive — Portal minimalista vinculado a recursos clave con accesos inteligentes." />
+  <title>Interfaz Simple + Google Drive — Business Bots Solutions</title>
+  <meta name="description" content="Portal minimalista conectado a Google Drive con automatizaciones, permisos avanzados y soporte continuo." />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #000000;
@@ -31,8 +32,8 @@
       color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      display: flex;
       min-height: 100vh;
+      display: flex;
     }
 
     a {
@@ -40,7 +41,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: clamp(24px, 6vw, 64px);
@@ -49,14 +50,51 @@
       gap: var(--gap);
     }
 
-    header.page-header {
-      text-align: center;
+    header[role="banner"] {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav[aria-label="Selector de idioma"] {
+      display: flex;
     /* LANGUAGE NAVIGATION STYLES */
     .lang-nav {
       display: flex;
@@ -64,6 +102,31 @@
       background: var(--panel);
       border: 1px solid var(--stroke);
       border-radius: var(--radius-sm);
+      padding: 6px;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 48px;
+      min-height: 44px;
+    }
+
+    .lang-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: var(--shadow-accent);
+    }
+
+    .lang-btn:hover:not([aria-pressed="true"]) {
       padding: 6px 10px;
       box-shadow: var(--shadow);
     }
@@ -83,6 +146,28 @@
       color: var(--fg);
     }
 
+    .hidden {
+      display: none !important;
+    }
+
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .services-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     .lang-link.active {
       background: var(--accent);
       color: var(--bg);
@@ -106,17 +191,26 @@
       font-weight: 600;
     }
 
-    header.page-header h1 {
+    .page-header h2 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(32px, 5vw, 46px);
       letter-spacing: -0.02em;
     }
 
-    header.page-header .lead {
+    .page-header .lead {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
       max-width: 720px;
+    }
+
+    .hero-media {
+      display: block;
+      margin: 0 auto;
+      max-width: min(640px, 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
     }
 
     .content-grid {
@@ -135,7 +229,7 @@
       gap: 16px;
     }
 
-    .panel h2 {
+    .panel h3 {
       margin: 0;
       font-size: clamp(20px, 3vw, 26px);
       color: var(--accent);
@@ -275,7 +369,7 @@
     .cta:hover {
       color: var(--bg);
       border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta:hover::after {
@@ -311,32 +405,42 @@
       transform: translateX(-2px);
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    footer {
+    footer[role="contentinfo"] {
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      padding-top: 8px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
     }
 
     @media (min-width: 900px) {
       .content-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .panel.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header[role="banner"] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav[aria-label="Selector de idioma"] {
+        width: 100%;
+        justify-content: center;
+        max-width: 420px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
 
@@ -348,8 +452,23 @@
     }
   </style>
 </head>
-<body data-service="interfaz-simple">
+<body>
   <div class="wrap">
+    <header role="banner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" alt="Business Bots Logo" width="60" height="60" loading="lazy" />
+        <div class="brand-text">
+          <h1>Business Bots</h1>
+          <p data-i18n-key="serviceTagline">Servicios profesionales automatizados</p>
+        </div>
+      </a>
+      <nav aria-label="Selector de idioma">
+        <button class="lang-btn" aria-pressed="true" data-lang="es" type="button">ES</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="de" type="button">DE</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
+      </nav>
     <header class="page-header" role="banner">
       <!-- LANGUAGE NAVIGATION BLOCK -->
       <nav class="lang-nav" aria-label="Language switcher">
@@ -364,62 +483,293 @@
       <p class="lead" data-i18n="lead">Portal minimalista vinculado a recursos de Google Drive para acceso rápido y organizado a todos tus documentos importantes.</p>
     </header>
 
-    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Interfaz Simple con Links + Google Drive" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
-
-    <main class="content-grid" role="main">
-      <section class="panel">
-        <h2 data-i18n="section1Title">Mapa inteligente de recursos</h2>
-        <p data-i18n="section1Paragraph">Diseñamos un hub de enlaces seguro que centraliza todos tus accesos críticos con estructura responsive y branding consistente.</p>
-        <ul class="feature-list">
-          <li data-i18n="section1Feature1">Mapa de enlaces personalizado con categorías dinámicas</li>
-          <li data-i18n="section1Feature2">Configuración de permisos avanzada por rol y dispositivo</li>
-          <li data-i18n="section1Feature3">Estructura SEO optimizada para indexar recursos clave</li>
-          <li data-i18n="section1Feature4">Documentación para que tu equipo mantenga y edite el portal</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
-        <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">5–10 días hábiles, incluyendo revisión y ajustes finales.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">Google Drive, Canva, HTML modular y automatizaciones con Apps Script.</dd>
-          <dt data-i18n="section2Item3Term">Integración</dt>
-          <dd data-i18n="section2Item3Desc">Compatible con CRM, portales NFC, códigos QR y ecosistemas Notion.</dd>
-          <dt data-i18n="section2Item4Term">Seguridad</dt>
-          <dd data-i18n="section2Item4Desc">Control de accesos con registros de actividad y backups periódicos.</dd>
-        </dl>
-      </section>
-
-      <section class="panel full">
-        <h2 data-i18n="section3Title">Automatizaciones &amp; soporte</h2>
-        <p data-i18n="section3Paragraph1">Activamos flujos automáticos para actualizar enlaces, sincronizar carpetas y notificar a tu equipo de nuevos recursos o cambios críticos.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Incluye una sesión de capacitación remota y guía paso a paso para replicar nuevas secciones sin depender del equipo técnico.</p>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
-        <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€352</span>
-          <span class="discount" data-i18n="section4Discount">€299</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €53</span>
+    <main role="main">
+      <section id="es" class="services-section" lang="es">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Interfaz Simple con Links + Google Drive</h2>
+          <p class="lead">Portal minimalista vinculado a recursos de Google Drive para acceso rápido y organizado a todos tus documentos importantes.</p>
         </div>
-        <p class="muted" data-i18n="section4Note">Instalación inicial con 15 enlaces priorizados, dashboards de uso y soporte durante 30 días.</p>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Interfaz simple conectada a Google Drive" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Mapa inteligente de recursos</h3>
+            <p>Diseñamos un hub de enlaces seguro que centraliza todos tus accesos críticos con estructura responsive y branding consistente.</p>
+            <ul class="feature-list">
+              <li>Mapa de enlaces personalizado con categorías dinámicas</li>
+              <li>Configuración de permisos avanzada por rol y dispositivo</li>
+              <li>Estructura SEO optimizada para indexar recursos clave</li>
+              <li>Documentación para que tu equipo mantenga y edite el portal</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Detalles técnicos</h3>
+            <dl class="data">
+              <dt>Entrega</dt>
+              <dd>5–10 días hábiles, incluyendo revisión y ajustes finales.</dd>
+              <dt>Herramientas</dt>
+              <dd>Google Drive, Canva, HTML modular y automatizaciones con Apps Script.</dd>
+              <dt>Integración</dt>
+              <dd>Compatible con CRM, portales NFC, códigos QR y ecosistemas Notion.</dd>
+              <dt>Seguridad</dt>
+              <dd>Control de accesos con registros de actividad y backups periódicos.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Automatizaciones & soporte</h3>
+            <p>Activamos flujos automáticos para actualizar enlaces, sincronizar carpetas y notificar a tu equipo de nuevos recursos o cambios críticos.</p>
+            <p class="muted">Incluye una sesión de capacitación remota y guía paso a paso para replicar nuevas secciones sin depender del equipo técnico.</p>
+          </div>
+          <div class="panel">
+            <h3>Inversión preferente</h3>
+            <div class="price-card">
+              <span class="regular">€352</span>
+              <span class="discount">€299</span>
+              <span class="saving">Ahorra €53</span>
+            </div>
+            <p class="muted">Instalación inicial con 15 enlaces priorizados, dashboards de uso y soporte durante 30 días.</p>
+          </div>
+          <div class="panel">
+            <h3>Condiciones del servicio</h3>
+            <p>Implementación remota con contenido suministrado por tu equipo. Entregamos assets editables, manual de actualización y checklist de seguridad para mantener la estructura a largo plazo.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20quiero%20implementar%20la%20Interfaz%20Simple%20con%20Drive.%20%C2%BFPodemos%20revisar%20requisitos%20y%20cronograma?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Volver a servicios</a>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones del servicio</h2>
-        <p data-i18n="section5Paragraph">Implementación remota con contenido suministrado por tu equipo. Entregamos assets editables, manual de actualización y checklist de seguridad para mantener la estructura a largo plazo.</p>
+      <section id="en" class="services-section hidden" lang="en">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Simple Interface with Links + Google Drive</h2>
+          <p class="lead">Minimal portal connected to Google Drive resources for quick, organized access to every critical document.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Simple interface connected to Google Drive" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Smart resource map</h3>
+            <p>We build a secure link hub that centralizes all critical access points with a responsive structure and consistent branding.</p>
+            <ul class="feature-list">
+              <li>Personalized link map with dynamic categories</li>
+              <li>Advanced permission configuration by role and device</li>
+              <li>SEO-optimized structure to index key resources</li>
+              <li>Documentation so your team can maintain and edit the portal</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technical details</h3>
+            <dl class="data">
+              <dt>Delivery</dt>
+              <dd>5–10 business days including review and final adjustments.</dd>
+              <dt>Tools</dt>
+              <dd>Google Drive, Canva, modular HTML and Apps Script automations.</dd>
+              <dt>Integration</dt>
+              <dd>Compatible with CRM, NFC portals, QR codes and Notion ecosystems.</dd>
+              <dt>Security</dt>
+              <dd>Access control with activity logs and scheduled backups.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Automations & support</h3>
+            <p>We activate automated flows to refresh links, sync folders and notify your team of new resources or critical changes.</p>
+            <p class="muted">Includes a remote training session and a step-by-step guide so you can replicate new sections without relying on the tech team.</p>
+          </div>
+          <div class="panel">
+            <h3>Preferred investment</h3>
+            <div class="price-card">
+              <span class="regular">€352</span>
+              <span class="discount">€299</span>
+              <span class="saving">Save €53</span>
+            </div>
+            <p class="muted">Initial setup with 15 prioritized links, usage dashboards and 30 days of support.</p>
+          </div>
+          <div class="panel">
+            <h3>Service conditions</h3>
+            <p>Remote implementation using content supplied by your team. We deliver editable assets, an update manual and a security checklist to maintain the structure long term.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'd%20like%20to%20launch%20the%20Simple%20Interface%20with%20Drive.%20Can%20we%20review%20requirements%20and%20timeline?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+        </div>
+      </section>
+
+      <section id="de" class="services-section hidden" lang="de">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Einfache Schnittstelle + Google Drive</h2>
+          <p class="lead">Minimaler Link-Hub, der mit Drive-Ressourcen verbunden ist, für schnellen und organisierten Zugriff auf alle wichtigen Dokumente.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Einfache Schnittstelle mit Google Drive" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Intelligente Ressourcenkarte</h3>
+            <p>Wir erstellen einen sicheren Link-Hub, der alle wichtigen Zugänge mit responsiver Struktur und konsistentem Branding bündelt.</p>
+            <ul class="feature-list">
+              <li>Individuelle Link-Map mit dynamischen Kategorien</li>
+              <li>Erweiterte Berechtigungseinstellungen nach Rolle und Gerät</li>
+              <li>SEO-optimierte Struktur zur Indexierung wichtiger Ressourcen</li>
+              <li>Dokumentation, damit dein Team das Portal pflegen und bearbeiten kann</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technische Details</h3>
+            <dl class="data">
+              <dt>Lieferung</dt>
+              <dd>5–10 Werktage inklusive Prüfung und finaler Anpassungen.</dd>
+              <dt>Tools</dt>
+              <dd>Google Drive, Canva, modulares HTML und Apps Script Automatisierungen.</dd>
+              <dt>Integration</dt>
+              <dd>Kompatibel mit CRM, NFC-Portalen, QR-Codes und Notion-Ökosystemen.</dd>
+              <dt>Sicherheit</dt>
+              <dd>Zugriffskontrolle mit Aktivitätsprotokollen und regelmäßigen Backups.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Automatisierungen & Support</h3>
+            <p>Wir aktivieren automatische Workflows, um Links zu aktualisieren, Ordner zu synchronisieren und dein Team über neue Ressourcen oder kritische Änderungen zu informieren.</p>
+            <p class="muted">Beinhaltet eine Remote-Schulung und eine Schritt-für-Schritt-Anleitung, um neue Bereiche ohne IT-Abhängigkeit zu erstellen.</p>
+          </div>
+          <div class="panel">
+            <h3>Bevorzugtes Investment</h3>
+            <div class="price-card">
+              <span class="regular">€352</span>
+              <span class="discount">€299</span>
+              <span class="saving">Spare €53</span>
+            </div>
+            <p class="muted">Initiale Einrichtung mit 15 priorisierten Links, Nutzungs-Dashboards und 30 Tagen Support.</p>
+          </div>
+          <div class="panel">
+            <h3>Servicebedingungen</h3>
+            <p>Remote-Implementierung mit Inhalten deines Teams. Wir liefern editierbare Assets, ein Update-Handbuch und eine Sicherheits-Checkliste für langfristige Stabilität.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20m%C3%B6chte%20die%20Einfache%20Schnittstelle%20mit%20Drive%20umsetzen.%20K%C3%B6nnen%20wir%20Anforderungen%20und%20Timing%20besprechen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Zurück zu den Services</a>
+        </div>
+      </section>
+
+      <section id="fr" class="services-section hidden" lang="fr">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Interface simple + Google Drive</h2>
+          <p class="lead">Hub de liens minimaliste connecté à Google Drive pour un accès rapide et organisé à tous vos documents essentiels.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Interface simple connectée à Google Drive" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Cartographie intelligente des ressources</h3>
+            <p>Nous construisons un hub de liens sécurisé qui centralise vos accès critiques avec une structure responsive et un branding cohérent.</p>
+            <ul class="feature-list">
+              <li>Carte de liens personnalisée avec catégories dynamiques</li>
+              <li>Configuration avancée des permissions par rôle et appareil</li>
+              <li>Structure SEO optimisée pour indexer les ressources clés</li>
+              <li>Documentation pour que votre équipe maintienne et édite le portail</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Détails techniques</h3>
+            <dl class="data">
+              <dt>Livraison</dt>
+              <dd>5 à 10 jours ouvrés incluant revue et ajustements finaux.</dd>
+              <dt>Outils</dt>
+              <dd>Google Drive, Canva, HTML modulaire et automatisations Apps Script.</dd>
+              <dt>Intégration</dt>
+              <dd>Compatible avec CRM, portails NFC, QR codes et écosystèmes Notion.</dd>
+              <dt>Sécurité</dt>
+              <dd>Contrôle d'accès avec journaux d'activité et sauvegardes programmées.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Automatisations & support</h3>
+            <p>Nous activons des flux automatiques pour mettre à jour les liens, synchroniser les dossiers et informer votre équipe des nouveaux contenus ou changements critiques.</p>
+            <p class="muted">Comprend une session de formation à distance et un guide pas-à-pas pour créer de nouvelles sections sans dépendance technique.</p>
+          </div>
+          <div class="panel">
+            <h3>Investissement préférentiel</h3>
+            <div class="price-card">
+              <span class="regular">€352</span>
+              <span class="discount">€299</span>
+              <span class="saving">Économisez 53 €</span>
+            </div>
+            <p class="muted">Mise en place initiale avec 15 liens prioritaires, tableaux de bord d'usage et 30 jours de support.</p>
+          </div>
+          <div class="panel">
+            <h3>Conditions du service</h3>
+            <p>Implantation à distance avec contenu fourni par votre équipe. Nous livrons des assets éditables, un manuel de mise à jour et une checklist de sécurité pour pérenniser la structure.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20souhaite%20d%C3%A9ployer%20l'Interface%20simple%20avec%20Drive.%20Pouvons-nous%20valider%20besoins%20et%20planning?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Retour aux services</a>
+        </div>
+      </section>
+
+      <section id="it" class="services-section hidden" lang="it">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Interfaccia semplice + Google Drive</h2>
+          <p class="lead">Hub di link minimalista collegato a Google Drive per un accesso rapido e organizzato a tutti i documenti essenziali.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559186/ChatGPT_Image_Oct_15_2025_07_50_18_PM_shrjkk.png" alt="Interfaccia semplice collegata a Google Drive" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Mappa intelligente delle risorse</h3>
+            <p>Creiamo un hub di link sicuro che centralizza tutti i punti di accesso critici con struttura responsive e branding coerente.</p>
+            <ul class="feature-list">
+              <li>Mappa dei link personalizzata con categorie dinamiche</li>
+              <li>Configurazione avanzata dei permessi per ruolo e dispositivo</li>
+              <li>Struttura SEO ottimizzata per indicizzare le risorse chiave</li>
+              <li>Documentazione per consentire al tuo team di mantenere e modificare il portale</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Dettagli tecnici</h3>
+            <dl class="data">
+              <dt>Consegna</dt>
+              <dd>5–10 giorni lavorativi, inclusa revisione e rifinitura finale.</dd>
+              <dt>Strumenti</dt>
+              <dd>Google Drive, Canva, HTML modulare e automazioni con Apps Script.</dd>
+              <dt>Integrazione</dt>
+              <dd>Compatibile con CRM, portali NFC, codici QR ed ecosistemi Notion.</dd>
+              <dt>Sicurezza</dt>
+              <dd>Controllo degli accessi con log di attività e backup periodici.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Automazioni & supporto</h3>
+            <p>Attiviamo flussi automatici per aggiornare link, sincronizzare cartelle e notificare il team su nuove risorse o modifiche critiche.</p>
+            <p class="muted">Include una sessione di formazione remota e una guida passo passo per creare nuove sezioni senza dipendere dal team tecnico.</p>
+          </div>
+          <div class="panel">
+            <h3>Investimento preferenziale</h3>
+            <div class="price-card">
+              <span class="regular">€352</span>
+              <span class="discount">€299</span>
+              <span class="saving">Risparmia €53</span>
+            </div>
+            <p class="muted">Setup iniziale con 15 link prioritari, dashboard di utilizzo e 30 giorni di supporto.</p>
+          </div>
+          <div class="panel">
+            <h3>Condizioni del servizio</h3>
+            <p>Implementazione da remoto con contenuti forniti dal tuo team. Consegniamo asset modificabili, manuale di aggiornamento e checklist di sicurezza per mantenere la struttura nel lungo periodo.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20desidero%20attivare%20l'Interfaccia%20semplice%20con%20Drive.%20Possiamo%20definire%20requisiti%20e%20tempistiche?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Torna ai servizi</a>
+        </div>
       </section>
     </main>
 
-    <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Interfaz%20Simple%20con%20Links%20%2B%20Google%20Drive." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
-    </div>
-
-    <footer>Business Bots Solutions © 2025</footer>
+    <footer role="contentinfo">
+      <p id="footer-text" data-i18n-key="footer">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+    </footer>
   </div>
+
+  <script src="./lang-switcher.js"></script>
 </body>
 </html>

@@ -1,3 +1,36 @@
+(function () {
+  'use strict';
+
+  const SUPPORTED_LANGS = ['es', 'en', 'de', 'fr', 'it'];
+  const DEFAULT_LANG = 'es';
+
+  const textBundles = {
+    homeSubtitle: {
+      es: 'Lista Especial de Servicios 2025',
+      en: 'Special Service List 2025',
+      de: 'Sonderdienstliste 2025',
+      fr: 'Liste spéciale de services 2025',
+      it: 'Elenco speciale dei servizi 2025'
+    },
+    serviceTagline: {
+      es: 'Servicios profesionales automatizados',
+      en: 'Automated professional services',
+      de: 'Automatisierte professionelle Dienstleistungen',
+      fr: 'Services professionnels automatisés',
+      it: 'Servizi professionali automatizzati'
+    },
+    footer: {
+      es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
+      en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
+      de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
+      fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
+      it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+    }
+  };
+
+  function normaliseLanguage(lang) {
+    if (typeof lang !== 'string') {
+      return DEFAULT_LANG;
 const translations = {
   branding: {
     es: {
@@ -626,162 +659,31 @@ const translations = {
       ctaPrimary: "Contattaci su WhatsApp",
       ctaSecondary: "← Torna ai servizi"
     }
-  },
-  "tarjetas-nfc": {
-    es: {
-      title: "Tarjetas NFC Contactless",
-      lead: "Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.",
-      section1Title: "Kit de experiencia contactless",
-      section1Paragraph: "Diseñamos tarjetas NFC de alto impacto con visuales premium y flujos digitales que puedes actualizar en segundos.",
-      section1Feature1: "Diseño personalizado con variantes para staff y clientes VIP",
-      section1Feature2: "Programación NFC avanzada con enlaces dinámicos y analítica",
-      section1Feature3: "Flujo de actualización automática sin reimprimir tarjetas",
-      section1Feature4: "Panel de contenidos editable para campañas y promos",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "1–2 semanas con pruebas y validación de lectura en campo.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "NFC Tools Pro, Canva, panel web Business Bots y automatizaciones.",
-      section2Item3Term: "Integración",
-      section2Item3Desc: "Compatible con Google Drive, formularios Business Bots y CRMs.",
-      section2Item4Term: "Soporte",
-      section2Item4Desc: "Incluye video tutorial, guía de instalación y 30 días de monitoreo.",
-      section3Title: "Implementación y garantías",
-      section3Paragraph1: "Creamos un flujo de onboarding para tu equipo y configuramos alertas de uso para detectar tarjetas inactivas o pérdidas.",
-      section3Paragraph2: "Dispondrás de un entorno de pruebas para actualizar campañas, además de soporte para replicar nuevos lotes bajo la misma identidad visual.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Ahorra €66",
-      section4Note: "Incluye lote inicial de 25 tarjetas, dashboard de métricas de clics y mantenimiento de enlaces durante el primer mes.",
-      section5Title: "Condiciones de producción",
-      section5Paragraph: "Requerimos logos editables y paleta de color para asegurar consistencia. La impresión física puede gestionarse con nuestro partner o el tuyo, con entrega de archivos listos para producción.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "Contactless NFC Cards",
-      lead: "Custom NFC design with a dynamic link ecosystem for innovative, professional contactless experiences.",
-      section1Title: "Contactless experience kit",
-      section1Paragraph: "We craft high-impact NFC cards with premium visuals and digital flows you can update in seconds.",
-      section1Feature1: "Tailored design with variants for staff and VIP clients",
-      section1Feature2: "Advanced NFC programming with dynamic links and analytics",
-      section1Feature3: "Automatic update workflow without reprinting cards",
-      section1Feature4: "Editable content dashboard for campaigns and promos",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "1–2 weeks with field testing and reading validation.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "NFC Tools Pro, Canva, Business Bots web console and automations.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Compatible with Google Drive, Business Bots forms and CRMs.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Includes video tutorial, installation guide and 30 days of monitoring.",
-      section3Title: "Implementation & guarantees",
-      section3Paragraph1: "We build an onboarding flow for your team and configure usage alerts to detect inactive or lost cards.",
-      section3Paragraph2: "You get a testing environment to refresh campaigns plus support to replicate new batches with the same visual identity.",
-      section4Title: "Preferred investment",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Save €66",
-      section4Note: "Includes an initial batch of 25 cards, click metrics dashboard and link maintenance during the first month.",
-      section5Title: "Production conditions",
-      section5Paragraph: "We require editable logos and color palette for consistency. Printing can be managed with our partner or yours, delivering production-ready files.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "NFC-Karten ohne Kontakt",
-      lead: "Individuelles NFC-Design mit dynamischem Link-Ökosystem für innovative und professionelle kontaktlose Erlebnisse.",
-      section1Title: "Contactless-Erlebnis-Kit",
-      section1Paragraph: "Wir gestalten wirkungsstarke NFC-Karten mit Premium-Visuals und digitalen Flows, die du in Sekunden aktualisieren kannst.",
-      section1Feature1: "Individuelles Design mit Varianten für Team und VIP-Kundschaft",
-      section1Feature2: "Erweiterte NFC-Programmierung mit dynamischen Links und Analysen",
-      section1Feature3: "Automatischer Aktualisierungsablauf ohne Karten neu zu drucken",
-      section1Feature4: "Editierbares Content-Dashboard für Kampagnen und Aktionen",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "1–2 Wochen mit Tests und Lesevalidierung im Einsatz.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "NFC Tools Pro, Canva, Business-Bots-Webkonsole und Automatisierungen.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Kompatibel mit Google Drive, Business Bots Formularen und CRMs.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Inklusive Video-Tutorial, Installationsleitfaden und 30 Tagen Monitoring.",
-      section3Title: "Implementierung & Garantien",
-      section3Paragraph1: "Wir erstellen einen Onboarding-Flow für dein Team und richten Nutzungsalarme ein, um inaktive oder verlorene Karten zu erkennen.",
-      section3Paragraph2: "Du erhältst eine Testumgebung für Kampagnen-Updates sowie Support zur Reproduktion neuer Chargen in identischer Markenoptik.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Spare 66 €",
-      section4Note: "Beinhaltet erste Charge mit 25 Karten, Klickmetriken-Dashboard und Link-Pflege im ersten Monat.",
-      section5Title: "Produktionsbedingungen",
-      section5Paragraph: "Wir benötigen editierbare Logos und Farbpalette für Konsistenz. Der Druck kann über unseren Partner oder euren erfolgen, mit lieferfertigen Produktionsdateien.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Cartes NFC sans contact",
-      lead: "Design NFC personnalisé avec écosystème de liens dynamiques pour des expériences sans contact innovantes et professionnelles.",
-      section1Title: "Kit d’expérience sans contact",
-      section1Paragraph: "Nous concevons des cartes NFC à fort impact avec visuels premium et parcours digitaux que vous pouvez mettre à jour en quelques secondes.",
-      section1Feature1: "Design personnalisé avec variantes pour l’équipe et les clients VIP",
-      section1Feature2: "Programmation NFC avancée avec liens dynamiques et analytics",
-      section1Feature3: "Flux de mise à jour automatique sans réimprimer les cartes",
-      section1Feature4: "Tableau de contenu éditable pour campagnes et promotions",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "1 à 2 semaines avec tests terrain et validation de lecture.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "NFC Tools Pro, Canva, console web Business Bots et automatisations.",
-      section2Item3Term: "Intégration",
-      section2Item3Desc: "Compatible avec Google Drive, formulaires Business Bots et CRM.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Inclut tutoriel vidéo, guide d’installation et 30 jours de monitoring.",
-      section3Title: "Mise en œuvre & garanties",
-      section3Paragraph1: "Nous créons un parcours d’onboarding pour votre équipe et configurons des alertes d’usage afin de détecter les cartes inactives ou perdues.",
-      section3Paragraph2: "Vous disposez d’un environnement de test pour mettre à jour vos campagnes, ainsi que d’un support pour reproduire de nouveaux lots avec la même identité visuelle.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Économisez 66 €",
-      section4Note: "Inclut un lot initial de 25 cartes, tableau de bord des clics et maintenance des liens durant le premier mois.",
-      section5Title: "Conditions de production",
-      section5Paragraph: "Nous demandons des logos éditables et une palette de couleurs pour garantir la cohérence. L’impression peut être gérée avec notre partenaire ou le vôtre, avec des fichiers prêts pour la production.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Card NFC Contactless",
-      lead: "Design NFC personalizzato con ecosistema di link dinamici per esperienze contactless innovative e professionali.",
-      section1Title: "Kit di esperienza contactless",
-      section1Paragraph: "Progettiamo card NFC ad alto impatto con visual premium e flussi digitali aggiornabili in pochi secondi.",
-      section1Feature1: "Design su misura con varianti per staff e clienti VIP",
-      section1Feature2: "Programmazione NFC avanzata con link dinamici e analitiche",
-      section1Feature3: "Flusso di aggiornamento automatico senza ristampare le card",
-      section1Feature4: "Dashboard di contenuti modificabile per campagne e promozioni",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "1–2 settimane con test e validazione di lettura sul campo.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "NFC Tools Pro, Canva, console web Business Bots e automazioni.",
-      section2Item3Term: "Integrazione",
-      section2Item3Desc: "Compatibile con Google Drive, moduli Business Bots e CRM.",
-      section2Item4Term: "Supporto",
-      section2Item4Desc: "Include video tutorial, guida all’installazione e 30 giorni di monitoraggio.",
-      section3Title: "Implementazione & garanzie",
-      section3Paragraph1: "Creiamo un flusso di onboarding per il tuo team e configuriamo avvisi d’uso per rilevare card inattive o smarrite.",
-      section3Paragraph2: "Hai a disposizione un ambiente di test per aggiornare le campagne e supporto per replicare nuovi lotti con la stessa identità visiva.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Risparmi 66 €",
-      section4Note: "Include lotto iniziale di 25 card, dashboard delle metriche di clic e manutenzione dei link per il primo mese.",
-      section5Title: "Condizioni di produzione",
-      section5Paragraph: "Richiediamo loghi modificabili e palette colori per garantire coerenza. La stampa può essere gestita con il nostro partner o il tuo, fornendo file pronti per la produzione.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
+    const code = lang.trim().toLowerCase();
+    return SUPPORTED_LANGS.includes(code) ? code : DEFAULT_LANG;
+  }
+
+  function getInitialLanguage() {
+    try {
+      const stored = localStorage.getItem('preferredLanguage');
+      if (stored) {
+        return normaliseLanguage(stored);
+      }
+    } catch (error) {
+      console.warn('Unable to access stored language preference', error);
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      const locale = navigator.language.toLowerCase();
+      const match = SUPPORTED_LANGS.find(code => locale.startsWith(code));
+      if (match) {
+        return match;
+      }
+    }
+
+    const docLang = document.documentElement.getAttribute('lang');
+    if (docLang) {
+      return normaliseLanguage(docLang);
     }
   },
 
@@ -801,38 +703,92 @@ const languageAnnouncements = {
   it: "Lingua impostata in italiano."
 };
 
-const defaultLanguage = "es";
-let currentService = "";
-let langButtons = [];
-let announcer = null;
-
-function applyLanguage(lang) {
-  const service = currentService || document.body?.dataset?.service || "";
-  const serviceTranslations = translations[service];
-  if (!serviceTranslations || !serviceTranslations[lang]) {
-    return;
+    return DEFAULT_LANG;
   }
 
-  document.documentElement.lang = lang;
-  const content = serviceTranslations[lang];
-  Object.entries(content).forEach(([key, value]) => {
-    document.querySelectorAll(`[data-i18n="${key}"]`).forEach((element) => {
-      element.textContent = value;
+  function updateButtons(lang) {
+    document.querySelectorAll('.lang-btn').forEach(button => {
+      const btnLang = normaliseLanguage(button.dataset.lang || button.textContent);
+      button.dataset.lang = btnLang;
+      button.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
     });
-  });
-
-  langButtons.forEach((button) => {
-    const isActive = button.dataset.lang === lang;
-    button.setAttribute("aria-pressed", String(isActive));
-  });
-
-  if (announcer) {
-    announcer.textContent = languageAnnouncements[lang] || "";
   }
 
-  localStorage.setItem("preferredLanguage", lang);
-}
+  function updateSections(lang) {
+    const sections = Array.from(document.querySelectorAll('.services-section'));
+    if (!sections.length) {
+      return;
+    }
 
+    let targetLang = lang;
+    const hasTarget = sections.some(section => section.id === lang);
+    if (!hasTarget) {
+      const fallback = sections[0].id;
+      targetLang = fallback ? normaliseLanguage(fallback) : DEFAULT_LANG;
+    }
+
+    sections.forEach(section => {
+      section.classList.toggle('hidden', section.id !== targetLang);
+    });
+
+    return targetLang;
+  }
+
+  function updateStaticText(lang) {
+    document.querySelectorAll('[data-i18n-key]').forEach(node => {
+      const key = node.getAttribute('data-i18n-key');
+      const bundle = textBundles[key];
+      if (bundle && bundle[lang]) {
+        node.textContent = bundle[lang];
+      }
+    });
+  }
+
+  function persistLanguage(lang) {
+    try {
+      localStorage.setItem('preferredLanguage', lang);
+    } catch (error) {
+      console.warn('Unable to persist language preference', error);
+    }
+  }
+
+  function applyLanguage(lang) {
+    const requestedLang = normaliseLanguage(lang);
+    const visibleLang = updateSections(requestedLang) || requestedLang;
+
+    updateButtons(visibleLang);
+    updateStaticText(visibleLang);
+
+    document.documentElement.setAttribute('lang', visibleLang);
+    document.documentElement.setAttribute('xml:lang', visibleLang);
+
+    persistLanguage(visibleLang);
+  }
+
+  function handleClick(event) {
+    const target = event.currentTarget;
+    const lang = target.dataset.lang || target.textContent;
+    applyLanguage(lang);
+  }
+
+  function prepareButtons() {
+    document.querySelectorAll('.lang-btn').forEach(button => {
+      if (!button.dataset.lang) {
+        button.dataset.lang = normaliseLanguage(button.textContent);
+      }
+      button.removeEventListener('click', handleClick);
+      button.addEventListener('click', handleClick);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    prepareButtons();
+    const initial = getInitialLanguage();
+    applyLanguage(initial);
+  });
+
+  window.switchLanguage = applyLanguage;
+})();
 function changeLanguage(lang) {
   const service = currentService || document.body?.dataset?.service || "";
   if (!translations[service] || !translations[service][lang]) {
