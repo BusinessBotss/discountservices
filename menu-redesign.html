@@ -95,6 +95,9 @@
 
     nav[aria-label="Selector de idioma"] {
       display: flex;
+    /* LANGUAGE NAVIGATION STYLES */
+    .lang-nav {
+      display: flex;
       gap: 6px;
       background: var(--panel);
       border: 1px solid var(--stroke);
@@ -124,6 +127,21 @@
     }
 
     .lang-btn:hover:not([aria-pressed="true"]) {
+      padding: 6px 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .lang-link:hover {
       background: var(--stroke);
       color: var(--fg);
     }
@@ -150,6 +168,19 @@
       flex-direction: column;
       gap: 12px;
       align-items: center;
+    .lang-link.active {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: var(--shadow-accent);
+    }
+
+    @media (max-width: 768px) {
+      .lang-nav {
+        width: 100%;
+        justify-content: center;
+        max-width: 400px;
+        flex-wrap: wrap;
+      }
     }
 
     .eyebrow {
@@ -438,6 +469,18 @@
         <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
         <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
       </nav>
+    <header class="page-header" role="banner">
+      <!-- LANGUAGE NAVIGATION BLOCK -->
+      <nav class="lang-nav" aria-label="Language switcher">
+        <a href="./menu-redesign.html" lang="es" hreflang="es" class="lang-link active">ES</a>
+        <a href="./en/menu-redesign.html" lang="en" hreflang="en" class="lang-link">EN</a>
+        <a href="./de/menu-redesign.html" lang="de" hreflang="de" class="lang-link">DE</a>
+        <a href="./fr/menu-redesign.html" lang="fr" hreflang="fr" class="lang-link">FR</a>
+        <a href="./it/menu-redesign.html" lang="it" hreflang="it" class="lang-link">IT</a>
+      </nav>
+      <span class="eyebrow">Business Bots Solutions</span>
+      <h1 data-i18n="title">Rediseño de Menú e Interfaz Digital</h1>
+      <p class="lead" data-i18n="lead">Reestructuración visual y funcional centrada en conversión para maximizar la experiencia del usuario y aumentar las ventas.</p>
     </header>
 
     <main role="main">

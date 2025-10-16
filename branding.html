@@ -95,6 +95,9 @@
 
     nav[aria-label="Selector de idioma"] {
       display: flex;
+    /* LANGUAGE NAVIGATION STYLES */
+    .lang-nav {
+      display: flex;
       gap: 6px;
       background: var(--panel);
       border: 1px solid var(--stroke);
@@ -124,6 +127,21 @@
     }
 
     .lang-btn:hover:not([aria-pressed="true"]) {
+      padding: 6px 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .lang-link:hover {
       background: var(--stroke);
       color: var(--fg);
     }
@@ -150,6 +168,19 @@
       flex-direction: column;
       gap: 12px;
       align-items: center;
+    .lang-link.active {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: var(--shadow-accent);
+    }
+
+    @media (max-width: 768px) {
+      .lang-nav {
+        width: 100%;
+        justify-content: center;
+        max-width: 400px;
+        flex-wrap: wrap;
+      }
     }
 
     .eyebrow {
@@ -438,6 +469,18 @@
         <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
         <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
       </nav>
+    <header class="page-header" role="banner">
+      <!-- LANGUAGE NAVIGATION BLOCK -->
+      <nav class="lang-nav" aria-label="Language switcher">
+        <a href="./branding.html" lang="es" hreflang="es" class="lang-link active">ES</a>
+        <a href="./en/branding.html" lang="en" hreflang="en" class="lang-link">EN</a>
+        <a href="./de/branding.html" lang="de" hreflang="de" class="lang-link">DE</a>
+        <a href="./fr/branding.html" lang="fr" hreflang="fr" class="lang-link">FR</a>
+        <a href="./it/branding.html" lang="it" hreflang="it" class="lang-link">IT</a>
+      </nav>
+      <span class="eyebrow">Business Bots Solutions</span>
+      <h1 data-i18n="title">Branding Completo</h1>
+      <p class="lead" data-i18n="lead">Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.</p>
     </header>
 
     <main role="main">
@@ -728,5 +771,38 @@
   </div>
 
   <script src="./lang-switcher.js"></script>
+      <section class="panel">
+        <h2 data-i18n="section5Title">Condiciones y entregables</h2>
+        <p data-i18n="section5Paragraph">Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
+        <h2>Proceso creativo</h2>
+        <p>Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.</p>
+        <p class="muted">Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Inversión preferente</h2>
+        <div class="price-card">
+          <span class="regular">€999</span>
+          <span class="discount">€799</span>
+          <span class="saving">Ahorra €200</span>
+        </div>
+        <p class="muted">Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Condiciones y entregables</h2>
+        <p>Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
+      </section>
+    </main>
+
+    <div class="cta-group">
+      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
+      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
+      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo." target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+      <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+    </div>
+
+    <footer>Business Bots Solutions © 2025</footer>
+  </div>
 </body>
 </html>
