@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Branding Completo — Business Bots Solutions</title>
-  <meta name="description" content="Branding Completo — Identidad visual coherente y profesional para destacar en todos tus canales." />
+  <meta name="description" content="Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales." />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #000000;
@@ -18,6 +19,7 @@
       --radius-sm: 12px;
       --gap: 32px;
       --shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      --shadow-accent: 0 10px 25px rgba(74, 222, 128, 0.35);
     }
 
     * {
@@ -30,8 +32,8 @@
       color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      display: flex;
       min-height: 100vh;
+      display: flex;
     }
 
     a {
@@ -39,7 +41,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: clamp(24px, 6vw, 64px);
@@ -48,74 +50,106 @@
       gap: var(--gap);
     }
 
-    header.page-header {
-      text-align: center;
+    header[role="banner"] {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
-    .language-switcher {
+    .brand {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
       align-items: center;
+      gap: 18px;
+      text-decoration: none;
     }
 
-    .language-switcher nav {
-      display: inline-flex;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav[aria-label="Selector de idioma"] {
+      display: flex;
+      gap: 6px;
+      background: var(--panel);
       border: 1px solid var(--stroke);
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(6px);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      box-shadow: var(--shadow);
     }
 
     .lang-btn {
-      border: 1px solid var(--stroke);
       background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 6px 12px;
-      border-radius: 999px;
+      border: none;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 48px;
+      min-height: 44px;
     }
 
     .lang-btn[aria-pressed="true"] {
       background: var(--accent);
       color: var(--bg);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
-    .lang-btn:hover {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
+    .lang-btn:hover:not([aria-pressed="true"]) {
+      background: var(--stroke);
+      color: var(--fg);
     }
 
-    .lang-btn[aria-pressed="true"]:hover {
-      color: var(--bg);
+    .hidden {
+      display: none !important;
     }
 
-    .lang-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    .services-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
     .eyebrow {
@@ -126,17 +160,26 @@
       font-weight: 600;
     }
 
-    header.page-header h1 {
+    .page-header h2 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(32px, 5vw, 46px);
       letter-spacing: -0.02em;
     }
 
-    header.page-header .lead {
+    .page-header .lead {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
       max-width: 720px;
+    }
+
+    .hero-media {
+      display: block;
+      margin: 0 auto;
+      max-width: min(640px, 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
     }
 
     .content-grid {
@@ -155,7 +198,7 @@
       gap: 16px;
     }
 
-    .panel h2 {
+    .panel h3 {
       margin: 0;
       font-size: clamp(20px, 3vw, 26px);
       color: var(--accent);
@@ -295,7 +338,7 @@
     .cta:hover {
       color: var(--bg);
       border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta:hover::after {
@@ -331,32 +374,42 @@
       transform: translateX(-2px);
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    footer {
+    footer[role="contentinfo"] {
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      padding-top: 8px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
     }
 
     @media (min-width: 900px) {
       .content-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .panel.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header[role="banner"] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav[aria-label="Selector de idioma"] {
+        width: 100%;
+        justify-content: center;
+        max-width: 420px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
 
@@ -368,81 +421,312 @@
     }
   </style>
 </head>
-<body data-service="branding">
+<body>
   <div class="wrap">
-    <header class="page-header">
-      <div class="language-switcher">
-        <nav aria-label="Language selector" data-lang-nav>
-          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish" onclick="switchLanguage('es')">ES</button>
-          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English" onclick="switchLanguage('en')">EN</button>
-          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen" onclick="switchLanguage('de')">DE</button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français" onclick="switchLanguage('fr')">FR</button>
-          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano" onclick="switchLanguage('it')">IT</button>
-        </nav>
-        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
-      </div>
-      <span class="eyebrow">Business Bots Solutions</span>
-      <h1 data-i18n="title">Branding Completo</h1>
-      <p class="lead" data-i18n="lead">Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.</p>
+    <header role="banner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" alt="Business Bots Logo" width="60" height="60" loading="lazy" />
+        <div class="brand-text">
+          <h1>Business Bots</h1>
+          <p data-i18n-key="serviceTagline">Servicios profesionales automatizados</p>
+        </div>
+      </a>
+      <nav aria-label="Selector de idioma">
+        <button class="lang-btn" aria-pressed="true" data-lang="es" type="button">ES</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="de" type="button">DE</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
+      </nav>
     </header>
 
-    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Branding Completo" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
-
-    <main class="content-grid" role="main">
-      <section class="panel">
-        <h2 data-i18n="section1Title">Kit completo de identidad</h2>
-        <p data-i18n="section1Paragraph">Creamos un sistema visual consistente para reforzar tu presencia en canales impresos y digitales con piezas listas para usar.</p>
-        <ul class="feature-list">
-          <li data-i18n="section1Feature1">Logo vectorial con versiones horizontales, verticales y monocromas</li>
-          <li data-i18n="section1Feature2">Guía de estilo completa con tipografía, color y componentes UI</li>
-          <li data-i18n="section1Feature3">Plantillas editables para redes sociales, presentaciones y flyers</li>
-          <li data-i18n="section1Feature4">Manual de tono de voz y bibliotecas para Canva o Figma</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
-        <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">2–5 semanas dependiendo de rondas de validación y activos previos.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">Canva, Illustrator, Figma y repositorios colaborativos en Drive.</dd>
-          <dt data-i18n="section2Item3Term">Integración</dt>
-          <dd data-i18n="section2Item3Desc">Materiales adaptables para web, redes sociales, señalética y NFC.</dd>
-          <dt data-i18n="section2Item4Term">Soporte</dt>
-          <dd data-i18n="section2Item4Desc">Incluye acompañamiento en lanzamiento y asesoría de impresión.</dd>
-        </dl>
-      </section>
-
-      <section class="panel full">
-        <h2 data-i18n="section3Title">Proceso creativo</h2>
-        <p data-i18n="section3Paragraph1">Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.</p>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
-        <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€999</span>
-          <span class="discount" data-i18n="section4Discount">€799</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €200</span>
+    <main role="main">
+      <section id="es" class="services-section" lang="es">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Branding Completo</h2>
+          <p class="lead">Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.</p>
         </div>
-        <p class="muted" data-i18n="section4Note">Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.</p>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Presentación del servicio Branding Completo" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit completo de identidad</h3>
+            <p>Creamos un sistema visual consistente para reforzar tu presencia en canales impresos y digitales con piezas listas para usar.</p>
+            <ul class="feature-list">
+              <li>Logo vectorial con versiones horizontales, verticales y monocromas</li>
+              <li>Guía de estilo completa con tipografía, color y componentes UI</li>
+              <li>Plantillas editables para redes sociales, presentaciones y flyers</li>
+              <li>Manual de tono de voz y bibliotecas para Canva o Figma</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Detalles técnicos</h3>
+            <dl class="data">
+              <dt>Entrega</dt>
+              <dd>2–5 semanas dependiendo de rondas de validación y activos previos.</dd>
+              <dt>Herramientas</dt>
+              <dd>Canva, Illustrator, Figma y repositorios colaborativos en Drive.</dd>
+              <dt>Integración</dt>
+              <dd>Materiales adaptables para web, redes sociales, señalética y NFC.</dd>
+              <dt>Soporte</dt>
+              <dd>Incluye acompañamiento en lanzamiento y asesoría de impresión.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Proceso creativo</h3>
+            <p>Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.</p>
+            <p class="muted">Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.</p>
+          </div>
+          <div class="panel">
+            <h3>Inversión preferente</h3>
+            <div class="price-card">
+              <span class="regular">€999</span>
+              <span class="discount">€799</span>
+              <span class="saving">Ahorra €200</span>
+            </div>
+            <p class="muted">Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.</p>
+          </div>
+          <div class="panel">
+            <h3>Condiciones y entregables</h3>
+            <p>Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Branding%20Completo.%20%C2%BFPodemos%20agendar%20una%20llamada?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Volver a servicios</a>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones y entregables</h2>
-        <p data-i18n="section5Paragraph">Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.</p>
+      <section id="en" class="services-section hidden" lang="en">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Comprehensive Branding</h2>
+          <p class="lead">Consistent, professional visual identity to strengthen your brand presence across every digital and physical channel.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Comprehensive Branding service overview" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Complete identity kit</h3>
+            <p>We build a cohesive visual system so you can show up polished across print and digital touchpoints with ready-to-use assets.</p>
+            <ul class="feature-list">
+              <li>Vector logo with horizontal, vertical and monochrome versions</li>
+              <li>Full style guide covering typography, color and UI components</li>
+              <li>Editable templates for social media, presentations and flyers</li>
+              <li>Voice and messaging manual plus Canva/Figma libraries</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technical details</h3>
+            <dl class="data">
+              <dt>Delivery</dt>
+              <dd>2–5 weeks depending on validation rounds and existing assets.</dd>
+              <dt>Tools</dt>
+              <dd>Canva, Illustrator, Figma and collaborative Drive repositories.</dd>
+              <dt>Integration</dt>
+              <dd>Assets adaptable for web, social media, signage and NFC.</dd>
+              <dt>Support</dt>
+              <dd>Includes launch accompaniment and print production advisory.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Creative process</h3>
+            <p>We explore moodboards and references, craft visual proposals and host feedback sessions until the final version is approved.</p>
+            <p class="muted">You receive editable files, exports and an implementation checklist to keep every future application consistent.</p>
+          </div>
+          <div class="panel">
+            <h3>Preferred investment</h3>
+            <div class="price-card">
+              <span class="regular">€999</span>
+              <span class="discount">€799</span>
+              <span class="saving">Save €200</span>
+            </div>
+            <p class="muted">Includes three initial concepts, two refinement rounds and preparation of final files for print and digital media.</p>
+          </div>
+          <div class="panel">
+            <h3>Terms & deliverables</h3>
+            <p>We require a full brief, brand values and visual references. Scheduling is secured with 30% upfront and the balance on delivery. We can coordinate photo or video production through specialist partners.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Comprehensive%20Branding%20service.%20Could%20we%20schedule%20a%20discovery%20call?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+        </div>
+      </section>
+
+      <section id="de" class="services-section hidden" lang="de">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Ganzheitliches Branding</h2>
+          <p class="lead">Konsistente, professionelle Markenidentität für einen starken Auftritt auf allen digitalen und physischen Kanälen.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Überblick zum Service Ganzheitliches Branding" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Komplettes Identitätspaket</h3>
+            <p>Wir entwickeln ein kohärentes visuelles System, damit du dich mit einsatzbereiten Assets in Print und Digital einheitlich präsentierst.</p>
+            <ul class="feature-list">
+              <li>Vektorlogo mit horizontalen, vertikalen und einfarbigen Varianten</li>
+              <li>Umfassender Styleguide mit Typografie, Farben und UI-Komponenten</li>
+              <li>Editierbare Vorlagen für Social Media, Präsentationen und Flyer</li>
+              <li>Tonleitfaden sowie Canva- und Figma-Bibliotheken</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technische Details</h3>
+            <dl class="data">
+              <dt>Lieferung</dt>
+              <dd>2–5 Wochen je nach Feedbackrunden und vorhandenen Assets.</dd>
+              <dt>Tools</dt>
+              <dd>Canva, Illustrator, Figma und kollaborative Drive-Repositories.</dd>
+              <dt>Integration</dt>
+              <dd>Anpassbare Materialien für Web, Social Media, Beschilderung und NFC.</dd>
+              <dt>Support</dt>
+              <dd>Begleitung zum Launch sowie Beratung für Druckproduktionen.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Kreativprozess</h3>
+            <p>Wir analysieren Moodboards und Referenzen, entwickeln visuelle Vorschläge und moderieren Feedback-Sessions bis zur finalen Freigabe.</p>
+            <p class="muted">Du erhältst bearbeitbare Dateien, Exporte und eine Implementierungs-Checkliste für künftige Anwendungen.</p>
+          </div>
+          <div class="panel">
+            <h3>Bevorzugtes Investment</h3>
+            <div class="price-card">
+              <span class="regular">€999</span>
+              <span class="discount">€799</span>
+              <span class="saving">Spare €200</span>
+            </div>
+            <p class="muted">Enthält drei Erstentwürfe, zwei Überarbeitungsrunden und die Aufbereitung finaler Dateien für Druck und digitale Medien.</p>
+          </div>
+          <div class="panel">
+            <h3>Bedingungen & Deliverables</h3>
+            <p>Wir benötigen ein vollständiges Briefing, Markenwerte und visuelle Referenzen. Die Terminierung wird mit 30 % Anzahlung und Restzahlung bei Lieferung gesichert. Auf Wunsch koordinieren wir Foto- oder Videoproduktionen über spezialisierte Partner.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Ganzheitliches%20Branding.%20K%C3%B6nnen%20wir%20einen%20Beratungstermin%20planen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Zurück zu den Services</a>
+        </div>
+      </section>
+
+      <section id="fr" class="services-section hidden" lang="fr">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Branding complet</h2>
+          <p class="lead">Identité visuelle cohérente et professionnelle pour renforcer votre présence sur tous les canaux digitaux et physiques.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Présentation du service Branding complet" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit d'identité complet</h3>
+            <p>Nous construisons un système visuel cohérent pour vous permettre d'apparaître soigné avec des ressources prêtes à l'emploi sur le print et le digital.</p>
+            <ul class="feature-list">
+              <li>Logo vectoriel avec versions horizontales, verticales et monochromes</li>
+              <li>Guide de style complet incluant typographie, couleurs et composants UI</li>
+              <li>Modèles éditables pour réseaux sociaux, présentations et flyers</li>
+              <li>Manuel de ton de voix et bibliothèques Canva/Figma</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Détails techniques</h3>
+            <dl class="data">
+              <dt>Livraison</dt>
+              <dd>2 à 5 semaines selon les cycles de validation et les assets fournis.</dd>
+              <dt>Outils</dt>
+              <dd>Canva, Illustrator, Figma et dépôts collaboratifs sur Drive.</dd>
+              <dt>Intégration</dt>
+              <dd>Supports adaptables pour le web, les réseaux sociaux, la signalétique et le NFC.</dd>
+              <dt>Support</dt>
+              <dd>Accompagnement au lancement et conseil pour les productions imprimées.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Processus créatif</h3>
+            <p>Nous explorons moodboards et références, élaborons des propositions visuelles et animons des sessions de feedback jusqu'à validation finale.</p>
+            <p class="muted">Vous recevez des fichiers éditables, des exports et une checklist d'implémentation pour garantir la cohérence de vos futures applications.</p>
+          </div>
+          <div class="panel">
+            <h3>Investissement préférentiel</h3>
+            <div class="price-card">
+              <span class="regular">€999</span>
+              <span class="discount">€799</span>
+              <span class="saving">Économisez 200 €</span>
+            </div>
+            <p class="muted">Comprend trois concepts initiaux, deux cycles d'ajustements et la préparation des fichiers finaux pour l'impression et le digital.</p>
+          </div>
+          <div class="panel">
+            <h3>Conditions & livrables</h3>
+            <p>Nous demandons un brief complet, les valeurs de marque et des références visuelles. Le planning est réservé avec 30 % d'acompte et le solde à la livraison. Nous pouvons coordonner des shootings photo ou vidéo via des partenaires spécialisés.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20service%20Branding%20complet.%20Pourrions-nous%20planifier%20un%20appel?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Retour aux services</a>
+        </div>
+      </section>
+
+      <section id="it" class="services-section hidden" lang="it">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Branding completo</h2>
+          <p class="lead">Identità visiva coerente e professionale per rafforzare la presenza del tuo brand su tutti i canali digitali e fisici.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559176/ChatGPT_Image_Oct_15_2025_10_11_08_PM_xex03n.png" alt="Panoramica del servizio Branding completo" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit di identità completo</h3>
+            <p>Creiamo un sistema visivo coerente per presentarti in modo impeccabile su stampa e digitale con asset pronti all'uso.</p>
+            <ul class="feature-list">
+              <li>Logo vettoriale con versioni orizzontali, verticali e monocromatiche</li>
+              <li>Style guide completa con tipografia, colori e componenti UI</li>
+              <li>Template modificabili per social, presentazioni e volantini</li>
+              <li>Manuale di tono di voce e librerie per Canva o Figma</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Dettagli tecnici</h3>
+            <dl class="data">
+              <dt>Consegna</dt>
+              <dd>2–5 settimane in base ai cicli di validazione e agli asset disponibili.</dd>
+              <dt>Strumenti</dt>
+              <dd>Canva, Illustrator, Figma e repository collaborativi su Drive.</dd>
+              <dt>Integrazione</dt>
+              <dd>Materiali adattabili per web, social media, segnaletica e NFC.</dd>
+              <dt>Supporto</dt>
+              <dd>Include accompagnamento al lancio e consulenza per la stampa.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Processo creativo</h3>
+            <p>Esploriamo moodboard e riferimenti, sviluppiamo proposte visive e conduciamo sessioni di feedback fino all'approvazione finale.</p>
+            <p class="muted">Ricevi file modificabili, esportazioni e una checklist di implementazione per mantenere coerenti tutte le applicazioni future.</p>
+          </div>
+          <div class="panel">
+            <h3>Investimento preferenziale</h3>
+            <div class="price-card">
+              <span class="regular">€999</span>
+              <span class="discount">€799</span>
+              <span class="saving">Risparmia €200</span>
+            </div>
+            <p class="muted">Include tre proposte iniziali, due cicli di revisioni e la preparazione dei file finali per stampa e media digitali.</p>
+          </div>
+          <div class="panel">
+            <h3>Condizioni e deliverable</h3>
+            <p>Richiediamo briefing completo, valori di brand e riferimenti visivi. L'agenda viene bloccata con il 30% iniziale e saldo alla consegna. Possiamo coordinare shooting foto o video tramite partner specializzati.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Branding%20completo.%20Possiamo%20organizzare%20una%20call%20conoscitiva?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Torna ai servizi</a>
+        </div>
       </section>
     </main>
 
-    <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
-    </div>
-
-    <footer>Business Bots Solutions © 2025</footer>
+    <footer role="contentinfo">
+      <p id="footer-text" data-i18n-key="footer">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+    </footer>
   </div>
+
   <script src="./lang-switcher.js"></script>
 </body>
 </html>

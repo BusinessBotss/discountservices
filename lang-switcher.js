@@ -1,876 +1,147 @@
-const translations = {
-  "menu-redesign": {
-    es: {
-      title: "Rediseño de Menú e Interfaz Digital",
-      lead: "Reestructuración visual y funcional centrada en conversión para maximizar la experiencia del usuario y aumentar las ventas.",
-      section1Title: "Qué incluye",
-      section1Paragraph: "Transformamos tu carta digital en una experiencia fluida, actualizada y enfocada en conversión para clientes presenciales y digitales.",
-      section1Feature1: "Auditoría UX completa con informes accionables",
-      section1Feature2: "Prototipo interactivo listo para test A/B",
-      section1Feature3: "Guía de estilos y componentes reutilizables",
-      section1Feature4: "Handoff técnico detallado para tu equipo de desarrollo",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "2–4 semanas según alcance y activos actuales.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "Figma, Canva, HTML/CSS colaborativo y librerías personalizadas.",
-      section2Item3Term: "Compatibilidad",
-      section2Item3Desc: "Integración con CMS, kioscos digitales o plataformas de pedidos existentes.",
-      section2Item4Term: "Soporte",
-      section2Item4Desc: "2 rondas de ajustes + documentación para tu equipo interno.",
-      section3Title: "Proceso colaborativo",
-      section3Paragraph1: "Sigue nuestro flujo comprobado: auditoría → arquitectura de información → prototipo navegable → pruebas con usuarios → entrega final optimizada.",
-      section3Paragraph2: "Integramos entregables con handoff técnico listo para desarrolladores y un kit de assets exportables en múltiples formatos.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€1.124",
-      section4Discount: "€899",
-      section4Saving: "Ahorra €225",
-      section4Note: "Incluye diseño responsive, guidelines para actualizaciones futuras y capacitación breve para tu equipo.",
-      section5Title: "Condiciones y entregables",
-      section5Paragraph: "El proyecto se agenda con un 30% inicial y balance al entregar la versión final aprobada. Entregamos archivos editables, exportables y documentación de implementación para asegurar consistencia en todas tus sedes.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "Menu Redesign & Digital Interface",
-      lead: "UI/UX redesign focused on conversion to maximize user experience and boost sales.",
-      section1Title: "What's included",
-      section1Paragraph: "We transform your digital menu into a fluid, up-to-date experience focused on conversion for on-site and online customers.",
-      section1Feature1: "Full UX audit with actionable reports",
-      section1Feature2: "Interactive prototype ready for A/B testing",
-      section1Feature3: "Reusable style guide and component library",
-      section1Feature4: "Detailed technical handoff for your development team",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "2–4 weeks depending on scope and current assets.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Figma, Canva, collaborative HTML/CSS and custom libraries.",
-      section2Item3Term: "Compatibility",
-      section2Item3Desc: "Integrates with CMS platforms, digital kiosks or existing ordering systems.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "2 revision rounds plus documentation for your internal team.",
-      section3Title: "Collaborative process",
-      section3Paragraph1: "Follow our proven flow: audit → information architecture → navigable prototype → user testing → optimized final handoff.",
-      section3Paragraph2: "We bundle developer-ready handoff materials and an exportable asset kit in multiple formats.",
-      section4Title: "Preferred investment",
-      section4Regular: "€1,124",
-      section4Discount: "€899",
-      section4Saving: "Save €225",
-      section4Note: "Includes responsive design, update guidelines and a short training session for your team.",
-      section5Title: "Terms & deliverables",
-      section5Paragraph: "Project kicks off with 30% upfront and the balance upon final approval. You receive editable files, exports and implementation docs to keep every location consistent.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "Menü-Redesign & Digitale Schnittstelle",
-      lead: "UI/UX-Redesign mit Fokus auf Konversion, um das Nutzererlebnis zu maximieren und den Umsatz zu steigern.",
-      section1Title: "Leistungsumfang",
-      section1Paragraph: "Wir verwandeln deine digitale Speisekarte in ein nahtloses, aktuelles Erlebnis mit Fokus auf Konversion für Gäste vor Ort und online.",
-      section1Feature1: "Umfassendes UX-Audit mit umsetzbaren Erkenntnissen",
-      section1Feature2: "Interaktiver Prototyp bereit für A/B-Tests",
-      section1Feature3: "Wiederverwendbarer Styleguide und Komponentenbibliothek",
-      section1Feature4: "Detaillierter technischer Handoff für dein Entwicklerteam",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "2–4 Wochen je nach Umfang und vorhandenen Assets.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Figma, Canva, kollaboratives HTML/CSS und individuelle Libraries.",
-      section2Item3Term: "Kompatibilität",
-      section2Item3Desc: "Anbindung an CMS, digitale Kioske oder bestehende Bestellsysteme.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "2 Überarbeitungsrunden plus Dokumentation für dein internes Team.",
-      section3Title: "Gemeinsamer Prozess",
-      section3Paragraph1: "Unser bewährter Ablauf: Audit → Informationsarchitektur → klickbarer Prototyp → Nutzertests → optimiertes Finale.",
-      section3Paragraph2: "Wir liefern entwicklerfertige Übergabedokumente sowie ein exportierbares Asset-Kit in mehreren Formaten.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€1.124",
-      section4Discount: "€899",
-      section4Saving: "Spare 225 €",
-      section4Note: "Inklusive Responsive-Design, Richtlinien für Updates und kurzem Training für dein Team.",
-      section5Title: "Rahmenbedingungen & Deliverables",
-      section5Paragraph: "Projektstart mit 30 % Anzahlung, Rest bei finaler Freigabe. Du erhältst editierbare Dateien, Exporte und Implementierungsdokumente für konsistente Standorte.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Refonte de menu & interface numérique",
-      lead: "Refonte UI/UX axée sur la conversion pour maximiser l’expérience utilisateur et augmenter les ventes.",
-      section1Title: "Ce qui est inclus",
-      section1Paragraph: "Nous transformons votre menu digital en une expérience fluide, mise à jour et orientée conversion pour vos clients sur place et en ligne.",
-      section1Feature1: "Audit UX complet avec insights actionnables",
-      section1Feature2: "Prototype interactif prêt pour des tests A/B",
-      section1Feature3: "Guide de style et bibliothèque de composants réutilisables",
-      section1Feature4: "Handoff technique détaillé pour votre équipe de développement",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "2 à 4 semaines selon le périmètre et les assets disponibles.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "Figma, Canva, HTML/CSS collaboratif et bibliothèques personnalisées.",
-      section2Item3Term: "Compatibilité",
-      section2Item3Desc: "Intégration avec CMS, bornes digitales ou systèmes de commande existants.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "2 cycles de révision et documentation pour votre équipe interne.",
-      section3Title: "Processus collaboratif",
-      section3Paragraph1: "Suivez notre parcours éprouvé : audit → architecture de l’information → prototype navigable → tests utilisateurs → livraison finale optimisée.",
-      section3Paragraph2: "Nous fournissons une passation prête pour les développeurs ainsi qu’un kit d’assets exportables dans plusieurs formats.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€1 124",
-      section4Discount: "€899",
-      section4Saving: "Économisez 225 €",
-      section4Note: "Inclut design responsive, lignes directrices pour les mises à jour futures et courte formation de votre équipe.",
-      section5Title: "Conditions & livrables",
-      section5Paragraph: "Le projet démarre avec 30 % d’acompte et le solde à la validation finale. Nous livrons fichiers éditables, exports et documentation de mise en œuvre pour assurer la cohérence sur tous vos points de contact.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Redesign Menu & Interfaccia Digitale",
-      lead: "Redesign UI/UX focalizzato sulla conversione per massimizzare l’esperienza utente e aumentare le vendite.",
-      section1Title: "Cosa include",
-      section1Paragraph: "Trasformiamo il tuo menu digitale in un’esperienza fluida, aggiornata e orientata alla conversione per clienti in sede e online.",
-      section1Feature1: "Audit UX completo con report azionabili",
-      section1Feature2: "Prototipo interattivo pronto per test A/B",
-      section1Feature3: "Guida di stile e libreria di componenti riutilizzabili",
-      section1Feature4: "Handoff tecnico dettagliato per il tuo team di sviluppo",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "2–4 settimane in base all’ambito e agli asset esistenti.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "Figma, Canva, HTML/CSS collaborativo e librerie personalizzate.",
-      section2Item3Term: "Compatibilità",
-      section2Item3Desc: "Integrazione con CMS, chioschi digitali o sistemi d’ordine esistenti.",
-      section2Item4Term: "Supporto",
-      section2Item4Desc: "2 round di revisioni più documentazione per il tuo team interno.",
-      section3Title: "Processo collaborativo",
-      section3Paragraph1: "Segui il nostro flusso collaudato: audit → architettura informativa → prototipo navigabile → test con utenti → consegna finale ottimizzata.",
-      section3Paragraph2: "Forniamo materiali di handoff pronti per gli sviluppatori e un kit di asset esportabili in più formati.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€1.124",
-      section4Discount: "€899",
-      section4Saving: "Risparmi 225 €",
-      section4Note: "Include design responsive, linee guida per futuri aggiornamenti e breve formazione al tuo team.",
-      section5Title: "Condizioni e deliverable",
-      section5Paragraph: "Il progetto parte con un anticipo del 30% e saldo alla consegna finale approvata. Forniamo file modificabili, esportazioni e documentazione di implementazione per garantire coerenza in tutte le sedi.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
-    }
-  },
-  "interfaz-simple": {
-    es: {
-      title: "Interfaz Simple con Links + Google Drive",
-      lead: "Portal minimalista vinculado a recursos de Google Drive para acceso rápido y organizado a todos tus documentos importantes.",
-      section1Title: "Mapa inteligente de recursos",
-      section1Paragraph: "Diseñamos un hub de enlaces seguro que centraliza todos tus accesos críticos con estructura responsive y branding consistente.",
-      section1Feature1: "Mapa de enlaces personalizado con categorías dinámicas",
-      section1Feature2: "Configuración de permisos avanzada por rol y dispositivo",
-      section1Feature3: "Estructura SEO optimizada para indexar recursos clave",
-      section1Feature4: "Documentación para que tu equipo mantenga y edite el portal",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "5–10 días hábiles, incluyendo revisión y ajustes finales.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "Google Drive, Canva, HTML modular y automatizaciones con Apps Script.",
-      section2Item3Term: "Integración",
-      section2Item3Desc: "Compatible con CRM, portales NFC, códigos QR y ecosistemas Notion.",
-      section2Item4Term: "Seguridad",
-      section2Item4Desc: "Control de accesos con registros de actividad y backups periódicos.",
-      section3Title: "Automatizaciones & soporte",
-      section3Paragraph1: "Activamos flujos automáticos para actualizar enlaces, sincronizar carpetas y notificar a tu equipo de nuevos recursos o cambios críticos.",
-      section3Paragraph2: "Incluye una sesión de capacitación remota y guía paso a paso para replicar nuevas secciones sin depender del equipo técnico.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€352",
-      section4Discount: "€299",
-      section4Saving: "Ahorra €53",
-      section4Note: "Instalación inicial con 15 enlaces priorizados, dashboards de uso y soporte durante 30 días.",
-      section5Title: "Condiciones del servicio",
-      section5Paragraph: "Implementación remota con contenido suministrado por tu equipo. Entregamos assets editables, manual de actualización y checklist de seguridad para mantener la estructura a largo plazo.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "Simple Interface with Links + Google Drive",
-      lead: "Minimal portal connected to Google Drive resources for quick, organized access to every critical document.",
-      section1Title: "Smart resource map",
-      section1Paragraph: "We build a secure link hub that centralizes all critical access points with a responsive structure and consistent branding.",
-      section1Feature1: "Personalized link map with dynamic categories",
-      section1Feature2: "Advanced permission configuration by role and device",
-      section1Feature3: "SEO-optimized structure to index key resources",
-      section1Feature4: "Documentation so your team can maintain and edit the portal",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "5–10 business days including review and final adjustments.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Google Drive, Canva, modular HTML and Apps Script automations.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Compatible with CRM, NFC portals, QR codes and Notion ecosystems.",
-      section2Item4Term: "Security",
-      section2Item4Desc: "Access control with activity logs and scheduled backups.",
-      section3Title: "Automations & support",
-      section3Paragraph1: "We activate automated flows to update links, sync folders and notify your team about new resources or critical changes.",
-      section3Paragraph2: "Includes a remote training session and step-by-step guide so you can replicate new sections without depending on technical staff.",
-      section4Title: "Preferred investment",
-      section4Regular: "€352",
-      section4Discount: "€299",
-      section4Saving: "Save €53",
-      section4Note: "Initial setup with 15 prioritized links, usage dashboards and 30-day support.",
-      section5Title: "Service conditions",
-      section5Paragraph: "Remote implementation with content provided by your team. We deliver editable assets, update manual and security checklist to keep the structure long term.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "Einfache Schnittstelle mit Links + Google Drive",
-      lead: "Minimalistisches Portal, das mit Google-Drive-Ressourcen verbunden ist, für schnellen und organisierten Zugriff auf alle wichtigen Dokumente.",
-      section1Title: "Intelligente Ressourcenkarte",
-      section1Paragraph: "Wir entwickeln einen sicheren Link-Hub, der all deine kritischen Zugänge mit responsiver Struktur und konsistentem Branding bündelt.",
-      section1Feature1: "Personalisierte Link-Karte mit dynamischen Kategorien",
-      section1Feature2: "Erweiterte Rechteverwaltung nach Rolle und Gerät",
-      section1Feature3: "SEO-optimierte Struktur zur Indexierung wichtiger Ressourcen",
-      section1Feature4: "Dokumentation, damit dein Team das Portal pflegen und bearbeiten kann",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "5–10 Werktage inklusive Review und finaler Anpassungen.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Google Drive, Canva, modulare HTML-Elemente und Apps-Script-Automatisierungen.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Kompatibel mit CRM, NFC-Portalen, QR-Codes und Notion-Ökosystemen.",
-      section2Item4Term: "Sicherheit",
-      section2Item4Desc: "Zugriffskontrolle mit Aktivitätsprotokollen und regelmäßigen Backups.",
-      section3Title: "Automatisierungen & Support",
-      section3Paragraph1: "Wir aktivieren automatisierte Abläufe zum Aktualisieren von Links, Synchronisieren von Ordnern und Benachrichtigen deines Teams über neue Ressourcen oder kritische Änderungen.",
-      section3Paragraph2: "Beinhaltet ein Remote-Training und eine Schritt-für-Schritt-Anleitung, um neue Bereiche ohne Technikteam zu replizieren.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€352",
-      section4Discount: "€299",
-      section4Saving: "Spare 53 €",
-      section4Note: "Initiale Einrichtung mit 15 priorisierten Links, Nutzungs-Dashboards und 30 Tagen Support.",
-      section5Title: "Servicebedingungen",
-      section5Paragraph: "Remote-Implementierung mit Inhalten aus deinem Team. Wir liefern editierbare Assets, Update-Handbuch und Sicherheits-Checkliste für nachhaltige Strukturen.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Interface simple avec liens + Google Drive",
-      lead: "Portail minimaliste relié aux ressources Google Drive pour un accès rapide et organisé à tous vos documents clés.",
-      section1Title: "Cartographie intelligente des ressources",
-      section1Paragraph: "Nous créons un hub de liens sécurisé qui centralise tous vos accès critiques avec une structure responsive et un branding cohérent.",
-      section1Feature1: "Carte de liens personnalisée avec catégories dynamiques",
-      section1Feature2: "Configuration avancée des permissions par rôle et appareil",
-      section1Feature3: "Structure SEO optimisée pour indexer les ressources clés",
-      section1Feature4: "Documentation permettant à votre équipe de maintenir et éditer le portail",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "5 à 10 jours ouvrés, révision et ajustements finaux inclus.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "Google Drive, Canva, HTML modulaire et automatisations Apps Script.",
-      section2Item3Term: "Intégration",
-      section2Item3Desc: "Compatible avec CRM, portails NFC, QR codes et écosystèmes Notion.",
-      section2Item4Term: "Sécurité",
-      section2Item4Desc: "Contrôle des accès avec journaux d’activité et sauvegardes planifiées.",
-      section3Title: "Automatisations & support",
-      section3Paragraph1: "Nous activons des flux automatiques pour mettre à jour les liens, synchroniser les dossiers et notifier votre équipe des nouvelles ressources ou changements critiques.",
-      section3Paragraph2: "Inclut une session de formation à distance et un guide pas à pas pour reproduire de nouvelles sections sans dépendre de l’équipe technique.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€352",
-      section4Discount: "€299",
-      section4Saving: "Économisez 53 €",
-      section4Note: "Installation initiale avec 15 liens prioritaires, tableaux de bord d’usage et support pendant 30 jours.",
-      section5Title: "Conditions de service",
-      section5Paragraph: "Mise en œuvre à distance avec contenu fourni par votre équipe. Nous livrons des assets éditables, un manuel de mise à jour et une checklist de sécurité pour maintenir la structure dans le temps.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Interfaccia semplice con Link + Google Drive",
-      lead: "Portale minimalista collegato alle risorse di Google Drive per un accesso rapido e organizzato a tutti i documenti importanti.",
-      section1Title: "Mappa intelligente delle risorse",
-      section1Paragraph: "Progettiamo un hub di link sicuro che centralizza tutti gli accessi critici con struttura responsive e branding coerente.",
-      section1Feature1: "Mappa di link personalizzata con categorie dinamiche",
-      section1Feature2: "Configurazione avanzata dei permessi per ruolo e dispositivo",
-      section1Feature3: "Struttura SEO ottimizzata per indicizzare le risorse chiave",
-      section1Feature4: "Documentazione per consentire al tuo team di mantenere e aggiornare il portale",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "5–10 giorni lavorativi con revisione e rifiniture finali.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "Google Drive, Canva, HTML modulare e automazioni con Apps Script.",
-      section2Item3Term: "Integrazione",
-      section2Item3Desc: "Compatibile con CRM, portali NFC, codici QR e ecosistemi Notion.",
-      section2Item4Term: "Sicurezza",
-      section2Item4Desc: "Controllo degli accessi con log di attività e backup periodici.",
-      section3Title: "Automazioni & supporto",
-      section3Paragraph1: "Attiviamo flussi automatici per aggiornare i link, sincronizzare le cartelle e avvisare il tuo team di nuove risorse o modifiche critiche.",
-      section3Paragraph2: "Include una sessione di formazione remota e guida passo-passo per replicare nuove sezioni senza dipendere dal team tecnico.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€352",
-      section4Discount: "€299",
-      section4Saving: "Risparmi 53 €",
-      section4Note: "Installazione iniziale con 15 link prioritari, dashboard d’uso e supporto per 30 giorni.",
-      section5Title: "Condizioni del servizio",
-      section5Paragraph: "Implementazione da remoto con contenuti forniti dal tuo team. Forniamo asset modificabili, manuale di aggiornamento e checklist di sicurezza per mantenere la struttura nel tempo.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
-    }
-  },
-  "tarjetas-nfc": {
-    es: {
-      title: "Tarjetas NFC Contactless",
-      lead: "Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.",
-      section1Title: "Kit de experiencia contactless",
-      section1Paragraph: "Diseñamos tarjetas NFC de alto impacto con visuales premium y flujos digitales que puedes actualizar en segundos.",
-      section1Feature1: "Diseño personalizado con variantes para staff y clientes VIP",
-      section1Feature2: "Programación NFC avanzada con enlaces dinámicos y analítica",
-      section1Feature3: "Flujo de actualización automática sin reimprimir tarjetas",
-      section1Feature4: "Panel de contenidos editable para campañas y promos",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "1–2 semanas con pruebas y validación de lectura en campo.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "NFC Tools Pro, Canva, panel web Business Bots y automatizaciones.",
-      section2Item3Term: "Integración",
-      section2Item3Desc: "Compatible con Google Drive, formularios Business Bots y CRMs.",
-      section2Item4Term: "Soporte",
-      section2Item4Desc: "Incluye video tutorial, guía de instalación y 30 días de monitoreo.",
-      section3Title: "Implementación y garantías",
-      section3Paragraph1: "Creamos un flujo de onboarding para tu equipo y configuramos alertas de uso para detectar tarjetas inactivas o pérdidas.",
-      section3Paragraph2: "Dispondrás de un entorno de pruebas para actualizar campañas, además de soporte para replicar nuevos lotes bajo la misma identidad visual.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Ahorra €66",
-      section4Note: "Incluye lote inicial de 25 tarjetas, dashboard de métricas de clics y mantenimiento de enlaces durante el primer mes.",
-      section5Title: "Condiciones de producción",
-      section5Paragraph: "Requerimos logos editables y paleta de color para asegurar consistencia. La impresión física puede gestionarse con nuestro partner o el tuyo, con entrega de archivos listos para producción.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "Contactless NFC Cards",
-      lead: "Custom NFC design with a dynamic link ecosystem for innovative, professional contactless experiences.",
-      section1Title: "Contactless experience kit",
-      section1Paragraph: "We craft high-impact NFC cards with premium visuals and digital flows you can update in seconds.",
-      section1Feature1: "Tailored design with variants for staff and VIP clients",
-      section1Feature2: "Advanced NFC programming with dynamic links and analytics",
-      section1Feature3: "Automatic update workflow without reprinting cards",
-      section1Feature4: "Editable content dashboard for campaigns and promos",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "1–2 weeks with field testing and reading validation.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "NFC Tools Pro, Canva, Business Bots web console and automations.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Compatible with Google Drive, Business Bots forms and CRMs.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Includes video tutorial, installation guide and 30 days of monitoring.",
-      section3Title: "Implementation & guarantees",
-      section3Paragraph1: "We build an onboarding flow for your team and configure usage alerts to detect inactive or lost cards.",
-      section3Paragraph2: "You get a testing environment to refresh campaigns plus support to replicate new batches with the same visual identity.",
-      section4Title: "Preferred investment",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Save €66",
-      section4Note: "Includes an initial batch of 25 cards, click metrics dashboard and link maintenance during the first month.",
-      section5Title: "Production conditions",
-      section5Paragraph: "We require editable logos and color palette for consistency. Printing can be managed with our partner or yours, delivering production-ready files.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "NFC-Karten ohne Kontakt",
-      lead: "Individuelles NFC-Design mit dynamischem Link-Ökosystem für innovative und professionelle kontaktlose Erlebnisse.",
-      section1Title: "Contactless-Erlebnis-Kit",
-      section1Paragraph: "Wir gestalten wirkungsstarke NFC-Karten mit Premium-Visuals und digitalen Flows, die du in Sekunden aktualisieren kannst.",
-      section1Feature1: "Individuelles Design mit Varianten für Team und VIP-Kundschaft",
-      section1Feature2: "Erweiterte NFC-Programmierung mit dynamischen Links und Analysen",
-      section1Feature3: "Automatischer Aktualisierungsablauf ohne Karten neu zu drucken",
-      section1Feature4: "Editierbares Content-Dashboard für Kampagnen und Aktionen",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "1–2 Wochen mit Tests und Lesevalidierung im Einsatz.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "NFC Tools Pro, Canva, Business-Bots-Webkonsole und Automatisierungen.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Kompatibel mit Google Drive, Business Bots Formularen und CRMs.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Inklusive Video-Tutorial, Installationsleitfaden und 30 Tagen Monitoring.",
-      section3Title: "Implementierung & Garantien",
-      section3Paragraph1: "Wir erstellen einen Onboarding-Flow für dein Team und richten Nutzungsalarme ein, um inaktive oder verlorene Karten zu erkennen.",
-      section3Paragraph2: "Du erhältst eine Testumgebung für Kampagnen-Updates sowie Support zur Reproduktion neuer Chargen in identischer Markenoptik.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Spare 66 €",
-      section4Note: "Beinhaltet erste Charge mit 25 Karten, Klickmetriken-Dashboard und Link-Pflege im ersten Monat.",
-      section5Title: "Produktionsbedingungen",
-      section5Paragraph: "Wir benötigen editierbare Logos und Farbpalette für Konsistenz. Der Druck kann über unseren Partner oder euren erfolgen, mit lieferfertigen Produktionsdateien.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Cartes NFC sans contact",
-      lead: "Design NFC personnalisé avec écosystème de liens dynamiques pour des expériences sans contact innovantes et professionnelles.",
-      section1Title: "Kit d’expérience sans contact",
-      section1Paragraph: "Nous concevons des cartes NFC à fort impact avec visuels premium et parcours digitaux que vous pouvez mettre à jour en quelques secondes.",
-      section1Feature1: "Design personnalisé avec variantes pour l’équipe et les clients VIP",
-      section1Feature2: "Programmation NFC avancée avec liens dynamiques et analytics",
-      section1Feature3: "Flux de mise à jour automatique sans réimprimer les cartes",
-      section1Feature4: "Tableau de contenu éditable pour campagnes et promotions",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "1 à 2 semaines avec tests terrain et validation de lecture.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "NFC Tools Pro, Canva, console web Business Bots et automatisations.",
-      section2Item3Term: "Intégration",
-      section2Item3Desc: "Compatible avec Google Drive, formulaires Business Bots et CRM.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Inclut tutoriel vidéo, guide d’installation et 30 jours de monitoring.",
-      section3Title: "Mise en œuvre & garanties",
-      section3Paragraph1: "Nous créons un parcours d’onboarding pour votre équipe et configurons des alertes d’usage afin de détecter les cartes inactives ou perdues.",
-      section3Paragraph2: "Vous disposez d’un environnement de test pour mettre à jour vos campagnes, ainsi que d’un support pour reproduire de nouveaux lots avec la même identité visuelle.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Économisez 66 €",
-      section4Note: "Inclut un lot initial de 25 cartes, tableau de bord des clics et maintenance des liens durant le premier mois.",
-      section5Title: "Conditions de production",
-      section5Paragraph: "Nous demandons des logos éditables et une palette de couleurs pour garantir la cohérence. L’impression peut être gérée avec notre partenaire ou le vôtre, avec des fichiers prêts pour la production.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Card NFC Contactless",
-      lead: "Design NFC personalizzato con ecosistema di link dinamici per esperienze contactless innovative e professionali.",
-      section1Title: "Kit di esperienza contactless",
-      section1Paragraph: "Progettiamo card NFC ad alto impatto con visual premium e flussi digitali aggiornabili in pochi secondi.",
-      section1Feature1: "Design su misura con varianti per staff e clienti VIP",
-      section1Feature2: "Programmazione NFC avanzata con link dinamici e analitiche",
-      section1Feature3: "Flusso di aggiornamento automatico senza ristampare le card",
-      section1Feature4: "Dashboard di contenuti modificabile per campagne e promozioni",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "1–2 settimane con test e validazione di lettura sul campo.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "NFC Tools Pro, Canva, console web Business Bots e automazioni.",
-      section2Item3Term: "Integrazione",
-      section2Item3Desc: "Compatibile con Google Drive, moduli Business Bots e CRM.",
-      section2Item4Term: "Supporto",
-      section2Item4Desc: "Include video tutorial, guida all’installazione e 30 giorni di monitoraggio.",
-      section3Title: "Implementazione & garanzie",
-      section3Paragraph1: "Creiamo un flusso di onboarding per il tuo team e configuriamo avvisi d’uso per rilevare card inattive o smarrite.",
-      section3Paragraph2: "Hai a disposizione un ambiente di test per aggiornare le campagne e supporto per replicare nuovi lotti con la stessa identità visiva.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€265",
-      section4Discount: "€199",
-      section4Saving: "Risparmi 66 €",
-      section4Note: "Include lotto iniziale di 25 card, dashboard delle metriche di clic e manutenzione dei link per il primo mese.",
-      section5Title: "Condizioni di produzione",
-      section5Paragraph: "Richiediamo loghi modificabili e palette colori per garantire coerenza. La stampa può essere gestita con il nostro partner o il tuo, fornendo file pronti per la produzione.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
-    }
-  },
-  chatbot: {
-    es: {
-      title: "Chatbot 24/7 Multilingüe",
-      lead: "Asistente conversacional inteligente disponible en varios idiomas con respuestas automáticas, reservas y soporte en tiempo real.",
-      section1Title: "Automatización conversacional",
-      section1Paragraph: "Diseñamos flujos multilingües con IA y reglas empresariales para capturar leads, reservar citas y resolver FAQs 24/7.",
-      section1Feature1: "Integración CRM bidireccional con actualización en tiempo real",
-      section1Feature2: "Sincronización de agenda con Google Calendar o Calendly",
-      section1Feature3: "Entrenamiento personalizado en español, inglés y un tercer idioma",
-      section1Feature4: "Rutas de escalamiento a agentes humanos con historial completo",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "10–15 días con sesiones de refinamiento y pruebas en vivo.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "WhatsApp Cloud API, Make, Gmail, Telegram, Webhooks personalizados.",
-      section2Item3Term: "Integración",
-      section2Item3Desc: "CRM (HubSpot, Zoho, Monday), calendarios, pasarelas de pago y sitios web.",
-      section2Item4Term: "Seguridad",
-      section2Item4Desc: "Políticas de cifrado end-to-end, manejo de consentimientos y logs auditables.",
-      section3Title: "Onboarding y entrenamiento",
-      section3Paragraph1: "Incluimos workshop de descubrimiento, scripting conversacional y entrenamiento con datasets reales de tu negocio.",
-      section3Paragraph2: "Recibirás dashboards de métricas, recomendaciones de mejora continua y soporte técnico durante el primer ciclo mensual.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€856",
-      section4Discount: "€599",
-      section4Saving: "Ahorra €257",
-      section4Note: "Incluye 2 canales simultáneos, 500 interacciones mensuales y formación a tu equipo de atención.",
-      section5Title: "Condiciones de implementación",
-      section5Paragraph: "Se requiere acceso a tu CRM o base de datos de contactos y definición de políticas de privacidad. Ofrecemos contratos de mantenimiento opcionales para ampliar funcionalidades o nuevos idiomas.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "24/7 Multilingual Chatbot",
-      lead: "Intelligent conversational assistant in multiple languages with automated replies, booking flows and real-time support.",
-      section1Title: "Conversational automation",
-      section1Paragraph: "We design multilingual flows with AI and business rules to capture leads, schedule appointments and resolve FAQs around the clock.",
-      section1Feature1: "Two-way CRM integration with real-time updates",
-      section1Feature2: "Calendar syncing with Google Calendar or Calendly",
-      section1Feature3: "Custom training in Spanish, English and a third language",
-      section1Feature4: "Escalation paths to human agents with full conversation history",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "10–15 days including refinement sessions and live testing.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "WhatsApp Cloud API, Make, Gmail, Telegram and custom webhooks.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "CRMs (HubSpot, Zoho, Monday), calendars, payment gateways and websites.",
-      section2Item4Term: "Security",
-      section2Item4Desc: "End-to-end encryption policies, consent handling and auditable logs.",
-      section3Title: "Onboarding & training",
-      section3Paragraph1: "We include discovery workshops, conversational scripting and training with real datasets from your business.",
-      section3Paragraph2: "You receive metric dashboards, continuous improvement recommendations and technical support throughout the first month.",
-      section4Title: "Preferred investment",
-      section4Regular: "€856",
-      section4Discount: "€599",
-      section4Saving: "Save €257",
-      section4Note: "Includes 2 simultaneous channels, 500 monthly interactions and training for your support team.",
-      section5Title: "Implementation conditions",
-      section5Paragraph: "Requires access to your CRM or contact database and clear privacy policies. Optional maintenance agreements extend features or add new languages.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "24/7 Mehrsprachiger Chatbot",
-      lead: "Intelligenter Conversational Assistant in mehreren Sprachen mit automatischen Antworten, Buchungsabläufen und Support in Echtzeit.",
-      section1Title: "Konversationsautomatisierung",
-      section1Paragraph: "Wir entwickeln mehrsprachige Flows mit KI und Geschäftsregeln, um Leads zu gewinnen, Termine zu buchen und FAQs rund um die Uhr zu lösen.",
-      section1Feature1: "Bidirektionale CRM-Integration mit Aktualisierung in Echtzeit",
-      section1Feature2: "Kalendersynchronisation mit Google Calendar oder Calendly",
-      section1Feature3: "Individuelles Training auf Spanisch, Englisch und einer dritten Sprache",
-      section1Feature4: "Eskalationspfade zu menschlichen Agents mit vollständigem Verlauf",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "10–15 Tage inklusive Verfeinerungssessions und Live-Tests.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "WhatsApp Cloud API, Make, Gmail, Telegram und individuelle Webhooks.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "CRMs (HubSpot, Zoho, Monday), Kalender, Zahlungsanbieter und Websites.",
-      section2Item4Term: "Sicherheit",
-      section2Item4Desc: "Ende-zu-Ende-Verschlüsselung, Consent-Management und prüfbare Logs.",
-      section3Title: "Onboarding & Training",
-      section3Paragraph1: "Wir führen Discovery-Workshops, Conversational Scripting und Trainings mit echten Datensätzen deines Unternehmens durch.",
-      section3Paragraph2: "Du erhältst Metrik-Dashboards, Empfehlungen zur kontinuierlichen Optimierung und technischen Support im ersten Monat.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€856",
-      section4Discount: "€599",
-      section4Saving: "Spare 257 €",
-      section4Note: "Inklusive 2 parallelen Kanälen, 500 Interaktionen pro Monat und Training für dein Support-Team.",
-      section5Title: "Implementierungsbedingungen",
-      section5Paragraph: "Benötigt Zugang zu deinem CRM oder Kontaktbestand sowie klare Datenschutzrichtlinien. Optionale Wartungsverträge erweitern Funktionen oder ergänzen neue Sprachen.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Chatbot multilingue 24/7",
-      lead: "Assistant conversationnel intelligent en plusieurs langues avec réponses automatiques, réservation et support en temps réel.",
-      section1Title: "Automatisation conversationnelle",
-      section1Paragraph: "Nous concevons des parcours multilingues avec IA et règles métiers pour capter des leads, planifier des rendez-vous et résoudre les FAQs 24/7.",
-      section1Feature1: "Intégration CRM bidirectionnelle avec mise à jour en temps réel",
-      section1Feature2: "Synchronisation d’agenda avec Google Calendar ou Calendly",
-      section1Feature3: "Entraînement personnalisé en espagnol, anglais et troisième langue",
-      section1Feature4: "Scénarios d’escalade vers des agents humains avec historique complet",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "10 à 15 jours avec sessions d’affinage et tests en direct.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "WhatsApp Cloud API, Make, Gmail, Telegram et webhooks personnalisés.",
-      section2Item3Term: "Intégration",
-      section2Item3Desc: "CRM (HubSpot, Zoho, Monday), agendas, passerelles de paiement et sites web.",
-      section2Item4Term: "Sécurité",
-      section2Item4Desc: "Politiques de chiffrement de bout en bout, gestion des consentements et journaux auditables.",
-      section3Title: "Onboarding & formation",
-      section3Paragraph1: "Nous incluons ateliers de découverte, script conversationnel et entraînement avec vos jeux de données réels.",
-      section3Paragraph2: "Vous recevez des dashboards de métriques, des recommandations d’amélioration continue et un support technique durant le premier mois.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€856",
-      section4Discount: "€599",
-      section4Saving: "Économisez 257 €",
-      section4Note: "Inclut 2 canaux simultanés, 500 interactions mensuelles et formation de votre équipe support.",
-      section5Title: "Conditions de mise en œuvre",
-      section5Paragraph: "Accès à votre CRM ou base contacts et politiques de confidentialité requises. Contrats de maintenance optionnels pour étendre les fonctionnalités ou ajouter des langues.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Chatbot multilingue 24/7",
-      lead: "Assistente conversazionale intelligente in più lingue con risposte automatiche, prenotazioni e supporto in tempo reale.",
-      section1Title: "Automazione conversazionale",
-      section1Paragraph: "Progettiamo flussi multilingue con IA e regole di business per acquisire lead, fissare appuntamenti e risolvere FAQ 24 ore su 24.",
-      section1Feature1: "Integrazione CRM bidirezionale con aggiornamento in tempo reale",
-      section1Feature2: "Sincronizzazione agenda con Google Calendar o Calendly",
-      section1Feature3: "Training personalizzato in spagnolo, inglese e una terza lingua",
-      section1Feature4: "Percorsi di escalation verso agenti umani con cronologia completa",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "10–15 giorni con sessioni di affinamento e test live.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "WhatsApp Cloud API, Make, Gmail, Telegram e webhooks personalizzati.",
-      section2Item3Term: "Integrazione",
-      section2Item3Desc: "CRM (HubSpot, Zoho, Monday), calendari, gateway di pagamento e siti web.",
-      section2Item4Term: "Sicurezza",
-      section2Item4Desc: "Crittografia end-to-end, gestione dei consensi e log verificabili.",
-      section3Title: "Onboarding & formazione",
-      section3Paragraph1: "Includiamo workshop di discovery, scripting conversazionale e training con dataset reali del tuo business.",
-      section3Paragraph2: "Ricevi dashboard di metriche, consigli di miglioramento continuo e supporto tecnico durante il primo mese.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€856",
-      section4Discount: "€599",
-      section4Saving: "Risparmi 257 €",
-      section4Note: "Include 2 canali simultanei, 500 interazioni mensili e formazione al tuo team di supporto.",
-      section5Title: "Condizioni di implementazione",
-      section5Paragraph: "Richiede accesso al tuo CRM o database contatti e politiche privacy definite. Contratti di manutenzione opzionali ampliano le funzionalità o aggiungono nuove lingue.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
-    }
-  },
-  branding: {
-    es: {
-      title: "Branding Completo",
-      lead: "Identidad visual coherente y profesional para fortalecer la presencia de tu marca en todos los canales digitales y físicos.",
-      section1Title: "Kit completo de identidad",
-      section1Paragraph: "Creamos un sistema visual consistente para reforzar tu presencia en canales impresos y digitales con piezas listas para usar.",
-      section1Feature1: "Logo vectorial con versiones horizontales, verticales y monocromas",
-      section1Feature2: "Guía de estilo completa con tipografía, color y componentes UI",
-      section1Feature3: "Plantillas editables para redes sociales, presentaciones y flyers",
-      section1Feature4: "Manual de tono de voz y bibliotecas para Canva o Figma",
-      section2Title: "Detalles técnicos",
-      section2Item1Term: "Entrega",
-      section2Item1Desc: "2–5 semanas dependiendo de rondas de validación y activos previos.",
-      section2Item2Term: "Herramientas",
-      section2Item2Desc: "Canva, Illustrator, Figma y repositorios colaborativos en Drive.",
-      section2Item3Term: "Integración",
-      section2Item3Desc: "Materiales adaptables para web, redes sociales, señalética y NFC.",
-      section2Item4Term: "Soporte",
-      section2Item4Desc: "Incluye acompañamiento en lanzamiento y asesoría de impresión.",
-      section3Title: "Proceso creativo",
-      section3Paragraph1: "Exploramos moodboards y referencias, desarrollamos propuestas visuales y realizamos sesiones de feedback hasta lograr la versión final aprobada.",
-      section3Paragraph2: "Entregamos archivos editables, exportables y checklist de implementación para asegurar consistencia en todas tus aplicaciones futuras.",
-      section4Title: "Inversión preferente",
-      section4Regular: "€999",
-      section4Discount: "€799",
-      section4Saving: "Ahorra €200",
-      section4Note: "Incluye tres propuestas iniciales, dos rondas de ajustes y preparación de archivos finales para imprenta y medios digitales.",
-      section5Title: "Condiciones y entregables",
-      section5Paragraph: "Requerimos briefing completo, valores de marca y referencias visuales. La agenda se bloquea con 30% inicial y el saldo a la entrega. Podemos gestionar sesiones fotográficas o producción de video mediante partners especializados.",
-      ctaPrimary: "Contáctanos por WhatsApp",
-      ctaSecondary: "← Volver a servicios"
-    },
-    en: {
-      title: "Full Branding Package",
-      lead: "Coherent, professional visual identity to strengthen your brand presence across every digital and physical channel.",
-      section1Title: "Complete identity kit",
-      section1Paragraph: "We build a consistent visual system to reinforce your presence in print and digital channels with ready-to-use assets.",
-      section1Feature1: "Vector logo suite with horizontal, vertical and monochrome versions",
-      section1Feature2: "Comprehensive style guide covering typography, color and UI components",
-      section1Feature3: "Editable templates for social media, presentations and flyers",
-      section1Feature4: "Tone-of-voice manual and libraries prepared for Canva or Figma",
-      section2Title: "Technical details",
-      section2Item1Term: "Delivery",
-      section2Item1Desc: "2–5 weeks depending on validation rounds and existing assets.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Canva, Illustrator, Figma and collaborative Drive repositories.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Materials adaptable for web, social media, signage and NFC.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Includes launch assistance and print advisory services.",
-      section3Title: "Creative process",
-      section3Paragraph1: "We explore moodboards and references, develop visual proposals and host feedback sessions until the final version is approved.",
-      section3Paragraph2: "Deliverables include editable files, exports and implementation checklists to keep every future application consistent.",
-      section4Title: "Preferred investment",
-      section4Regular: "€999",
-      section4Discount: "€799",
-      section4Saving: "Save €200",
-      section4Note: "Includes three initial concepts, two revision rounds and final file preparation for print and digital media.",
-      section5Title: "Terms & deliverables",
-      section5Paragraph: "We require a complete brief, brand values and visual references. Scheduling reserves with 30% upfront and the balance on delivery. We can coordinate photo or video production through specialized partners.",
-      ctaPrimary: "Contact us on WhatsApp",
-      ctaSecondary: "← Back to services"
-    },
-    de: {
-      title: "Komplettes Branding-Paket",
-      lead: "Kohärente, professionelle Markenidentität zur Stärkung deiner Präsenz über alle digitalen und physischen Kanäle hinweg.",
-      section1Title: "Umfassendes Identitätskit",
-      section1Paragraph: "Wir entwickeln ein konsistentes visuelles System, das deine Präsenz in Print- und Digitalkanälen mit einsatzbereiten Assets stärkt.",
-      section1Feature1: "Vektorbasiertes Logo-Set mit horizontalen, vertikalen und monochromen Varianten",
-      section1Feature2: "Umfassender Styleguide für Typografie, Farben und UI-Komponenten",
-      section1Feature3: "Editierbare Vorlagen für Social Media, Präsentationen und Flyer",
-      section1Feature4: "Tonfall-Handbuch und Bibliotheken vorbereitet für Canva oder Figma",
-      section2Title: "Technische Details",
-      section2Item1Term: "Lieferung",
-      section2Item1Desc: "2–5 Wochen je nach Anzahl der Freigabeschleifen und vorhandenen Assets.",
-      section2Item2Term: "Tools",
-      section2Item2Desc: "Canva, Illustrator, Figma und kollaborative Drive-Repositories.",
-      section2Item3Term: "Integration",
-      section2Item3Desc: "Materialien adaptierbar für Web, Social Media, Beschilderung und NFC.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Begleitung beim Launch sowie Beratung für Druckproduktionen.",
-      section3Title: "Kreativprozess",
-      section3Paragraph1: "Wir erkunden Moodboards und Referenzen, entwickeln visuelle Konzepte und moderieren Feedback-Sessions bis zur finalen Freigabe.",
-      section3Paragraph2: "Du erhältst editierbare Dateien, Exporte und Implementierungs-Checklisten für konsistente zukünftige Anwendungen.",
-      section4Title: "Bevorzugtes Investment",
-      section4Regular: "€999",
-      section4Discount: "€799",
-      section4Saving: "Spare 200 €",
-      section4Note: "Beinhaltet drei Erstentwürfe, zwei Überarbeitungsrunden und finale Dateivorbereitung für Druck und digitale Medien.",
-      section5Title: "Rahmenbedingungen & Deliverables",
-      section5Paragraph: "Wir benötigen ein vollständiges Briefing, Markenwerte und visuelle Referenzen. Terminreservierung mit 30 % Anzahlung, Rest bei Lieferung. Fotoshootings oder Videoproduktionen koordinieren wir auf Wunsch über Partner.",
-      ctaPrimary: "Kontaktiere uns per WhatsApp",
-      ctaSecondary: "← Zurück zu den Services"
-    },
-    fr: {
-      title: "Pack branding complet",
-      lead: "Identité visuelle cohérente et professionnelle pour renforcer votre présence sur tous les canaux digitaux et physiques.",
-      section1Title: "Kit d’identité complet",
-      section1Paragraph: "Nous concevons un système visuel cohérent pour renforcer votre présence sur les supports imprimés et digitaux avec des assets prêts à l’emploi.",
-      section1Feature1: "Suite de logos vectoriels en versions horizontales, verticales et monochromes",
-      section1Feature2: "Guide de style complet couvrant typographie, couleurs et composants UI",
-      section1Feature3: "Modèles éditables pour réseaux sociaux, présentations et flyers",
-      section1Feature4: "Guide de ton de voix et bibliothèques prêtes pour Canva ou Figma",
-      section2Title: "Détails techniques",
-      section2Item1Term: "Livraison",
-      section2Item1Desc: "2 à 5 semaines selon les cycles de validation et les assets disponibles.",
-      section2Item2Term: "Outils",
-      section2Item2Desc: "Canva, Illustrator, Figma et espaces collaboratifs sur Drive.",
-      section2Item3Term: "Intégration",
-      section2Item3Desc: "Supports adaptables pour web, réseaux sociaux, signalétique et NFC.",
-      section2Item4Term: "Support",
-      section2Item4Desc: "Accompagnement au lancement et conseils pour l’impression.",
-      section3Title: "Processus créatif",
-      section3Paragraph1: "Nous explorons moodboards et inspirations, développons des propositions visuelles et animons les sessions de feedback jusqu’à validation finale.",
-      section3Paragraph2: "Livrables fournis : fichiers éditables, exports et checklist d’implémentation pour garantir la cohérence de vos futures applications.",
-      section4Title: "Investissement privilégié",
-      section4Regular: "€999",
-      section4Discount: "€799",
-      section4Saving: "Économisez 200 €",
-      section4Note: "Comprend trois concepts initiaux, deux cycles de retouches et préparation finale des fichiers pour impression et médias digitaux.",
-      section5Title: "Conditions & livrables",
-      section5Paragraph: "Brief complet, valeurs de marque et références visuelles requis. Planification avec acompte de 30 % et solde à la livraison. Nous pouvons coordonner shootings photo ou production vidéo via des partenaires spécialisés.",
-      ctaPrimary: "Contactez-nous sur WhatsApp",
-      ctaSecondary: "← Retour aux services"
-    },
-    it: {
-      title: "Branding completo",
-      lead: "Identità visiva coerente e professionale per rafforzare la presenza del tuo brand su tutti i canali digitali e fisici.",
-      section1Title: "Kit di identità completo",
-      section1Paragraph: "Creiamo un sistema visivo coerente per rafforzare la tua presenza su canali stampati e digitali con asset pronti all’uso.",
-      section1Feature1: "Logo vettoriale con varianti orizzontali, verticali e monocromatiche",
-      section1Feature2: "Brand book completo con tipografia, palette colori e componenti UI",
-      section1Feature3: "Template editabili per social, presentazioni e flyer",
-      section1Feature4: "Manuale di tono di voce e librerie pronte per Canva o Figma",
-      section2Title: "Dettagli tecnici",
-      section2Item1Term: "Consegna",
-      section2Item1Desc: "2–5 settimane in base ai cicli di validazione e agli asset disponibili.",
-      section2Item2Term: "Strumenti",
-      section2Item2Desc: "Canva, Illustrator, Figma e repository collaborativi su Drive.",
-      section2Item3Term: "Integrazione",
-      section2Item3Desc: "Materiali adattabili per web, social media, segnaletica e NFC.",
-      section2Item4Term: "Supporto",
-      section2Item4Desc: "Comprende affiancamento al lancio e consulenza per la stampa.",
-      section3Title: "Processo creativo",
-      section3Paragraph1: "Esploriamo moodboard e riferimenti, sviluppiamo proposte visive e conduciamo sessioni di feedback fino alla versione definitiva.",
-      section3Paragraph2: "Forniamo file modificabili, esportazioni e checklist di implementazione per garantire coerenza a tutte le applicazioni future.",
-      section4Title: "Investimento preferenziale",
-      section4Regular: "€999",
-      section4Discount: "€799",
-      section4Saving: "Risparmi 200 €",
-      section4Note: "Include tre proposte iniziali, due cicli di revisioni e preparazione finale dei file per stampa e media digitali.",
-      section5Title: "Condizioni e deliverable",
-      section5Paragraph: "Richiediamo briefing completo, valori di marca e riferimenti visivi. Pianificazione con acconto del 30% e saldo alla consegna. Possiamo coordinare shooting foto o produzione video tramite partner specializzati.",
-      ctaPrimary: "Contattaci su WhatsApp",
-      ctaSecondary: "← Torna ai servizi"
-    }
-  }
-};
-const languageAnnouncements = {
-  es: "Idioma cambiado a español.",
-  en: "Language switched to English.",
-  de: "Sprache auf Deutsch gestellt.",
-  fr: "Langue changée en français.",
-  it: "Lingua impostata in italiano."
-};
+(function () {
+  'use strict';
 
-const defaultLanguage = "es";
-let currentService = "";
-let langButtons = [];
-let announcer = null;
+  const SUPPORTED_LANGS = ['es', 'en', 'de', 'fr', 'it'];
+  const DEFAULT_LANG = 'es';
 
-function applyLanguage(lang) {
-  const service = currentService || document.body?.dataset?.service || "";
-  const serviceTranslations = translations[service];
-  if (!serviceTranslations || !serviceTranslations[lang]) {
-    return;
+  const textBundles = {
+    homeSubtitle: {
+      es: 'Lista Especial de Servicios 2025',
+      en: 'Special Service List 2025',
+      de: 'Sonderdienstliste 2025',
+      fr: 'Liste spéciale de services 2025',
+      it: 'Elenco speciale dei servizi 2025'
+    },
+    serviceTagline: {
+      es: 'Servicios profesionales automatizados',
+      en: 'Automated professional services',
+      de: 'Automatisierte professionelle Dienstleistungen',
+      fr: 'Services professionnels automatisés',
+      it: 'Servizi professionali automatizzati'
+    },
+    footer: {
+      es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
+      en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
+      de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
+      fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
+      it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+    }
+  };
+
+  function normaliseLanguage(lang) {
+    if (typeof lang !== 'string') {
+      return DEFAULT_LANG;
+    }
+    const code = lang.trim().toLowerCase();
+    return SUPPORTED_LANGS.includes(code) ? code : DEFAULT_LANG;
   }
 
-  document.documentElement.lang = lang;
-  const content = serviceTranslations[lang];
-  Object.entries(content).forEach(([key, value]) => {
-    document.querySelectorAll(`[data-i18n="${key}"]`).forEach((element) => {
-      element.textContent = value;
-    });
-  });
-
-  langButtons.forEach((button) => {
-    const isActive = button.dataset.lang === lang;
-    button.setAttribute("aria-pressed", String(isActive));
-  });
-
-  if (announcer) {
-    announcer.textContent = languageAnnouncements[lang] || "";
-  }
-
-  localStorage.setItem("preferredLanguage", lang);
-}
-
-function initLanguageSwitcher() {
-  currentService = document.body?.dataset?.service || "";
-  if (!translations[currentService]) {
-    return;
-  }
-
-  langButtons = Array.from(document.querySelectorAll(".lang-btn"));
-  announcer = document.querySelector("[data-lang-announcer]");
-  const nav = document.querySelector("[data-lang-nav]");
-
-  if (nav) {
-    nav.addEventListener("keydown", (event) => {
-      const keys = ["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"];
-      if (!keys.includes(event.key)) {
-        return;
+  function getInitialLanguage() {
+    try {
+      const stored = localStorage.getItem('preferredLanguage');
+      if (stored) {
+        return normaliseLanguage(stored);
       }
-      const focusedIndex = langButtons.indexOf(document.activeElement);
-      if (focusedIndex === -1) {
-        return;
+    } catch (error) {
+      console.warn('Unable to access stored language preference', error);
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      const locale = navigator.language.toLowerCase();
+      const match = SUPPORTED_LANGS.find(code => locale.startsWith(code));
+      if (match) {
+        return match;
       }
-      event.preventDefault();
-      let targetIndex = focusedIndex;
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        targetIndex = (focusedIndex + 1) % langButtons.length;
-      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        targetIndex = (focusedIndex - 1 + langButtons.length) % langButtons.length;
-      } else if (event.key === "Home") {
-        targetIndex = 0;
-      } else if (event.key === "End") {
-        targetIndex = langButtons.length - 1;
-      }
-      langButtons[targetIndex].focus();
+    }
+
+    const docLang = document.documentElement.getAttribute('lang');
+    if (docLang) {
+      return normaliseLanguage(docLang);
+    }
+
+    return DEFAULT_LANG;
+  }
+
+  function updateButtons(lang) {
+    document.querySelectorAll('.lang-btn').forEach(button => {
+      const btnLang = normaliseLanguage(button.dataset.lang || button.textContent);
+      button.dataset.lang = btnLang;
+      button.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
     });
   }
 
-  const savedLang = localStorage.getItem("preferredLanguage");
-  const initialLang = savedLang && translations[currentService][savedLang] ? savedLang : defaultLanguage;
-  applyLanguage(initialLang);
-}
+  function updateSections(lang) {
+    const sections = Array.from(document.querySelectorAll('.services-section'));
+    if (!sections.length) {
+      return;
+    }
 
-window.switchLanguage = function (lang) {
-  const service = currentService || document.body?.dataset?.service || "";
-  if (!translations[service] || !translations[service][lang]) {
-    return;
+    let targetLang = lang;
+    const hasTarget = sections.some(section => section.id === lang);
+    if (!hasTarget) {
+      const fallback = sections[0].id;
+      targetLang = fallback ? normaliseLanguage(fallback) : DEFAULT_LANG;
+    }
+
+    sections.forEach(section => {
+      section.classList.toggle('hidden', section.id !== targetLang);
+    });
+
+    return targetLang;
   }
-  applyLanguage(lang);
-};
 
-document.addEventListener("DOMContentLoaded", initLanguageSwitcher);
+  function updateStaticText(lang) {
+    document.querySelectorAll('[data-i18n-key]').forEach(node => {
+      const key = node.getAttribute('data-i18n-key');
+      const bundle = textBundles[key];
+      if (bundle && bundle[lang]) {
+        node.textContent = bundle[lang];
+      }
+    });
+  }
+
+  function persistLanguage(lang) {
+    try {
+      localStorage.setItem('preferredLanguage', lang);
+    } catch (error) {
+      console.warn('Unable to persist language preference', error);
+    }
+  }
+
+  function applyLanguage(lang) {
+    const requestedLang = normaliseLanguage(lang);
+    const visibleLang = updateSections(requestedLang) || requestedLang;
+
+    updateButtons(visibleLang);
+    updateStaticText(visibleLang);
+
+    document.documentElement.setAttribute('lang', visibleLang);
+    document.documentElement.setAttribute('xml:lang', visibleLang);
+
+    persistLanguage(visibleLang);
+  }
+
+  function handleClick(event) {
+    const target = event.currentTarget;
+    const lang = target.dataset.lang || target.textContent;
+    applyLanguage(lang);
+  }
+
+  function prepareButtons() {
+    document.querySelectorAll('.lang-btn').forEach(button => {
+      if (!button.dataset.lang) {
+        button.dataset.lang = normaliseLanguage(button.textContent);
+      }
+      button.removeEventListener('click', handleClick);
+      button.addEventListener('click', handleClick);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    prepareButtons();
+    const initial = getInitialLanguage();
+    applyLanguage(initial);
+  });
+
+  window.switchLanguage = applyLanguage;
+})();

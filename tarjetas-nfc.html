@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tarjetas NFC Contactless — Business Bots Solutions</title>
-  <meta name="description" content="Tarjetas NFC Contactless — Diseño NFC personalizado con ecosistema de links dinámicos y analítica en tiempo real." />
+  <meta name="description" content="Tarjetas NFC personalizadas con flujos digitales dinámicos, analítica y soporte para experiencias contactless." />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
   <style>
     :root {
       --bg: #000000;
@@ -18,6 +19,7 @@
       --radius-sm: 12px;
       --gap: 32px;
       --shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      --shadow-accent: 0 10px 25px rgba(74, 222, 128, 0.35);
     }
 
     * {
@@ -30,8 +32,8 @@
       color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      display: flex;
       min-height: 100vh;
+      display: flex;
     }
 
     a {
@@ -39,7 +41,7 @@
     }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: clamp(24px, 6vw, 64px);
@@ -48,74 +50,106 @@
       gap: var(--gap);
     }
 
-    header.page-header {
-      text-align: center;
+    header[role="banner"] {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
-    .language-switcher {
+    .brand {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
       align-items: center;
+      gap: 18px;
+      text-decoration: none;
     }
 
-    .language-switcher nav {
-      display: inline-flex;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 34px);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav[aria-label="Selector de idioma"] {
+      display: flex;
+      gap: 6px;
+      background: var(--panel);
       border: 1px solid var(--stroke);
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(6px);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      box-shadow: var(--shadow);
     }
 
     .lang-btn {
-      border: 1px solid var(--stroke);
       background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 6px 12px;
-      border-radius: 999px;
+      border: none;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 48px;
+      min-height: 44px;
     }
 
     .lang-btn[aria-pressed="true"] {
       background: var(--accent);
       color: var(--bg);
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
-    .lang-btn:hover {
-      border-color: rgba(74, 222, 128, 0.6);
-      color: var(--accent);
+    .lang-btn:hover:not([aria-pressed="true"]) {
+      background: var(--stroke);
+      color: var(--fg);
     }
 
-    .lang-btn[aria-pressed="true"]:hover {
-      color: var(--bg);
+    .hidden {
+      display: none !important;
     }
 
-    .lang-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
+    main[role="main"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    .services-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
     .eyebrow {
@@ -126,17 +160,26 @@
       font-weight: 600;
     }
 
-    header.page-header h1 {
+    .page-header h2 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 44px);
+      font-size: clamp(32px, 5vw, 46px);
       letter-spacing: -0.02em;
     }
 
-    header.page-header .lead {
+    .page-header .lead {
       margin: 0;
       color: var(--muted);
       font-size: clamp(16px, 2.4vw, 19px);
       max-width: 720px;
+    }
+
+    .hero-media {
+      display: block;
+      margin: 0 auto;
+      max-width: min(640px, 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
     }
 
     .content-grid {
@@ -155,7 +198,7 @@
       gap: 16px;
     }
 
-    .panel h2 {
+    .panel h3 {
       margin: 0;
       font-size: clamp(20px, 3vw, 26px);
       color: var(--accent);
@@ -295,7 +338,7 @@
     .cta:hover {
       color: var(--bg);
       border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta:hover::after {
@@ -331,32 +374,42 @@
       transform: translateX(-2px);
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    footer {
+    footer[role="contentinfo"] {
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      padding-top: 8px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
     }
 
     @media (min-width: 900px) {
       .content-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .panel.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header[role="banner"] {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav[aria-label="Selector de idioma"] {
+        width: 100%;
+        justify-content: center;
+        max-width: 420px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
 
@@ -368,81 +421,312 @@
     }
   </style>
 </head>
-<body data-service="tarjetas-nfc">
+<body>
   <div class="wrap">
-    <header class="page-header">
-      <div class="language-switcher">
-        <nav aria-label="Language selector" data-lang-nav>
-          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish" onclick="switchLanguage('es')">ES</button>
-          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English" onclick="switchLanguage('en')">EN</button>
-          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen" onclick="switchLanguage('de')">DE</button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français" onclick="switchLanguage('fr')">FR</button>
-          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano" onclick="switchLanguage('it')">IT</button>
-        </nav>
-        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
-      </div>
-      <span class="eyebrow">Business Bots Solutions</span>
-      <h1 data-i18n="title">Tarjetas NFC Contactless</h1>
-      <p class="lead" data-i18n="lead">Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.</p>
+    <header role="banner">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png" alt="Business Bots Logo" width="60" height="60" loading="lazy" />
+        <div class="brand-text">
+          <h1>Business Bots</h1>
+          <p data-i18n-key="serviceTagline">Servicios profesionales automatizados</p>
+        </div>
+      </a>
+      <nav aria-label="Selector de idioma">
+        <button class="lang-btn" aria-pressed="true" data-lang="es" type="button">ES</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="de" type="button">DE</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="fr" type="button">FR</button>
+        <button class="lang-btn" aria-pressed="false" data-lang="it" type="button">IT</button>
+      </nav>
     </header>
 
-    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Tarjetas NFC Contactless" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
-
-    <main class="content-grid" role="main">
-      <section class="panel">
-        <h2 data-i18n="section1Title">Kit de experiencia contactless</h2>
-        <p data-i18n="section1Paragraph">Diseñamos tarjetas NFC de alto impacto con visuales premium y flujos digitales que puedes actualizar en segundos.</p>
-        <ul class="feature-list">
-          <li data-i18n="section1Feature1">Diseño personalizado con variantes para staff y clientes VIP</li>
-          <li data-i18n="section1Feature2">Programación NFC avanzada con enlaces dinámicos y analítica</li>
-          <li data-i18n="section1Feature3">Flujo de actualización automática sin reimprimir tarjetas</li>
-          <li data-i18n="section1Feature4">Panel de contenidos editable para campañas y promos</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section2Title">Detalles técnicos</h2>
-        <dl class="data">
-          <dt data-i18n="section2Item1Term">Entrega</dt>
-          <dd data-i18n="section2Item1Desc">1–2 semanas con pruebas y validación de lectura en campo.</dd>
-          <dt data-i18n="section2Item2Term">Herramientas</dt>
-          <dd data-i18n="section2Item2Desc">NFC Tools Pro, Canva, panel web Business Bots y automatizaciones.</dd>
-          <dt data-i18n="section2Item3Term">Integración</dt>
-          <dd data-i18n="section2Item3Desc">Compatible con Google Drive, formularios Business Bots y CRMs.</dd>
-          <dt data-i18n="section2Item4Term">Soporte</dt>
-          <dd data-i18n="section2Item4Desc">Incluye video tutorial, guía de instalación y 30 días de monitoreo.</dd>
-        </dl>
-      </section>
-
-      <section class="panel full">
-        <h2 data-i18n="section3Title">Implementación y garantías</h2>
-        <p data-i18n="section3Paragraph1">Creamos un flujo de onboarding para tu equipo y configuramos alertas de uso para detectar tarjetas inactivas o pérdidas.</p>
-        <p class="muted" data-i18n="section3Paragraph2">Dispondrás de un entorno de pruebas para actualizar campañas, además de soporte para replicar nuevos lotes bajo la misma identidad visual.</p>
-      </section>
-
-      <section class="panel">
-        <h2 data-i18n="section4Title">Inversión preferente</h2>
-        <div class="price-card">
-          <span class="regular" data-i18n="section4Regular">€265</span>
-          <span class="discount" data-i18n="section4Discount">€199</span>
-          <span class="saving" data-i18n="section4Saving">Ahorra €66</span>
+    <main role="main">
+      <section id="es" class="services-section" lang="es">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Tarjetas NFC Contactless</h2>
+          <p class="lead">Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.</p>
         </div>
-        <p class="muted" data-i18n="section4Note">Incluye lote inicial de 25 tarjetas, dashboard de métricas de clics y mantenimiento de enlaces durante el primer mes.</p>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Tarjetas NFC personalizadas" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit de experiencia contactless</h3>
+            <p>Diseñamos tarjetas NFC de alto impacto con visuales premium y flujos digitales que puedes actualizar en segundos.</p>
+            <ul class="feature-list">
+              <li>Diseño personalizado con variantes para staff y clientes VIP</li>
+              <li>Programación NFC avanzada con enlaces dinámicos y analítica</li>
+              <li>Flujo de actualización automática sin reimprimir tarjetas</li>
+              <li>Panel de contenidos editable para campañas y promos</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Detalles técnicos</h3>
+            <dl class="data">
+              <dt>Entrega</dt>
+              <dd>1–2 semanas con pruebas y validación de lectura en campo.</dd>
+              <dt>Herramientas</dt>
+              <dd>NFC Tools Pro, Canva, panel web Business Bots y automatizaciones.</dd>
+              <dt>Integración</dt>
+              <dd>Compatible con Google Drive, formularios Business Bots y CRMs.</dd>
+              <dt>Soporte</dt>
+              <dd>Incluye video tutorial, guía de instalación y 30 días de monitoreo.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Implementación y garantías</h3>
+            <p>Creamos un flujo de onboarding para tu equipo y configuramos alertas de uso para detectar tarjetas inactivas o pérdidas.</p>
+            <p class="muted">Dispondrás de un entorno de pruebas para actualizar campañas, además de soporte para replicar nuevos lotes bajo la misma identidad visual.</p>
+          </div>
+          <div class="panel">
+            <h3>Inversión preferente</h3>
+            <div class="price-card">
+              <span class="regular">€265</span>
+              <span class="discount">€199</span>
+              <span class="saving">Ahorra €66</span>
+            </div>
+            <p class="muted">Incluye lote inicial de 25 tarjetas, dashboard de métricas de clics y mantenimiento de enlaces durante el primer mes.</p>
+          </div>
+          <div class="panel">
+            <h3>Condiciones de producción</h3>
+            <p>Requerimos logos editables y paleta de color para asegurar consistencia. La impresión física puede gestionarse con nuestro partner o el tuyo, con entrega de archivos listos para producción.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20kit%20de%20Tarjetas%20NFC.%20%C2%BFPodemos%20hablar%20de%20dise%C3%B1o%20y%20entrega?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Volver a servicios</a>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2 data-i18n="section5Title">Condiciones de producción</h2>
-        <p data-i18n="section5Paragraph">Requerimos logos editables y paleta de color para asegurar consistencia. La impresión física puede gestionarse con nuestro partner o el tuyo, con entrega de archivos listos para producción.</p>
+      <section id="en" class="services-section hidden" lang="en">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Contactless NFC Cards</h2>
+          <p class="lead">Custom NFC design with a dynamic link ecosystem for innovative, professional contactless experiences.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Custom contactless NFC cards" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Contactless experience kit</h3>
+            <p>We craft high-impact NFC cards with premium visuals and digital flows you can update in seconds.</p>
+            <ul class="feature-list">
+              <li>Tailored design with variants for staff and VIP clients</li>
+              <li>Advanced NFC programming with dynamic links and analytics</li>
+              <li>Automatic update workflow without reprinting cards</li>
+              <li>Editable content dashboard for campaigns and promos</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technical details</h3>
+            <dl class="data">
+              <dt>Delivery</dt>
+              <dd>1–2 weeks with field testing and reading validation.</dd>
+              <dt>Tools</dt>
+              <dd>NFC Tools Pro, Canva, Business Bots web console and automations.</dd>
+              <dt>Integration</dt>
+              <dd>Compatible with Google Drive, Business Bots forms and CRMs.</dd>
+              <dt>Support</dt>
+              <dd>Includes video tutorial, installation guide and 30 days of monitoring.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Implementation & guarantees</h3>
+            <p>We build an onboarding flow for your team and configure usage alerts to detect inactive or lost cards.</p>
+            <p class="muted">You get a testing environment to refresh campaigns plus support to replicate new batches with the same visual identity.</p>
+          </div>
+          <div class="panel">
+            <h3>Preferred investment</h3>
+            <div class="price-card">
+              <span class="regular">€265</span>
+              <span class="discount">€199</span>
+              <span class="saving">Save €66</span>
+            </div>
+            <p class="muted">Includes an initial batch of 25 cards, click metrics dashboard and link maintenance during the first month.</p>
+          </div>
+          <div class="panel">
+            <h3>Production conditions</h3>
+            <p>We require editable logos and color palette for consistency. Printing can be managed with our partner or yours, delivering production-ready files.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Contactless%20NFC%20Cards.%20Can%20we%20review%20design%20options%20and%20delivery?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Back to services</a>
+        </div>
+      </section>
+
+      <section id="de" class="services-section hidden" lang="de">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>NFC-Karten ohne Kontakt</h2>
+          <p class="lead">Individuelles NFC-Design mit dynamischem Link-Ökosystem für innovative und professionelle kontaktlose Erlebnisse.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Kontaktlose NFC-Karten" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Contactless-Erlebnis-Kit</h3>
+            <p>Wir gestalten wirkungsstarke NFC-Karten mit Premium-Visuals und digitalen Flows, die du in Sekunden aktualisieren kannst.</p>
+            <ul class="feature-list">
+              <li>Individuelles Design mit Varianten für Team und VIP-Kundschaft</li>
+              <li>Erweiterte NFC-Programmierung mit dynamischen Links und Analysen</li>
+              <li>Automatischer Aktualisierungsablauf ohne Karten neu zu drucken</li>
+              <li>Editierbares Content-Dashboard für Kampagnen und Aktionen</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Technische Details</h3>
+            <dl class="data">
+              <dt>Lieferung</dt>
+              <dd>1–2 Wochen mit Tests und Lesevalidierung im Einsatz.</dd>
+              <dt>Tools</dt>
+              <dd>NFC Tools Pro, Canva, Business-Bots-Webkonsole und Automatisierungen.</dd>
+              <dt>Integration</dt>
+              <dd>Kompatibel mit Google Drive, Business Bots Formularen und CRMs.</dd>
+              <dt>Support</dt>
+              <dd>Inklusive Video-Tutorial, Installationsleitfaden und 30 Tagen Monitoring.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Implementierung & Garantien</h3>
+            <p>Wir erstellen einen Onboarding-Flow für dein Team und richten Nutzungsalarme ein, um inaktive oder verlorene Karten zu erkennen.</p>
+            <p class="muted">Du erhältst eine Testumgebung für Kampagnen-Updates sowie Support zur Reproduktion neuer Chargen in identischer Markenoptik.</p>
+          </div>
+          <div class="panel">
+            <h3>Bevorzugtes Investment</h3>
+            <div class="price-card">
+              <span class="regular">€265</span>
+              <span class="discount">€199</span>
+              <span class="saving">Spare 66 €</span>
+            </div>
+            <p class="muted">Beinhaltet erste Charge mit 25 Karten, Klickmetriken-Dashboard und Link-Pflege im ersten Monat.</p>
+          </div>
+          <div class="panel">
+            <h3>Produktionsbedingungen</h3>
+            <p>Wir benötigen editierbare Logos und Farbpalette für Konsistenz. Der Druck kann über unseren Partner oder euren erfolgen, mit lieferfertigen Produktionsdateien.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20die%20kontaktlosen%20NFC-Karten.%20K%C3%B6nnen%20wir%20Design%20und%20Lieferung%20besprechen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Zurück zu den Services</a>
+        </div>
+      </section>
+
+      <section id="fr" class="services-section hidden" lang="fr">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Cartes NFC sans contact</h2>
+          <p class="lead">Design NFC personnalisé avec écosystème de liens dynamiques pour des expériences sans contact innovantes et professionnelles.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Cartes NFC sans contact" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit d’expérience sans contact</h3>
+            <p>Nous concevons des cartes NFC à fort impact avec visuels premium et parcours digitaux que vous pouvez mettre à jour en quelques secondes.</p>
+            <ul class="feature-list">
+              <li>Design personnalisé avec variantes pour l’équipe et les clients VIP</li>
+              <li>Programmation NFC avancée avec liens dynamiques et analytics</li>
+              <li>Flux de mise à jour automatique sans réimprimer les cartes</li>
+              <li>Tableau de contenu éditable pour campagnes et promotions</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Détails techniques</h3>
+            <dl class="data">
+              <dt>Livraison</dt>
+              <dd>1 à 2 semaines avec tests terrain et validation de lecture.</dd>
+              <dt>Outils</dt>
+              <dd>NFC Tools Pro, Canva, console web Business Bots et automatisations.</dd>
+              <dt>Intégration</dt>
+              <dd>Compatible avec Google Drive, formulaires Business Bots et CRM.</dd>
+              <dt>Support</dt>
+              <dd>Inclut tutoriel vidéo, guide d’installation et 30 jours de monitoring.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Mise en œuvre & garanties</h3>
+            <p>Nous créons un parcours d’onboarding pour votre équipe et configurons des alertes d’usage afin de détecter les cartes inactives ou perdues.</p>
+            <p class="muted">Vous disposez d’un environnement de test pour mettre à jour vos campagnes, ainsi que d’un support pour reproduire de nouveaux lots avec la même identité visuelle.</p>
+          </div>
+          <div class="panel">
+            <h3>Investissement privilégié</h3>
+            <div class="price-card">
+              <span class="regular">€265</span>
+              <span class="discount">€199</span>
+              <span class="saving">Économisez 66 €</span>
+            </div>
+            <p class="muted">Inclut un lot initial de 25 cartes, tableau de bord des clics et maintenance des liens durant le premier mois.</p>
+          </div>
+          <div class="panel">
+            <h3>Conditions de production</h3>
+            <p>Nous demandons des logos éditables et une palette de couleurs pour garantir la cohérence. L’impression peut être gérée avec notre partenaire ou le vôtre, avec des fichiers prêts pour la production.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20les%20cartes%20NFC%20sans%20contact.%20Discutons%20design%20et%20livraison." target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Retour aux services</a>
+        </div>
+      </section>
+
+      <section id="it" class="services-section hidden" lang="it">
+        <div class="page-header">
+          <span class="eyebrow">Business Bots Solutions</span>
+          <h2>Card NFC Contactless</h2>
+          <p class="lead">Design NFC personalizzato con ecosistema di link dinamici per esperienze contactless innovative e professionali.</p>
+        </div>
+        <img class="hero-media" src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Card NFC contactless" loading="lazy" width="960" height="540" />
+        <div class="content-grid">
+          <div class="panel">
+            <h3>Kit di esperienza contactless</h3>
+            <p>Progettiamo card NFC ad alto impatto con visual premium e flussi digitali aggiornabili in pochi secondi.</p>
+            <ul class="feature-list">
+              <li>Design su misura con varianti per staff e clienti VIP</li>
+              <li>Programmazione NFC avanzata con link dinamici e analitiche</li>
+              <li>Flusso di aggiornamento automatico senza ristampare le card</li>
+              <li>Dashboard di contenuti modificabile per campagne e promozioni</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Dettagli tecnici</h3>
+            <dl class="data">
+              <dt>Consegna</dt>
+              <dd>1–2 settimane con test e validazione di lettura sul campo.</dd>
+              <dt>Strumenti</dt>
+              <dd>NFC Tools Pro, Canva, console web Business Bots e automazioni.</dd>
+              <dt>Integrazione</dt>
+              <dd>Compatibile con Google Drive, moduli Business Bots e CRM.</dd>
+              <dt>Supporto</dt>
+              <dd>Include video tutorial, guida all’installazione e 30 giorni di monitoraggio.</dd>
+            </dl>
+          </div>
+          <div class="panel full">
+            <h3>Implementazione & garanzie</h3>
+            <p>Creiamo un flusso di onboarding per il tuo team e configuriamo avvisi d’uso per rilevare card inattive o smarrite.</p>
+            <p class="muted">Hai a disposizione un ambiente di test per aggiornare le campagne e supporto per replicare nuovi lotti con la stessa identità visiva.</p>
+          </div>
+          <div class="panel">
+            <h3>Investimento preferenziale</h3>
+            <div class="price-card">
+              <span class="regular">€265</span>
+              <span class="discount">€199</span>
+              <span class="saving">Risparmi 66 €</span>
+            </div>
+            <p class="muted">Include lotto iniziale di 25 card, dashboard delle metriche di clic e manutenzione dei link per il primo mese.</p>
+          </div>
+          <div class="panel">
+            <h3>Condizioni di produzione</h3>
+            <p>Richiediamo loghi modificabili e palette colori per garantire coerenza. La stampa può essere gestita con il nostro partner o il tuo, fornendo file pronti per la produzione.</p>
+          </div>
+        </div>
+        <div class="cta-group">
+          <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20vorrei%20informazioni%20sulle%20card%20NFC%20contactless.%20Parliamo%20di%20design%20e%20consegna." target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+          <a class="cta secondary" data-icon="" href="./index.html">← Torna ai servizi</a>
+        </div>
       </section>
     </main>
 
-    <div class="cta-group">
-      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Tarjetas%20NFC%20Contactless." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
-      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
-    </div>
-
-    <footer>Business Bots Solutions © 2025</footer>
+    <footer role="contentinfo">
+      <p id="footer-text" data-i18n-key="footer">Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta</p>
+    </footer>
   </div>
+
   <script src="./lang-switcher.js"></script>
 </body>
 </html>
