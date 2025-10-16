@@ -316,6 +316,13 @@
             margin-left: auto;
         }
         
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: auto;
+        }
+
         .cta {
             display: inline-flex;
             align-items: center;
@@ -329,17 +336,25 @@
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: auto;
+            margin-top: 0;
             text-align: center;
             border: 1px solid var(--stroke);
             position: relative;
             overflow: hidden;
         }
-        
+
+        .cta-group .cta {
+            width: 100%;
+        }
+
         .cta::before {
-            content: "💬";
+            content: attr(data-icon);
             font-size: 18px;
             transition: transform 0.3s ease;
+        }
+
+        .cta[data-icon=""]::before {
+            display: none;
         }
         
         .cta::after {
@@ -529,20 +544,6 @@
         </header>
 
         <main role="main">
-            <!-- Quick links to standalone service pages -->
-            <section aria-label="Páginas individuales" style="margin-bottom:24px">
-                <div class="service-card" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
-                    <h2 class="name">Páginas individuales (HTML)</h2>
-                    <p class="desc">Descarga o abre cada página dedicada para editar o subir a tu repositorio.</p>
-                    <div style="display:flex;flex-wrap:wrap;gap:10px">
-                        <a class="cta" href="/menu-redesign.html">Rediseño de Menú e Interfaz Digital</a>
-                        <a class="cta" href="/interfaz-simple.html">Interfaz Simple con Links + Google Drive</a>
-                        <a class="cta" href="/tarjetas-nfc.html">Tarjetas NFC Contactless</a>
-                        <a class="cta" href="/chatbot.html">Chatbot 24/7 Multilingüe</a>
-                        <a class="cta" href="/branding.html">Branding Completo</a>
-                    </div>
-                </div>
-            </section>
             <!-- ESPAÑOL -->
             <section id="es" class="services-section" lang="es">
                 <div class="services-grid">
@@ -558,7 +559,10 @@
                                 <span class="pricing-savings">Ahorras €225</span>
                             </div>
                         </div>
-                        <a class="cta" href="./menu-redesign.html">Ver detalles</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Redise%C3%B1o%20de%20Men%C3%BA%20e%20Interfaz%20Digital.%20%C2%BFPodemos%20hablar?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./menu-redesign.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -573,7 +577,10 @@
                                 <span class="pricing-savings">Ahorras €53</span>
                             </div>
                         </div>
-                        <a class="cta" href="./interfaz-simple.html">Ver detalles</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20Interfaz%20Simple%20con%20Links%20%2B%20Google%20Drive.%20%C2%BFPueden%20enviarme%20m%C3%A1s%20detalles?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./interfaz-simple.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -588,7 +595,10 @@
                                 <span class="pricing-savings">Ahorras €66</span>
                             </div>
                         </div>
-                        <a class="cta" href="./tarjetas-nfc.html">Ver detalles</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesan%20las%20Tarjetas%20NFC%20Contactless.%20%C2%BFPueden%20contarme%20sobre%20opciones%20y%20formatos?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./tarjetas-nfc.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -603,7 +613,10 @@
                                 <span class="pricing-savings">Ahorras €257</span>
                             </div>
                         </div>
-                        <a class="cta" href="./chatbot.html">Ver detalles</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20Chatbot%2024/7%20Multiling%C3%BCe.%20%C2%BFPodemos%20revisar%20integraciones%20y%20precios?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./chatbot.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -618,7 +631,10 @@
                                 <span class="pricing-savings">Ahorras €200</span>
                             </div>
                         </div>
-                        <a class="cta" href="./branding.html">Ver detalles</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hola,%20me%20interesa%20el%20servicio%20de%20Branding%20Completo.%20%C2%BFPodemos%20ver%20ejemplos%20y%20propuesta?" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./branding.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -638,7 +654,10 @@
                                 <span class="pricing-savings">Save €225</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Menu%20Redesign%20%26%20Digital%20Interface%20service.%20Could%20you%20please%20provide%20more%20detailed%20information?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Menu%20Redesign%20%26%20Digital%20Interface%20service.%20Could%20you%20please%20provide%20more%20detailed%20information?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./menu-redesign.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -653,7 +672,10 @@
                                 <span class="pricing-savings">Save €53</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Simple%20Interface%20%2B%20Google%20Drive%20service.%20Could%20you%20please%20share%20more%20information?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Simple%20Interface%20%2B%20Google%20Drive%20service.%20Could%20you%20please%20share%20more%20information?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./interfaz-simple.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -668,7 +690,10 @@
                                 <span class="pricing-savings">Save €66</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20NFC%20Contactless%20Cards%20service.%20Could%20you%20please%20provide%20information%20about%20available%20options?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20NFC%20Contactless%20Cards%20service.%20Could%20you%20please%20provide%20information%20about%20available%20options?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./tarjetas-nfc.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -683,7 +708,10 @@
                                 <span class="pricing-savings">Save €257</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%2024/7%20Multilingual%20Chatbot%20service.%20Could%20you%20please%20explain%20how%20the%20integration%20works?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%2024/7%20Multilingual%20Chatbot%20service.%20Could%20you%20please%20explain%20how%20the%20integration%20works?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./chatbot.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -698,7 +726,10 @@
                                 <span class="pricing-savings">Save €200</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Complete%20Branding%20service.%20Could%20you%20please%20show%20me%20some%20examples%20of%20previous%20work?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hi,%20I'm%20interested%20in%20the%20Complete%20Branding%20service.%20Could%20you%20please%20show%20me%20some%20examples%20of%20previous%20work?" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./branding.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -718,7 +749,10 @@
                                 <span class="pricing-savings">Sparen Sie €225</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Men%C3%BC-Redesign%20%26%20Digitale%20Schnittstelle.%20K%C3%B6nnten%20Sie%20mir%20bitte%20detailliertere%20Informationen%20geben?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Men%C3%BC-Redesign%20%26%20Digitale%20Schnittstelle.%20K%C3%B6nnten%20Sie%20mir%20bitte%20detailliertere%20Informationen%20geben?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./menu-redesign.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -733,7 +767,10 @@
                                 <span class="pricing-savings">Sparen Sie €53</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Einfache%20Schnittstelle%20%2B%20Google%20Drive.%20K%C3%B6nnten%20Sie%20mir%20weitere%20Informationen%20mitteilen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Einfache%20Schnittstelle%20%2B%20Google%20Drive.%20K%C3%B6nnten%20Sie%20mir%20weitere%20Informationen%20mitteilen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./interfaz-simple.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -748,7 +785,10 @@
                                 <span class="pricing-savings">Sparen Sie €66</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20NFC-Kontaktlose%20Karten.%20K%C3%B6nnten%20Sie%20mir%20Informationen%20%C3%BCber%20verf%C3%BCgbare%20Optionen%20geben?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20NFC-Kontaktlose%20Karten.%20K%C3%B6nnten%20Sie%20mir%20Informationen%20%C3%BCber%20verf%C3%BCgbare%20Optionen%20geben?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./tarjetas-nfc.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -763,7 +803,10 @@
                                 <span class="pricing-savings">Sparen Sie €257</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%2024/7%20Mehrsprachiger%20Chatbot.%20K%C3%B6nnten%20Sie%20mir%20erkl%C3%A4ren,%20wie%20die%20Integration%20funktioniert?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%2024/7%20Mehrsprachiger%20Chatbot.%20K%C3%B6nnten%20Sie%20mir%20erkl%C3%A4ren,%20wie%20die%20Integration%20funktioniert?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./chatbot.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -778,7 +821,10 @@
                                 <span class="pricing-savings">Sparen Sie €200</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Vollst%C3%A4ndiges%20Branding.%20K%C3%B6nnten%20Sie%20mir%20einige%20Beispiele%20fr%C3%BCherer%20Arbeiten%20zeigen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Hallo,%20ich%20interessiere%20mich%20f%C3%BCr%20den%20Service%20Vollst%C3%A4ndiges%20Branding.%20K%C3%B6nnten%20Sie%20mir%20einige%20Beispiele%20fr%C3%BCherer%20Arbeiten%20zeigen?" target="_blank" rel="noopener noreferrer">Kontaktieren Sie uns über WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./branding.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -798,7 +844,10 @@
                                 <span class="pricing-savings">Économisez €225</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Refonte%20de%20Menu%20%26%20Interface%20Num%C3%A9rique.%20Pourriez-vous%20me%20fournir%20des%20informations%20plus%20d%C3%A9taill%C3%A9es?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Refonte%20de%20Menu%20%26%20Interface%20Num%C3%A9rique.%20Pourriez-vous%20me%20fournir%20des%20informations%20plus%20d%C3%A9taill%C3%A9es?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./menu-redesign.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -813,7 +862,10 @@
                                 <span class="pricing-savings">Économisez €53</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Interface%20Simple%20%2B%20Google%20Drive.%20Pourriez-vous%20partager%20plus%20d'informations?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Interface%20Simple%20%2B%20Google%20Drive.%20Pourriez-vous%20partager%20plus%20d'informations?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./interfaz-simple.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -828,7 +880,10 @@
                                 <span class="pricing-savings">Économisez €66</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Cartes%20NFC%20Sans%20Contact.%20Pourriez-vous%20me%20fournir%20des%20informations%20sur%20les%20options%20disponibles?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Cartes%20NFC%20Sans%20Contact.%20Pourriez-vous%20me%20fournir%20des%20informations%20sur%20les%20options%20disponibles?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./tarjetas-nfc.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -843,7 +898,10 @@
                                 <span class="pricing-savings">Économisez €257</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Chatbot%20Multilingue%2024/7.%20Pourriez-vous%20m'expliquer%20comment%20fonctionne%20l'int%C3%A9gration?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Chatbot%20Multilingue%2024/7.%20Pourriez-vous%20m'expliquer%20comment%20fonctionne%20l'int%C3%A9gration?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./chatbot.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -858,7 +916,10 @@
                                 <span class="pricing-savings">Économisez €200</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Branding%20Complet.%20Pourriez-vous%20me%20montrer%20quelques%20exemples%20de%20travaux%20ant%C3%A9rieurs?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Bonjour,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20service%20Branding%20Complet.%20Pourriez-vous%20me%20montrer%20quelques%20exemples%20de%20travaux%20ant%C3%A9rieurs?" target="_blank" rel="noopener noreferrer">Contactez-nous sur WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./branding.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -878,7 +939,10 @@
                                 <span class="pricing-savings">Risparmi €225</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Redesign%20Menu%20%26%20Interfaccia%20Digitale.%20Potreste%20fornirmi%20informazioni%20pi%C3%B9%20dettagliate?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Redesign%20Menu%20%26%20Interfaccia%20Digitale.%20Potreste%20fornirmi%20informazioni%20pi%C3%B9%20dettagliate?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./menu-redesign.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -893,7 +957,10 @@
                                 <span class="pricing-savings">Risparmi €53</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Interfaccia%20Semplice%20%2B%20Google%20Drive.%20Potreste%20condividere%20maggiori%20informazioni?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Interfaccia%20Semplice%20%2B%20Google%20Drive.%20Potreste%20condividere%20maggiori%20informazioni?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./interfaz-simple.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -908,7 +975,10 @@
                                 <span class="pricing-savings">Risparmi €66</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Carte%20NFC%20Contactless.%20Potreste%20fornirmi%20informazioni%20sulle%20opzioni%20disponibili?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Carte%20NFC%20Contactless.%20Potreste%20fornirmi%20informazioni%20sulle%20opzioni%20disponibili?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./tarjetas-nfc.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -923,7 +993,10 @@
                                 <span class="pricing-savings">Risparmi €257</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Chatbot%20Multilingue%2024/7.%20Potreste%20spiegarmi%20come%20funziona%20l'integrazione?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Chatbot%20Multilingue%2024/7.%20Potreste%20spiegarmi%20come%20funziona%20l'integrazione?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./chatbot.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
 
                     <article class="service-card">
@@ -938,7 +1011,10 @@
                                 <span class="pricing-savings">Risparmi €200</span>
                             </div>
                         </div>
-                        <a class="cta" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Branding%20Completo.%20Potreste%20mostrarmi%20alcuni%20esempi%20di%20lavori%20precedenti?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                        <div class="cta-group">
+                            <a class="cta" data-icon="💬" href="https://api.whatsapp.com/send?phone=34631690524&text=Ciao,%20sono%20interessato%20al%20servizio%20Branding%20Completo.%20Potreste%20mostrarmi%20alcuni%20esempi%20di%20lavori%20precedenti?" target="_blank" rel="noopener noreferrer">Contattaci su WhatsApp</a>
+                            <a class="cta learn-more" data-icon="↗" href="./branding.html" rel="bookmark">Learn more</a>
+                        </div>
                     </article>
                 </div>
             </section>

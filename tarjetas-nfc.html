@@ -1,94 +1,448 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tarjetas NFC Contactless — Business Bots Solutions</title>
-  <meta name="description" content="Tarjetas NFC Contactless — Diseño NFC personalizado con ecosistema de links dinámicos." />
+  <meta name="description" content="Tarjetas NFC Contactless — Diseño NFC personalizado con ecosistema de links dinámicos y analítica en tiempo real." />
   <style>
-    :root{--bg:#000;--fg:#fff;--panel:#0A0A0A;--accent:#00FFD1;--accent-hover:#00C9A7;--stroke:#1E1E1E;--shadow:rgba(0,0,0,0.3);--radius:12px}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Poppins,system-ui,Roboto,Arial}
-    .wrap{max-width:1100px;margin:28px auto;padding:20px}
-    .card{background:var(--panel);border:1px solid var(--stroke);padding:18px;border-radius:12px;box-shadow:0 8px 20px var(--shadow)}
-    header{display:flex;gap:12px;align-items:center}
-    .img{width:88px;height:88px;border-radius:10px;overflow:hidden;border:1px solid var(--stroke)}
-    h1{margin:0;color:var(--accent);font-size:24px}
-    .desc{color:rgba(255,255,255,0.9);margin-top:8px}
+    :root {
+      --bg: #000000;
+      --fg: #ffffff;
+      --muted: rgba(255, 255, 255, 0.72);
+      --panel: #0a0a0a;
+      --stroke: #1a1a1a;
+      --accent: #4ade80;
+      --accent-hover: #22c55e;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --gap: 32px;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
 
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    * {
+      box-sizing: border-box;
+    }
 
-    .deliver{display:grid;gap:8px}
-    .deliver li{background:linear-gradient(0deg, rgba(255,255,255,0.02), transparent);padding:10px;border-radius:8px;border:1px solid var(--stroke)}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
 
-    .price{padding:12px;border-radius:10px;border:1px solid var(--stroke);background:linear-gradient(135deg, rgba(0,255,209,0.03), transparent)}
-    .orig{text-decoration:line-through;color:rgba(255,255,255,0.6);font-weight:700}
-    .disc{font-weight:900;color:var(--accent);font-size:20px}
-    .save{color:var(--accent-hover);font-weight:700;padding:6px;border-radius:8px;background:rgba(0,201,167,0.04);display:inline-block}
+    a {
+      color: inherit;
+    }
 
-    .cta{display:inline-block;padding:10px 14px;background:var(--accent);color:#001f1a;border-radius:10px;text-decoration:none;font-weight:800}
-    footer{margin-top:18px;color:rgba(255,255,255,0.6);text-align:center}
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+      padding: clamp(24px, 6vw, 64px);
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    header.page-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .language-switcher {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .language-switcher nav {
+      display: inline-flex;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(6px);
+    }
+
+    .lang-btn {
+      border: 1px solid var(--stroke);
+      background: transparent;
+      color: var(--fg);
+      font: inherit;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+    }
+
+    .lang-btn:hover {
+      border-color: rgba(74, 222, 128, 0.6);
+      color: var(--accent);
+    }
+
+    .lang-btn[aria-pressed="true"]:hover {
+      color: var(--bg);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    header.page-header h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 44px);
+      letter-spacing: -0.02em;
+    }
+
+    header.page-header .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2.4vw, 19px);
+      max-width: 720px;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: var(--gap);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: clamp(20px, 3vw, 26px);
+      color: var(--accent);
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--fg);
+      font-size: 15px;
+    }
+
+    .panel p.muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .feature-list li {
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-weight: 600;
+    }
+
+    dl.data {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(140px, 1fr) minmax(0, 1.4fr);
+      gap: 10px 16px;
+      font-size: 15px;
+    }
+
+    dl.data dt {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    dl.data dd {
+      margin: 0;
+    }
+
+    .price-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.15) 0%, rgba(34, 197, 94, 0.1) 100%);
+    }
+
+    .price-card .regular {
+      text-decoration: line-through;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .price-card .discount {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .price-card .saving {
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(74, 222, 128, 0.18);
+      padding: 6px 12px;
+      border-radius: 999px;
+      align-self: flex-start;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (min-width: 600px) {
+      .cta-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .cta-group .cta {
+        flex: 1;
+      }
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(135deg, var(--stroke) 0%, #1f1f1f 100%);
+      color: var(--fg);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: attr(data-icon);
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .cta[data-icon=""]::before {
+      display: none;
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .cta:hover {
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(74, 222, 128, 0.35);
+    }
+
+    .cta:hover::after {
+      opacity: 1;
+    }
+
+    .cta:hover::before {
+      transform: scale(1.2);
+    }
+
+    .cta:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .cta.secondary {
+      background: transparent;
+      color: var(--accent);
+      border-color: rgba(74, 222, 128, 0.5);
+    }
+
+    .cta.secondary::after {
+      display: none;
+    }
+
+    .cta.secondary:hover {
+      background: rgba(74, 222, 128, 0.12);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    .cta.secondary:hover::before {
+      transform: translateX(-2px);
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding-top: 8px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (min-width: 900px) {
+      .content-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (prefers-contrast: high) {
+      :root {
+        --stroke: #2a2a2a;
+        --panel: #111111;
+      }
+    }
   </style>
 </head>
-<body>
+<body data-service="tarjetas-nfc">
   <div class="wrap">
-    <div class="card">
-      <header>
-        <div class="img"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Tarjetas NFC" style="width:100%;height:100%;object-fit:cover"></div>
-        <div>
-          <h1>Tarjetas NFC Contactless</h1>
-          <p class="desc">Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.</p>
-        </div>
-      </header>
-
-      <div class="grid">
-        <main>
-          <section>
-            <h3 style="color:var(--accent);margin:0 0 8px">Entregables</h3>
-            <ul class="deliver">
-              <li>Diseño personalizado premium</li>
-              <li>Programación NFC avanzada</li>
-              <li>Flujo de actualización automática</li>
-            </ul>
-          </section>
-
-          <section style="margin-top:14px">
-            <h3 style="color:var(--accent);margin:0 0 8px">Descripción</h3>
-            <p style="margin:0;color:rgba(255,255,255,0.9)">Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.</p>
-          </section>
-        </main>
-
-        <aside>
-          <div class="card" style="padding:12px">
-            <h4 style="margin-top:0;color:var(--accent)">Detalles técnicos</h4>
-            <dl style="display:grid;grid-template-columns:100px 1fr;gap:6px">
-              <dt style="color:rgba(255,255,255,0.7);font-weight:700">Entrega</dt>
-              <dd>1–2 semanas</dd>
-              <dt style="color:rgba(255,255,255,0.7);font-weight:700">Herramientas</dt>
-              <dd>NFC Tools, Canva, Panel Digital</dd>
-              <dt style="color:rgba(255,255,255,0.7);font-weight:700">Integración</dt>
-              <dd>Compatible con páginas de Drive o formularios Business Bots</dd>
-            </dl>
-          </div>
-
-          <div style="margin-top:12px" class="card">
-            <div class="price">
-              <div style="font-size:13px;color:rgba(255,255,255,0.75)">Original</div>
-              <div class="orig">€265</div>
-              <div class="disc">€199</div>
-              <div class="save" style="margin-top:8px">Ahorra €66</div>
-            </div>
-
-            <div style="margin-top:12px;text-align:center">
-              <a class="cta" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Tarjetas%20NFC%20Contactless." target="_blank">Contáctanos por WhatsApp</a>
-            </div>
-          </div>
-        </aside>
+    <header class="page-header">
+      <div class="language-switcher">
+        <nav aria-label="Language selector" data-lang-nav>
+          <button class="lang-btn" type="button" data-lang="es" aria-pressed="true" aria-label="Switch language to Spanish" onclick="switchLanguage('es')">ES</button>
+          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="Switch language to English" onclick="switchLanguage('en')">EN</button>
+          <button class="lang-btn" type="button" data-lang="de" aria-pressed="false" aria-label="Sprache auf Deutsch umstellen" onclick="switchLanguage('de')">DE</button>
+          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false" aria-label="Basculer la langue en français" onclick="switchLanguage('fr')">FR</button>
+          <button class="lang-btn" type="button" data-lang="it" aria-pressed="false" aria-label="Passa la lingua in italiano" onclick="switchLanguage('it')">IT</button>
+        </nav>
+        <span class="sr-only" aria-live="polite" data-lang-announcer></span>
       </div>
+      <span class="eyebrow">Business Bots Solutions</span>
+      <h1 data-i18n="title">Tarjetas NFC Contactless</h1>
+      <p class="lead" data-i18n="lead">Diseño NFC personalizado con ecosistema de links dinámicos para experiencias contactless innovadoras y profesionales.</p>
+    </header>
 
-      <footer>Business Bots Solutions © 2025</footer>
+    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1760559528/ChatGPT_Image_Oct_15_2025_10_18_41_PM_vclurj.png" alt="Tarjetas NFC Contactless" loading="lazy" width="960" height="540" style="display:block;margin:0 auto;max-width:600px;border-radius:12px;border:1px solid var(--stroke)" />
+
+    <main class="content-grid" role="main">
+      <section class="panel">
+        <h2 data-i18n="section1Title">Kit de experiencia contactless</h2>
+        <p data-i18n="section1Paragraph">Diseñamos tarjetas NFC de alto impacto con visuales premium y flujos digitales que puedes actualizar en segundos.</p>
+        <ul class="feature-list">
+          <li data-i18n="section1Feature1">Diseño personalizado con variantes para staff y clientes VIP</li>
+          <li data-i18n="section1Feature2">Programación NFC avanzada con enlaces dinámicos y analítica</li>
+          <li data-i18n="section1Feature3">Flujo de actualización automática sin reimprimir tarjetas</li>
+          <li data-i18n="section1Feature4">Panel de contenidos editable para campañas y promos</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="section2Title">Detalles técnicos</h2>
+        <dl class="data">
+          <dt data-i18n="section2Item1Term">Entrega</dt>
+          <dd data-i18n="section2Item1Desc">1–2 semanas con pruebas y validación de lectura en campo.</dd>
+          <dt data-i18n="section2Item2Term">Herramientas</dt>
+          <dd data-i18n="section2Item2Desc">NFC Tools Pro, Canva, panel web Business Bots y automatizaciones.</dd>
+          <dt data-i18n="section2Item3Term">Integración</dt>
+          <dd data-i18n="section2Item3Desc">Compatible con Google Drive, formularios Business Bots y CRMs.</dd>
+          <dt data-i18n="section2Item4Term">Soporte</dt>
+          <dd data-i18n="section2Item4Desc">Incluye video tutorial, guía de instalación y 30 días de monitoreo.</dd>
+        </dl>
+      </section>
+
+      <section class="panel full">
+        <h2 data-i18n="section3Title">Implementación y garantías</h2>
+        <p data-i18n="section3Paragraph1">Creamos un flujo de onboarding para tu equipo y configuramos alertas de uso para detectar tarjetas inactivas o pérdidas.</p>
+        <p class="muted" data-i18n="section3Paragraph2">Dispondrás de un entorno de pruebas para actualizar campañas, además de soporte para replicar nuevos lotes bajo la misma identidad visual.</p>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="section4Title">Inversión preferente</h2>
+        <div class="price-card">
+          <span class="regular" data-i18n="section4Regular">€265</span>
+          <span class="discount" data-i18n="section4Discount">€199</span>
+          <span class="saving" data-i18n="section4Saving">Ahorra €66</span>
+        </div>
+        <p class="muted" data-i18n="section4Note">Incluye lote inicial de 25 tarjetas, dashboard de métricas de clics y mantenimiento de enlaces durante el primer mes.</p>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="section5Title">Condiciones de producción</h2>
+        <p data-i18n="section5Paragraph">Requerimos logos editables y paleta de color para asegurar consistencia. La impresión física puede gestionarse con nuestro partner o el tuyo, con entrega de archivos listos para producción.</p>
+      </section>
+    </main>
+
+    <div class="cta-group">
+      <a class="cta" data-icon="💬" href="https://wa.me/34631690524?text=Hola,%20me%20interesa%20el%20servicio%20de%20Tarjetas%20NFC%20Contactless." target="_blank" rel="noopener noreferrer" data-i18n="ctaPrimary">Contáctanos por WhatsApp</a>
+      <a class="cta secondary" data-icon="" href="./index.html" data-i18n="ctaSecondary">← Volver a servicios</a>
     </div>
+
+    <footer>Business Bots Solutions © 2025</footer>
   </div>
+  <script src="./lang-switcher.js"></script>
 </body>
 </html>
