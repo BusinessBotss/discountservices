@@ -1026,205 +1026,85 @@
     </div>
 
     <script>
-        // Multilingual footer texts
-        const footerTexts = {
-            es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
-            en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
-            de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
-            fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
-            it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+        const siteTexts = {
+            subtitles: {
+                es: 'Lista Especial de Servicios 2025',
+                en: 'Special Service List 2025',
+                de: 'Sonderdienstliste 2025',
+                fr: 'Liste spéciale de services 2025',
+                it: 'Elenco speciale dei servizi 2025'
+            },
+            footer: {
+                es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
+                en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
+                de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
+                fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
+                it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+            }
         };
 
-        const subtitleTexts = {
-            es: 'Lista Especial de Servicios 2025',
-            en: 'Special Services Lineup 2025',
-            de: 'Spezielle Serviceliste 2025',
-            fr: 'Liste spéciale de services 2025',
-            it: 'Lista speciale di servizi 2025'
-        };
-
-        // Language switching function
         function switchLanguage(lang) {
-            // Validate language parameter
-            if (!footerTexts.hasOwnProperty(lang)) {
-                console.error('Invalid language:', lang);
+            const validLangs = Object.keys(siteTexts.subtitles);
+            if (!validLangs.includes(lang)) {
                 return;
             }
 
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+            const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
+            if (activeBtn) {
+                activeBtn.setAttribute('aria-pressed', 'true');
+            }
+
+            document.querySelectorAll('.services-section').forEach(section => section.classList.add('hidden'));
+            const targetSection = document.getElementById(lang);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            const subtitleEl = document.getElementById('brand-subtitle');
+            if (subtitleEl && siteTexts.subtitles[lang]) {
+                subtitleEl.textContent = siteTexts.subtitles[lang];
+            }
+
+            const footerEl = document.getElementById('footer-text');
+            if (footerEl && siteTexts.footer[lang]) {
+                footerEl.textContent = siteTexts.footer[lang];
+            }
+
+            document.documentElement.setAttribute('lang', lang);
+            document.documentElement.setAttribute('xml:lang', lang);
+
             try {
-                // Update button states
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.setAttribute('aria-pressed', 'false');
-                });
-                
-                const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
-                if (activeBtn) {
-                    activeBtn.setAttribute('aria-pressed', 'true');
-                }
-
-                // Hide all sections
-                document.querySelectorAll('.services-section').forEach(section => {
-                    section.classList.add('hidden');
-                });
-
-                // Show selected section
-                const targetSection = document.getElementById(lang);
-                if (targetSection) {
-                    targetSection.classList.remove('hidden');
-                }
-
-                // Update footer text
-                const footerElement = document.getElementById('footer-text');
-                if (footerElement) {
-                    footerElement.textContent = footerTexts[lang];
-                }
-
-                // Update brand subtitle
-                const brandSubtitle = document.getElementById('brand-subtitle');
-                if (brandSubtitle && subtitleTexts[lang]) {
-                    brandSubtitle.textContent = subtitleTexts[lang];
-                }
-
-                // Update document language
-                document.documentElement.setAttribute('lang', lang);
-                document.documentElement.setAttribute('xml:lang', lang);
-
-                // Save preference
-                try {
-                    localStorage.setItem('preferredLanguage', lang);
-                } catch (e) {
-                    console.warn('Could not save language preference:', e);
-                }
-
-                // Announce change to screen readers
-                const announcement = document.createElement('div');
-                announcement.setAttribute('aria-live', 'polite');
-                announcement.setAttribute('aria-atomic', 'true');
-                announcement.className = 'sr-only';
-                announcement.style.position = 'absolute';
-                announcement.style.left = '-10000px';
-                announcement.style.width = '1px';
-                announcement.style.height = '1px';
-                announcement.style.overflow = 'hidden';
-                
-                const langNames = {
-                    es: 'Español',
-                    en: 'English', 
-                    de: 'Deutsch',
-                    fr: 'Français',
-                    it: 'Italiano'
-                };
-                
-                announcement.textContent = `Idioma cambiado a ${langNames[lang]}`;
-                document.body.appendChild(announcement);
-                
-                setTimeout(() => {
-                    document.body.removeChild(announcement);
-                }, 1000);
-
+                localStorage.setItem('preferredLanguage', lang);
             } catch (error) {
-                console.error('Error switching language:', error);
+                console.warn('Could not store language preference', error);
             }
         }
 
-        // Initialize language on page load
-        function initializeLanguage() {
+        document.addEventListener('DOMContentLoaded', () => {
+            let initialLang = 'es';
+
             try {
-                // Detect browser language
-                const browserLang = navigator.language.toLowerCase();
-                let defaultLang = 'es'; // Default fallback
-                
-                // Map browser languages to supported languages
-                if (browserLang.startsWith('en')) defaultLang = 'en';
-                else if (browserLang.startsWith('de')) defaultLang = 'de';
-                else if (browserLang.startsWith('fr')) defaultLang = 'fr';
-                else if (browserLang.startsWith('it')) defaultLang = 'it';
-                
-                // Get saved preference or use detected language
-                let savedLang;
-                try {
-                    savedLang = localStorage.getItem('preferredLanguage');
-                } catch (e) {
-                    console.warn('Could not access localStorage:', e);
-                }
-                
-                const initialLang = savedLang || defaultLang;
-                
-                // Validate and set initial language
-                if (footerTexts.hasOwnProperty(initialLang)) {
-                    switchLanguage(initialLang);
-                } else {
-                    switchLanguage('es'); // Fallback to Spanish
+                const saved = localStorage.getItem('preferredLanguage');
+                if (saved) {
+                    initialLang = saved;
+                } else if (navigator.language) {
+                    const browserLang = navigator.language.toLowerCase();
+                    if (browserLang.startsWith('en')) initialLang = 'en';
+                    else if (browserLang.startsWith('de')) initialLang = 'de';
+                    else if (browserLang.startsWith('fr')) initialLang = 'fr';
+                    else if (browserLang.startsWith('it')) initialLang = 'it';
                 }
             } catch (error) {
-                console.error('Error initializing language:', error);
-                switchLanguage('es'); // Fallback to Spanish
+                console.warn('Language preference unavailable', error);
             }
-        }
 
-        // Keyboard navigation for language buttons
-        document.addEventListener('keydown', function(e) {
-            if (e.target.classList.contains('lang-btn')) {
-                const buttons = Array.from(document.querySelectorAll('.lang-btn'));
-                const currentIndex = buttons.indexOf(e.target);
-                
-                let nextIndex;
-                
-                switch(e.key) {
-                    case 'ArrowLeft':
-                    case 'ArrowUp':
-                        e.preventDefault();
-                        nextIndex = currentIndex > 0 ? currentIndex - 1 : buttons.length - 1;
-                        buttons[nextIndex].focus();
-                        break;
-                    case 'ArrowRight':
-                    case 'ArrowDown':
-                        e.preventDefault();
-                        nextIndex = currentIndex < buttons.length - 1 ? currentIndex + 1 : 0;
-                        buttons[nextIndex].focus();
-                        break;
-                    case 'Home':
-                        e.preventDefault();
-                        buttons[0].focus();
-                        break;
-                    case 'End':
-                        e.preventDefault();
-                        buttons[buttons.length - 1].focus();
-                        break;
-                }
+            if (!Object.prototype.hasOwnProperty.call(siteTexts.subtitles, initialLang)) {
+                initialLang = 'es';
             }
+
+            switchLanguage(initialLang);
         });
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeLanguage);
-        } else {
-            initializeLanguage();
-        }
-
-        // Handle visibility change to maintain state
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                // Refresh language state when page becomes visible
-                const currentLang = localStorage.getItem('preferredLanguage') || 'es';
-                if (footerTexts.hasOwnProperty(currentLang)) {
-                    switchLanguage(currentLang);
-                }
-            }
-        });
-
-        // Error handling for failed image loads
-        document.querySelector('.brand-logo').addEventListener('error', function() {
-            this.style.display = 'none';
-            console.warn('Logo image failed to load');
-        });
-
-        // Performance optimization: Preload critical resources
-        const preloadLink = document.createElement('link');
-        preloadLink.rel = 'preload';
-        preloadLink.href = 'https://res.cloudinary.com/dxhef6dju/image/upload/v1755725396/ChatGPT_Image_Apr_16_2025_12_31_00_AM_pbed1s.png';
-        preloadLink.as = 'image';
-        document.head.appendChild(preloadLink);
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c1b1c3c265cc69',t:'MTc2MDA1MjkyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
