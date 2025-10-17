@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://businessbotss.github.io/discountservices/sitemap.xml
