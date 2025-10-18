@@ -27,7 +27,7 @@
                      loading="eager" />
                 <div class="brand-text">
                     <h1>Business Bots</h1>
-                    <p>Lista Especial de Servicios 2025</p>
+                    <p id="brand-subtitle">Lista Especial de Servicios 2025</p>
                 </div>
             </div>
             <nav aria-label="Selector de idioma">
@@ -522,13 +522,21 @@
     </div>
 
     <script>
-        // Multilingual footer texts
+        // Multilingual footer texts and brand subtitle
         const footerTexts = {
             es: 'Business Bots Solutions © 2025 — Servicios profesionales sin comisión por venta',
             en: 'Business Bots Solutions © 2025 — Professional services with no sales commission',
             de: 'Business Bots Solutions © 2025 — Professionelle Dienstleistungen ohne Verkaufsprovision',
             fr: 'Business Bots Solutions © 2025 — Services professionnels sans commission de vente',
             it: 'Business Bots Solutions © 2025 — Servizi professionali senza commissioni di vendita'
+        };
+
+        const brandSubtitles = {
+            es: 'Lista Especial de Servicios 2025',
+            en: 'Special Services List 2025',
+            de: 'Spezielle Service-Liste 2025',
+            fr: 'Liste Spéciale de Services 2025',
+            it: 'Lista Speciale di Servizi 2025'
         };
 
         // Language switching function for index.html (home page)
@@ -561,10 +569,15 @@
                     targetSection.classList.remove('hidden');
                 }
 
-                // Update footer text
+                // Update footer text and brand subtitle
                 const footerElement = document.getElementById('footer-text');
                 if (footerElement) {
                     footerElement.textContent = footerTexts[lang];
+                }
+
+                const brandSubtitleElement = document.getElementById('brand-subtitle');
+                if (brandSubtitleElement) {
+                    brandSubtitleElement.textContent = brandSubtitles[lang];
                 }
 
                 // Update document language
